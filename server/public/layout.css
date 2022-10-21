@@ -1,0 +1,49 @@
+.mg-top-0 {
+  margin-top: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.li-no-style {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wd-260 {
+  width: 260px;
+}
+
+.wd-325 {
+  width: 325px;
+}
+
+.wd-375 {
+  width: 375px;
+}
+
+.ht-100 {
+  height: 100px;
+}
+
+.ht-200 {
+  height: 200px;
+}
+
+.flex {
+  display: flex;
+}
+
+.fd-column {
+  flex-direction: column;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.jc-center {
+  justify-content: center;
+}

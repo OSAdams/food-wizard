@@ -6,7 +6,7 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       recipe: {
-        recipeTitle: 'Test Bread',
+        recipeTitle: 'Test Bread Bigger Name Pls Help',
         recipeCalories: 205,
         recipeTime: 45,
         recipeCuisine: 'american',
