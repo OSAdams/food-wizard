@@ -25,20 +25,21 @@ Secondary Light: #E5E3E8
 
 /* recipe card */
 
-.rc {
+.recipe-card {
   background-color: #e2dbf0;
   color: #201c2b;
 }
 
 .t-ct {
-  padding-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.rc-list {
+  padding-left: 2rem;
 }
 
 .t-ct p {
   margin-bottom: 0.25rem;
   margin-top: 0;
-}
-
-.t-ct ul {
-  padding-bottom: 0.5rem;
 }
