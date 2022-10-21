@@ -15,7 +15,7 @@ export default function RecipeCard(props) {
           </ul>
         </div>
       </div>
-      <div className="img-ct ht-200 wd-375" style={{
+      <div className="img-ct flex ai-end jc-center ht-200 wd-375" style={{
         backgroundImage: 'url("https://media2.wnyc.org/i/620/372/l/80/photologue/photos/wizard_feature_BIG.jpg")'
       }}>
         <div className="rt"><p>rating: { props.rating }</p></div>

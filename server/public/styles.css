@@ -43,3 +43,9 @@ Secondary Light: #E5E3E8
   margin-bottom: 0.25rem;
   margin-top: 0;
 }
+
+.img-ct {
+  background-position: center;
+  color: #e5e3e8;
+  font-size: 2rem;
+}

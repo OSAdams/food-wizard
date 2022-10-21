@@ -47,3 +47,7 @@
 .jc-center {
   justify-content: center;
 }
+
+.ai-end {
+  align-items: flex-end;
+}
