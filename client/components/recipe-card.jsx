@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function RecipeCard(props) {
+  // eslint-disable-next-line
+  const ratingLimit = 5;
+  // eslint-disable-next-line
+  const ratingNumber = props.rating;
   return (
     <div className="recipe-card flex fd-column ai-center">
       <div className="t-ct ht-200">
@@ -18,7 +22,17 @@ export default function RecipeCard(props) {
       <div className="img-ct flex ai-end jc-center ht-200 wd-375" style={{
         backgroundImage: 'url("https://media2.wnyc.org/i/620/372/l/80/photologue/photos/wizard_feature_BIG.jpg")'
       }}>
-        <div className="rt"><p>rating: { props.rating }</p></div>
+        <div className="rc-rating">
+          {
+            // for(let i = 1, i < 5, i++) {
+            //   <Rating rating="3" />
+            // }
+          /* {<i className="fa-solid fa-star" />
+          <i className="fa-solid fa-star" />
+          <i className="fa-solid fa-star" />
+          <i className="fa-regular fa-star" />
+          <i className="fa-regular fa-star" />} */}
+        </div>
       </div>
     </div>
   );
