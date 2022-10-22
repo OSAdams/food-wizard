@@ -1,30 +1,34 @@
 import React from 'react';
-import RecipeCard from '../components/recipe-card';
+// import RecipeCard from '../components/recipe-card';
+// import { getRandomArbitrary } from '../lib';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipe: {
-        recipeTitle: 'Test Bread Bigger Name Pls Help third line',
-        recipeCalories: 205,
-        recipeTime: 45,
-        recipeCuisine: 'american',
-        recipeRating: 3
-      }
+      recipes: []
     };
   }
 
+  componentDidMount() {
+    fetch('/api/recipes')
+      .then(res => res.json())
+      .then(recipes => this.setState({ recipes }))
+      .catch(err => console.error({ error: err }));
+  }
+
   render() {
-    const { recipe } = this.state;
+    // eslint-disable-next-line
+    const { recipes } = this.state;
     return (
       <div>
-        <RecipeCard
-          title={ recipe.recipeTitle }
-          calories={ recipe.recipeCalories }
-          time={ recipe.recipeTime }
-          cuisine={ recipe.recipeCuisine }
-          rating={ recipe.recipeRating }/>
+        <p>jaoisdasd</p>
+        {/* <RecipeCard
+          title={ recipes[0].recipeName }
+          calories={ getRandomArbitrary(200, 500) }
+          time={ getRandomArbitrary(15, 60) }
+          cuisine={`id: ${recipes[0].recipeId} -- spoon: ${recipes[0].spoonApiId}`}
+          rating={ recipes[0].recipeRating }/> */}
       </div>
     );
   }

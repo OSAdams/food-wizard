@@ -28,6 +28,7 @@ Secondary Light: #E5E3E8
 .recipe-card {
   background-color: #e2dbf0;
   color: #201c2b;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
 .t-ct {
@@ -48,4 +49,9 @@ Secondary Light: #E5E3E8
   background-position: center;
   color: #e5e3e8;
   font-size: 2rem;
+}
+
+.rc-rating > h2 {
+  margin: 0;
+  padding: 0;
 }
