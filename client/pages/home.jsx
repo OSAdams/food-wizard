@@ -1,6 +1,5 @@
 import React from 'react';
-// import RecipeCard from '../components/recipe-card';
-// import { getRandomArbitrary } from '../lib';
+import RecipeCard from '../components/recipe-card';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -18,17 +17,19 @@ export default class Home extends React.Component {
   }
 
   render() {
-    // eslint-disable-next-line
     const { recipes } = this.state;
+
+    if (!recipes.length) {
+      return null;
+    }
     return (
       <div>
-        <p>jaoisdasd</p>
-        {/* <RecipeCard
-          title={ recipes[0].recipeName }
-          calories={ getRandomArbitrary(200, 500) }
-          time={ getRandomArbitrary(15, 60) }
-          cuisine={`id: ${recipes[0].recipeId} -- spoon: ${recipes[0].spoonApiId}`}
-          rating={ recipes[0].recipeRating }/> */}
+        <RecipeCard
+          title={recipes[4].recipeName}
+          calories={ recipes[4].spoonApiId }
+          time={ recipes[4].recipeId }
+          cuisine="JavaScript"
+          rating={ recipes[4].recipeRating }/>
       </div>
     );
   }
