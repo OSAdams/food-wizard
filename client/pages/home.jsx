@@ -22,6 +22,7 @@ export default class Home extends React.Component {
     if (!recipes.length) {
       return null;
     }
+
     return (
       <div>
         <Carousel recipes={ recipes } />
