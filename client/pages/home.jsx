@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeCard from '../components/recipe-card';
+import Carousel from '../components/carousel';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -24,12 +24,7 @@ export default class Home extends React.Component {
     }
     return (
       <div>
-        <RecipeCard
-          title={recipes[4].recipeName}
-          calories={ recipes[4].spoonApiId }
-          time={ recipes[4].recipeId }
-          cuisine="JavaScript"
-          rating={ recipes[4].recipeRating }/>
+        <Carousel recipes={ recipes } />
       </div>
     );
   }
