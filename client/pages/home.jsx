@@ -1,36 +1,51 @@
 import React from 'react';
+// eslint-disable-next-line
 import Carousel from '../components/carousel';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: [],
-      spoonRecipes: []
+      recipes: []
     };
   }
 
   componentDidMount() {
-    Promise.all([fetch('api/recipes'), fetch('https://api.spoonacular.com/recipes/random?apiKey=633237cc8f324710afa989c4ba9993f0&number=10')])
-      .then(([database, spoonAPI]) => {
-        return Promise.all([database.json(), spoonAPI.json()]);
-      })
-      .then(([dataRes, spoonRes]) => {
-        this.setState({ recipes: dataRes, spoonRecipes: spoonRes });
-      })
+    fetch('https://api.spoonacular.com/recipes/random?apiKey=633237cc8f324710afa989c4ba9993f0&number=10')
+      .then(res => res.json())
+      .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
   }
 
-  render() {
-    const { recipes, spoonRecipes } = this.state;
-
-    if (!recipes.length || !spoonRecipes.recipes.length) {
+  updateRecipes(recipes) {
+    if (!recipes) {
       return null;
     }
-    // eslint-disable-next-line no-console
-    console.log(spoonRecipes.recipes);
+    recipes.map(index => {
+      const someObj = { recipeName: index.title, spoonApiLikes: index.aggregateLikes, spoonApiId: index.id };
+      fetch('/api/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(someObj)
+      })
+        .then(res => res.json())
+        .then(recipes => null)
+        .catch(err => console.error({ error: err }));
+      return null;
+    });
+  }
+
+  render() {
+    const { recipes } = this.state;
+
+    if (!recipes.recipes) {
+      return <h1>Loading ...</h1>;
+    }
+
     return (
-      <Carousel recipes={ recipes } spoonRecipes={ spoonRecipes.recipes } />
+      <Carousel onLoad={ this.updateRecipes(recipes.recipes) } recipes={ recipes.recipes } />
     );
   }
 }

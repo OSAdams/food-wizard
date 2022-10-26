@@ -38,3 +38,12 @@ Secondary Light: #E5E3E8
   color: #201c2b;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
+
+.rc-likes h2 {
+  font-size: 4rem;
+  opacity: 70%;
+}
+
+.rc-shade {
+  background-color: #201c2b38;
+}

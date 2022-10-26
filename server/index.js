@@ -23,24 +23,21 @@ app.get('/api/recipes', (req, res, next) => {
 });
 
 app.post('/api/recipes', (req, res, next) => {
-  const { recipeName, recipeRating, spoonApiId } = req.body;
-  const ratingInt = parseInt(recipeRating);
+  const { recipeName, spoonApiLikes, spoonApiId } = req.body;
+  const apiRatingInt = parseInt(spoonApiLikes);
   const apiIdInt = parseInt(spoonApiId);
-  if (!recipeName || !recipeRating || !spoonApiId) {
-    throw new ClientError(400, 'recipeName, recipeRating, and spoonApiId are required fields');
+  if (!recipeName || !spoonApiLikes || !spoonApiId) {
+    throw new ClientError(400, 'recipeName, spoonApiLikes, and spoonApiId are required fields');
   }
-  if (!ratingInt || !apiIdInt) {
-    throw new ClientError(400, 'recipeRating and spoonApiId must be an integer');
-  }
-  if (recipeRating > 5 || recipeRating < 1) {
-    throw new ClientError(400, 'recipeRating must be a number 1 through 5');
+  if (!apiRatingInt || !apiIdInt) {
+    throw new ClientError(400, 'spoonApiLikes and spoonApiId must be an integer');
   }
   const sql = `
-    INSERT INTO recipes ("recipeName", "recipeRating", "spoonApiId")
+    INSERT INTO recipes ("recipeName", "spoonApiLikes", "spoonApiId")
          VALUES ($1, $2, $3)
       RETURNING *
   `;
-  const params = [recipeName, recipeRating, spoonApiId];
+  const params = [recipeName, spoonApiLikes, spoonApiId];
   db.query(sql, params)
     .then(result => {
       const [recipes] = result.rows;
