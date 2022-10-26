@@ -15,11 +15,7 @@ Secondary Dark: #232127
 Secondary Light: #E5E3E8
 */
 
-.semi-bold {
-  font-weight: 600;
-}
-
-.clr-2nd-drk {
+.font-dark-2 {
   color: #232127;
 }
 
@@ -31,27 +27,8 @@ Secondary Light: #E5E3E8
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
-.t-ct {
-  padding: 1rem;
-  width: 100%;
-}
+/* recipe card image */
 
-.rc-list {
-  padding-left: 2rem;
-}
-
-.t-ct p {
-  margin-bottom: 0.25rem;
-  margin-top: 0;
-}
-
-.img-ct {
-  background-position: center;
-  color: #e5e3e8;
-  font-size: 2rem;
-}
-
-.rc-rating > h2 {
-  margin: 0;
-  padding: 0;
+.rc-image {
+  object-fit: cover;
 }

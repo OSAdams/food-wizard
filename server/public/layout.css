@@ -1,53 +1,34 @@
-.mg-top-0 {
-  margin-top: 0;
-}
+/* recipe card */
 
-.text-center {
-  text-align: center;
-}
-
-.li-no-style {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.wd-260 {
-  width: 260px;
-}
-
-.wd-325 {
-  width: 325px;
-}
-
-.wd-375 {
+.recipe-card {
   width: 375px;
 }
 
-.ht-100 {
-  height: 100px;
-}
+/* recipe card text */
 
-.ht-200 {
+.rc-text {
   height: 200px;
 }
 
-.flex {
-  display: flex;
+.rc-text div {
+  height: 100px;
+  padding: 0.5rem;
 }
 
-.fd-column {
-  flex-direction: column;
+.rc-text div > h3,
+.rc-rating > h2,
+.li-style-none,
+.li-style-none li p {
+  margin: 0;
+  padding: 0;
 }
 
-.ai-center {
-  align-items: center;
+.li-style-none {
+  list-style-type: none;
 }
 
-.jc-center {
-  justify-content: center;
-}
+/* recipe card image and rating */
 
-.ai-end {
-  align-items: flex-end;
+.rc-image {
+  height: 200px;
 }

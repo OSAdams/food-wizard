@@ -1,25 +1,32 @@
 import React from 'react';
 
 export default function recipeCard(props) {
+  const { title } = props;
+  let updatedTitle = '';
+  if (title.length > 40) {
+    updatedTitle += title.slice(0, 50) + '...';
+  } else {
+    updatedTitle = title;
+  }
   return (
-    <div className="recipe-card flex fd-column ai-center">
-      <div className="t-ct ht-200">
-        <div className="flex jc-center ht-100">
-          <h2 className="mg-top-0 text-center wd-260">{ props.title }</h2>
+    <div className="recipe-card">
+      <div className="rc-text">
+        <div>
+          <h3>{updatedTitle}</h3>
         </div>
-        <div className="rc-list">
-          <ul className="li-no-style">
-            <li><p className="semi-bold clr-2nd-drk">calories: { props.calories }</p></li>
-            <li><p className="semi-bold clr-2nd-drk">time: { props.time } minutes</p></li>
-            <li><p className="semi-bold clr-2nd-drk">cuisine: { props.cuisine }</p></li>
+        <div>
+          <ul className="li-style-none">
+            <li><p className="font-dark-2">time: { props.time }</p></li>
+            <li><p className="font-dark-2">servings: { props.servings }</p></li>
+            <li><p className="font-dark-2">diet: { props.diet }</p></li>
           </ul>
         </div>
       </div>
-      <div className="img-ct flex ai-end jc-center ht-200 wd-375" style={{
-        backgroundImage: 'url("https://media2.wnyc.org/i/620/372/l/80/photologue/photos/wizard_feature_BIG.jpg")'
+      <div className="rc-image" style={{
+        backgroundImage: `url(${props.image})`
       }}>
-        <div className="rc-rating">
-          <h2>{ props.rating }</h2>
+        <div className="rc-rating font-dark-2">
+          <h2>{props.likes} <i className="fa-solid fa-thumbs-up" /></h2>
         </div>
       </div>
     </div>

@@ -26,16 +26,25 @@ export default class Carousel extends React.Component {
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
+  ratingRender(para) {
+    if (!para) {
+      return para;
+    }
+    return '';
+  }
+
   render() {
     const { iterator } = this.state;
-    const { recipes } = this.props;
+    // eslint-disable-next-line
+    const { recipes, spoonRecipes } = this.props;
     return (
       <RecipeCard
-        title={ recipes[iterator].recipeName }
-        calories={ recipes[iterator].recipeId }
-        time={ recipes[iterator].spoonApiId }
-        cuisine="JavaScript"
-        rating={ recipes[iterator].recipeRating } />
+        title={ spoonRecipes[iterator].title }
+        time={ spoonRecipes[iterator].readyInMinutes }
+        diet={ spoonRecipes[iterator].diets[0] }
+        servings={ spoonRecipes[iterator].servings }
+        likes={ spoonRecipes[iterator].aggregateLikes }
+        image={ spoonRecipes[iterator].image } />
     );
   }
 }
