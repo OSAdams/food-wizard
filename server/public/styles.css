@@ -19,16 +19,22 @@ Secondary Light: #E5E3E8
   color: #232127;
 }
 
+.font-light-1 {
+  color: #e2dbf0;
+}
+
+.txt-shadow {
+  text-shadow:
+    1px 1px 2px black,
+    1px -1px 2px black,
+    -1px 1px 2px black,
+    -1px -1px 2px black;
+}
+
 /* recipe card */
 
 .recipe-card {
   background-color: #e2dbf0;
   color: #201c2b;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-}
-
-/* recipe card image */
-
-.rc-image {
-  object-fit: cover;
 }

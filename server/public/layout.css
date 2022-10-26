@@ -16,7 +16,7 @@
 }
 
 .rc-text div > h3,
-.rc-rating > h2,
+.rc-likes > h1,
 .li-style-none,
 .li-style-none li p {
   margin: 0;
@@ -31,4 +31,8 @@
 
 .rc-image {
   height: 200px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }

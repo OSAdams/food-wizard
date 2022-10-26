@@ -25,8 +25,8 @@ export default function recipeCard(props) {
       <div className="rc-image" style={{
         backgroundImage: `url(${props.image})`
       }}>
-        <div className="rc-rating font-dark-2">
-          <h2>{props.likes} <i className="fa-solid fa-thumbs-up" /></h2>
+        <div className="rc-likes font-light-1 txt-shadow">
+          <h1>{props.likes} <i className="fa-solid fa-thumbs-up" /></h1>
         </div>
       </div>
     </div>
