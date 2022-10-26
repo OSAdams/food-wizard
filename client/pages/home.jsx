@@ -11,7 +11,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://api.spoonacular.com/recipes/random?apiKey=633237cc8f324710afa989c4ba9993f0&number=10')
+    fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
