@@ -34,16 +34,29 @@ Secondary Light: #E5E3E8
 /* recipe card */
 
 .recipe-card {
-  background-color: #e2dbf0;
-  color: #201c2b;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  background-color: #201c2b;
 }
 
 .rc-likes h2 {
-  font-size: 4rem;
+  font-size: 2rem;
   opacity: 70%;
 }
 
 .rc-shade {
   background-color: #201c2b38;
+}
+
+.rc-image {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.list-style-none {
+  color: #e2dbf0;
+}
+
+@media screen and (min-width: 700px) {
+  .rc-image,
+  .rc-shade {
+    border-radius: 50%;
+  }
 }

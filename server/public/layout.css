@@ -2,12 +2,13 @@
 
 .recipe-card {
   width: 375px;
+  display: flex;
+  flex-direction: column-reverse;
 }
-
-/* recipe card text */
 
 .rc-text {
   height: 200px;
+  margin: 2rem;
 }
 
 .rc-text div {
@@ -27,8 +28,6 @@
   list-style-type: none;
 }
 
-/* recipe card image and rating */
-
 .rc-image {
   height: 200px;
   background-position: center;
@@ -44,4 +43,34 @@
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.rc-likes h2 {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  /* recipe card  */
+  .recipe-card {
+    width: 500px;
+    flex-direction: row-reverse;
+    margin: 2rem;
+  }
+
+  .recipe-card > div {
+    width: 200px;
+  }
+
+  .recipe-card > div:first-child {
+    width: 300px;
+  }
+
+  .rc-text {
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .rc-title {
+    margin-top: 0;
+  }
 }
