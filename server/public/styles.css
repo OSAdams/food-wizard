@@ -37,6 +37,10 @@ Secondary Light: #E5E3E8
   background-color: #201c2b;
 }
 
+.recipe-card:hover {
+  cursor: pointer;
+}
+
 .rc-likes h2 {
   font-size: 2rem;
   opacity: 70%;
