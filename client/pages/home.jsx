@@ -31,7 +31,6 @@ export default class Home extends React.Component {
         body: JSON.stringify(someObj)
       })
         .then(res => res.json())
-        .then(recipes => null)
         .catch(err => console.error({ error: err }));
       return null;
     });
