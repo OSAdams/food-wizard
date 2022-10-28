@@ -30,7 +30,7 @@ export default class Carousel extends React.Component {
 
   cycleCarousel(event) {
     const { iterator } = this.state;
-    const recipes = this.props;
+    const { recipes } = this.props;
     const { id } = event.target;
     this.resetInterval();
     if (id === 'cara-next') {
@@ -48,7 +48,7 @@ export default class Carousel extends React.Component {
     const { iterator } = this.state;
     const { recipes } = this.props;
     return (
-      <div className="carousel-container">
+      <div onClick={this.cycleCarousel} className="carousel-container">
         <RecipeCard
           title={recipes[iterator].title}
           time={recipes[iterator].readyInMinutes}
@@ -56,8 +56,8 @@ export default class Carousel extends React.Component {
           servings={recipes[iterator].servings}
           likes={recipes[iterator].aggregateLikes}
           image={recipes[iterator].image} />
-        <IconGenerator onClick={this.cycleCarousel} className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
-        <IconGenerator onClick={this.cycleCarousel} className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
+        <IconGenerator className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
+        <IconGenerator className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
       </div>
     );
   }
