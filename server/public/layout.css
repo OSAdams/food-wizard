@@ -91,4 +91,8 @@
   .rc-title {
     margin-top: 0;
   }
+
+  .carousel-container {
+    width: 580px;
+  }
 }

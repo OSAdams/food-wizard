@@ -22,6 +22,19 @@ app.get('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// app.get('/api/recipes:id', (req, res, next) => {
+//   const sql = `
+//     SELECT *
+//       FROM recipes
+//      WHERE "spoonApiId" = ($1)
+//  RETURNING *
+//   `;
+//   const params = [req.id];
+//   db.query(sql)
+//     .then(result => res.json(result.rows))
+//     .catch(err => next(err));
+// });
+
 app.post('/api/recipes', (req, res, next) => {
   const { recipeName, spoonApiLikes, spoonApiId } = req.body;
   const apiRatingInt = parseInt(spoonApiLikes);
@@ -35,6 +48,7 @@ app.post('/api/recipes', (req, res, next) => {
   const sql = `
     INSERT INTO recipes ("recipeName", "spoonApiLikes", "spoonApiId")
          VALUES ($1, $2, $3)
+          ON CONFLICT DO NOTHING
       RETURNING *
   `;
   const params = [recipeName, spoonApiLikes, spoonApiId];

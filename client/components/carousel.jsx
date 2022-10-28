@@ -10,6 +10,7 @@ export default class Carousel extends React.Component {
     };
     this.startCarousel = this.startCarousel.bind(this);
     this.resetInterval = this.resetInterval.bind(this);
+    this.cycleCarousel = this.cycleCarousel.bind(this);
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
@@ -27,21 +28,21 @@ export default class Carousel extends React.Component {
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
-  // changeImage(event) {
-  //   const { iterator } = this.state;
-  //   const recipes = this.props
-  //   const { id } = event.target;
-  //   this.resetInterval();
-  //   if (id === 'cara-next') {
-  //     iterator === recipes.length - 1
-  //       ? this.setState({ iterator: 0 })
-  //       : this.setState({ iterator: iterator + 1 });
-  //   } else if (id === 'cara-previous') {
-  //     iterator === 0
-  //       ? this.setState({ iterator: recipes.length - 1 })
-  //       : this.setState({ iterator: iterator - 1 });
-  //   }
-  // }
+  cycleCarousel(event) {
+    const { iterator } = this.state;
+    const recipes = this.props;
+    const { id } = event.target;
+    this.resetInterval();
+    if (id === 'cara-next') {
+      iterator === recipes.length - 1
+        ? this.setState({ iterator: 0 })
+        : this.setState({ iterator: iterator + 1 });
+    } else if (id === 'cara-prev') {
+      iterator === 0
+        ? this.setState({ iterator: recipes.length - 1 })
+        : this.setState({ iterator: iterator - 1 });
+    }
+  }
 
   render() {
     const { iterator } = this.state;
@@ -55,8 +56,8 @@ export default class Carousel extends React.Component {
           servings={recipes[iterator].servings}
           likes={recipes[iterator].aggregateLikes}
           image={recipes[iterator].image} />
-        <IconGenerator className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
-        <IconGenerator className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
+        <IconGenerator onClick={this.cycleCarousel} className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
+        <IconGenerator onClick={this.cycleCarousel} className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
       </div>
     );
   }
