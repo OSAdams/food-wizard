@@ -31,13 +31,21 @@ Secondary Light: #E5E3E8
     -1px -1px 2px black;
 }
 
+i {
+  transition: all 300ms;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
 /* recipe card */
 
 .recipe-card {
   background-color: #201c2b;
 }
 
-.recipe-card:hover {
+.rc-text:hover {
   cursor: pointer;
 }
 
@@ -56,6 +64,23 @@ Secondary Light: #E5E3E8
 
 .list-style-none {
   color: #e2dbf0;
+}
+
+/* carousel */
+
+.carousel-container > i {
+  font-size: 2rem;
+  opacity: 70%;
+}
+
+.carousel-container i:hover,
+.rc-likes h2 i:hover {
+  opacity: 100%;
+  text-shadow:
+    2px 2px 2px black,
+    2px -2px 2px black,
+    -2px 2px 2px black,
+    -2px -2px 2px black;
 }
 
 @media screen and (min-width: 700px) {
