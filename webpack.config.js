@@ -53,6 +53,9 @@ module.exports = {
     new webpack.EnvironmentPlugin([]),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin(),
-    isDevelopment && new webpack.HotModuleReplacementPlugin()
+    isDevelopment && new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    })
   ].filter(Boolean)
 };

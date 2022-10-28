@@ -1,5 +1,8 @@
 require('dotenv/config');
 const express = require('express');
+const jsonMiddleware = express.json();
+const db = require('./db');
+const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
 
@@ -7,8 +10,40 @@ const app = express();
 
 app.use(staticMiddleware);
 
-app.get('/api/hello', (req, res) => {
-  res.json({ hello: 'world' });
+app.use(jsonMiddleware);
+
+app.get('/api/recipes', (req, res, next) => {
+  const sql = `
+    SELECT *
+      FROM recipes
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/recipes', (req, res, next) => {
+  const { recipeName, spoonApiLikes, spoonApiId } = req.body;
+  const apiRatingInt = parseInt(spoonApiLikes);
+  const apiIdInt = parseInt(spoonApiId);
+  if (!recipeName || !spoonApiLikes || !spoonApiId) {
+    throw new ClientError(400, 'recipeName, spoonApiLikes, and spoonApiId are required fields');
+  }
+  if (!apiRatingInt || !apiIdInt) {
+    throw new ClientError(400, 'spoonApiLikes and spoonApiId must be an integer');
+  }
+  const sql = `
+    INSERT INTO recipes ("recipeName", "spoonApiLikes", "spoonApiId")
+         VALUES ($1, $2, $3)
+      RETURNING *
+  `;
+  const params = [recipeName, spoonApiLikes, spoonApiId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipes] = result.rows;
+      res.status(201).json(recipes);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
