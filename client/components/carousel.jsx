@@ -44,6 +44,7 @@ export default class Carousel extends React.Component {
     } else {
       const saveCarouselRecipe = JSON.stringify(recipes[iterator]);
       localStorage.setItem('clicked-carousel-recipe', saveCarouselRecipe);
+      window.location.hash = '#recipe';
     }
   }
 
