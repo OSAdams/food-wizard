@@ -41,6 +41,9 @@ export default class Carousel extends React.Component {
       iterator === 0
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
+    } else {
+      const saveCarouselRecipe = JSON.stringify(recipes[iterator]);
+      localStorage.setItem('clicked-carousel-recipe', saveCarouselRecipe);
     }
   }
 
@@ -50,6 +53,7 @@ export default class Carousel extends React.Component {
     return (
       <div onClick={this.cycleCarousel} className="carousel-container">
         <RecipeCard
+          onClick = { this.handleRecipeClick }
           title={recipes[iterator].title}
           time={recipes[iterator].readyInMinutes}
           diet={recipes[iterator].diets}
