@@ -22,13 +22,13 @@ export default class Home extends React.Component {
       return null;
     }
     recipes.map(index => {
-      const someObj = { recipeName: index.title, spoonApiLikes: index.aggregateLikes, spoonApiId: index.id };
+      const reqBody = { recipeName: index.title, spoonApiLikes: index.aggregateLikes, spoonApiId: index.id };
       fetch('/api/recipes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(someObj)
+        body: JSON.stringify(reqBody)
       })
         .then(res => res.json())
         .catch(err => console.error({ error: err }));

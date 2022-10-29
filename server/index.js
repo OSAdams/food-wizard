@@ -48,7 +48,7 @@ app.post('/api/recipes', (req, res, next) => {
   const sql = `
     INSERT INTO recipes ("recipeName", "spoonApiLikes", "spoonApiId")
          VALUES ($1, $2, $3)
-          ON CONFLICT DO NOTHING
+    ON CONFLICT DO NOTHING
   `;
   const params = [recipeName, spoonApiLikes, spoonApiId];
   db.query(sql, params)
