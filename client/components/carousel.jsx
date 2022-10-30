@@ -1,6 +1,7 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import IconGenerator from './icon-generator';
+import { insertIntoRecipes, setLocalStorage } from '../lib';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class Carousel extends React.Component {
     };
     this.startCarousel = this.startCarousel.bind(this);
     this.resetInterval = this.resetInterval.bind(this);
-    this.cycleCarousel = this.cycleCarousel.bind(this);
+    this.carouselControls = this.carouselControls.bind(this);
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
@@ -28,7 +29,7 @@ export default class Carousel extends React.Component {
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
-  cycleCarousel(event) {
+  carouselControls(event) {
     const { iterator } = this.state;
     const { recipes } = this.props;
     const { id } = event.target;
@@ -42,8 +43,8 @@ export default class Carousel extends React.Component {
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
     } else {
-      const saveCarouselRecipe = JSON.stringify(recipes[iterator]);
-      localStorage.setItem('clicked-carousel-recipe', saveCarouselRecipe);
+      insertIntoRecipes(recipes[iterator]);
+      setLocalStorage('carousel-recipe', recipes[iterator]);
       window.location.hash = '#recipe';
     }
   }
@@ -52,9 +53,8 @@ export default class Carousel extends React.Component {
     const { iterator } = this.state;
     const { recipes } = this.props;
     return (
-      <div onClick={this.cycleCarousel} className="carousel-container">
+      <div onClick={this.carouselControls} className="carousel-container">
         <RecipeCard
-          onClick = { this.handleRecipeClick }
           title={recipes[iterator].title}
           time={recipes[iterator].readyInMinutes}
           diet={recipes[iterator].diets}
