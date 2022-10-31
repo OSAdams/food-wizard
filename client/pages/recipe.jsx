@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeData from '../components/recipe-data';
+import FullRecipe from '../components/full-recipe';
 
 export default class Recipe extends React.Component {
   constructor(props) {
@@ -7,23 +7,24 @@ export default class Recipe extends React.Component {
     this.state = {
       recipe: []
     };
-    this.handleLoad = this.handleLoad.bind(this);
   }
 
-  handleLoad() {
-    const carouselRecipe = localStorage.getItem('clicked-carousel-recipe');
-    if (!carouselRecipe) {
-      return <h1>Error: Unable to grab recipe from local storage</h1>;
+  componentDidMount() {
+    const recipe = localStorage.getItem('user-full-recipe');
+    if (!recipe) {
+      return (
+        <div className="error-placeholder">
+          <h3>Error:</h3>
+          <p>Error Placeholder some text some text some text some text</p>
+        </div>
+      );
     }
-    // eslint-disable-next-line
-    console.log(carouselRecipe);
-    const parsedRecipe = JSON.parse(carouselRecipe);
+    const parsedRecipe = JSON.parse(recipe);
     // eslint-disable-next-line
     console.log(parsedRecipe);
-    this.setState({ recipe: parsedRecipe });
   }
 
   render() {
-    return <RecipeData recipe={this.state} onLoad={this.handleLoad} />;
+    return <FullRecipe />;
   }
 }

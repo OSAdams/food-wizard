@@ -1,6 +1,7 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import IconGenerator from './icon-generator';
+// eslint-disable-next-line
 import { insertIntoRecipes, setLocalStorage } from '../lib';
 
 export default class Carousel extends React.Component {
@@ -43,9 +44,9 @@ export default class Carousel extends React.Component {
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
     } else {
-      insertIntoRecipes(recipes[iterator]);
-      setLocalStorage('carousel-recipe', recipes[iterator]);
-      // window.location.hash = '#recipe';
+      setLocalStorage('user-full-recipe', recipes[iterator]);
+      const updatedTitle = recipes[iterator].title.split(' ').join('+');
+      window.location.hash += `recipe?title=${updatedTitle}`;
     }
   }
 
