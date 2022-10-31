@@ -45,7 +45,7 @@ export default class Carousel extends React.Component {
     } else {
       insertIntoRecipes(recipes[iterator]);
       setLocalStorage('carousel-recipe', recipes[iterator]);
-      window.location.hash = '#recipe';
+      // window.location.hash = '#recipe';
     }
   }
 

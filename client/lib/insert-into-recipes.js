@@ -16,5 +16,4 @@ export default function insertIntoRecipes(recipe) {
   })
     .then(res => res.json())
     .catch(err => console.error({ error: err }));
-  return null;
 }
