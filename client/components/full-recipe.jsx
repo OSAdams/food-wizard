@@ -2,6 +2,10 @@ import React from 'react';
 
 export default function FullRecipe(props) {
   // eslint-disable-next-line
-  console.log(props);
-  return <h1> happy days </h1>;
+  const { recipe } = props
+  return (
+    <div className="full-recipe">
+      <h2> {recipe.title} </h2>
+    </div>
+  );
 }
