@@ -35,6 +35,10 @@ export default class Recipe extends React.Component {
 
   render() {
     const { recipe } = this.state;
-    return <FullRecipe recipe={ recipe } />;
+    return (
+      <div className="full-recipe-container">
+        <FullRecipe recipe={ recipe } />
+      </div>
+    );
   }
 }
