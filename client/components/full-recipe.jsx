@@ -32,17 +32,19 @@ export default class FullRecipe extends React.Component {
       { number: '020', name: 'Instructions', value: directInstructions }
     ];
     return (
-      <div className="fr-header">
-        <h2> { recipe.title } </h2>
-        <div className="fr-basic">
-          <ul className="li-style-none">
-            <ListGenerator content={ basicContent } />
-          </ul>
+      <>
+        <div className="fr-header">
+          <h2> { recipe.title } </h2>
+          <div className="fr-basic">
+            <ul className="li-style-none">
+              <ListGenerator content={ basicContent } />
+            </ul>
+          </div>
         </div>
         <div className="fr-ingredients">
           <Accordion data={ recipeContent } />
         </div>
-      </div>
+      </>
     );
   }
 }

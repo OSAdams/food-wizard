@@ -1,6 +1,16 @@
 import React from 'react';
 import ListGenerator from './list-generator';
 
+function ContentList(props) {
+  return (
+    <div className="ac-content">
+      <ol>
+        <ListGenerator content={ props.content } />
+      </ol>
+    </div>
+  );
+}
+
 export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
@@ -23,25 +33,24 @@ export default class Accordion extends React.Component {
   }
 
   render() {
-    // eslint-disable-next-line
     const { verifyID, isLoading } = this.state;
     if (isLoading) {
       return <h4>Loading...</h4>;
     }
     const { data } = this.props;
-    // eslint-disable-next-line
-    console.log('accordion props data:', data);
     const renderData = data.map(index => {
       return (
         <div key={ index.number }>
-          <div className="ac-title" onClick={() => this.handleClick(index.id)}>
-            <h4>{ index.name }</h4>
+          <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
+            <h4>{index.name} </h4>
+            <p>
+              { index.number === verifyID ? <i className="fa-solid fa-arrow-up" /> : <i className="fa-solid fa-arrow-down" /> }</p>
           </div>
-          <div className="ac-content">
-            <ol>
-              <ListGenerator content={ index.value } />
-            </ol>
-          </div>
+          {
+          index.number === verifyID
+            ? <ContentList content={ index.value } />
+            : null
+           }
         </div>
       );
     });
