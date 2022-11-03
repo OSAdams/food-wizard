@@ -5,8 +5,13 @@ export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
       verifyID: null
     };
+  }
+
+  componentDidMount() {
+    this.setState({ isLoading: false });
   }
 
   handleClick(id) {
@@ -19,17 +24,20 @@ export default class Accordion extends React.Component {
 
   render() {
     // eslint-disable-next-line
-    const { verifyID } = this.state;
+    const { verifyID, isLoading } = this.state;
+    if (isLoading) {
+      return <h4>Loading...</h4>;
+    }
     const { data } = this.props;
     // eslint-disable-next-line
-    console.log(data);
+    console.log('accordion props data:', data);
     const renderData = data.map(index => {
       return (
-        <div key={index.number}>
+        <div key={ index.number }>
           <div className="ac-title" onClick={() => this.handleClick(index.id)}>
             <h4>{ index.name }</h4>
           </div>
-          <div>
+          <div className="ac-content">
             <ol>
               <ListGenerator content={ index.value } />
             </ol>
