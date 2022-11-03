@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default function ListGenerator(props) {
+  // eslint-disable-next-line
+  console.log(props.content);
   const liData = props.content.map(index => {
     if (!index.value) {
       return (

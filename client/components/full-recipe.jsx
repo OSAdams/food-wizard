@@ -12,7 +12,7 @@ export default function FullRecipe(props) {
   ];
   const recipeContent = [
     { number: '010', name: 'Ingredients', value: recipe.extendedIngredients },
-    { number: '020', name: 'Instructions', value: recipe.analyzedInstructions }
+    { number: '020', name: 'Instructions', value: recipe.analyzedInstructions[0].steps }
   ];
   return (
     <div className="fr-header">

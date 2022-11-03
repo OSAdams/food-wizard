@@ -21,6 +21,8 @@ export default class Accordion extends React.Component {
     // eslint-disable-next-line
     const { verifyID } = this.state;
     const { data } = this.props;
+    // eslint-disable-next-line
+    console.log(data);
     const renderData = data.map(index => {
       return (
         <div key={index.number}>
