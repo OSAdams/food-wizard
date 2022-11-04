@@ -1,7 +1,6 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import IconGenerator from './icon-generator';
-// eslint-disable-next-line
 import { setLocalStorage } from '../lib';
 
 export default class Carousel extends React.Component {

@@ -15,13 +15,8 @@ export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
       verifyID: null
     };
-  }
-
-  componentDidMount() {
-    this.setState({ isLoading: false });
   }
 
   handleClick(id) {
@@ -33,10 +28,7 @@ export default class Accordion extends React.Component {
   }
 
   render() {
-    const { verifyID, isLoading } = this.state;
-    if (isLoading) {
-      return <h4>Loading...</h4>;
-    }
+    const { verifyID } = this.state;
     const { data } = this.props;
     const renderData = data.map(index => {
       return (
