@@ -8,20 +8,18 @@
 
 .rc-text {
   height: 200px;
-  margin: 0.5rem;
-}
-
-.rc-text div {
-  height: 100px;
-  padding: 0.5rem;
+  margin: 1rem;
 }
 
 .rc-text div > h3,
 .rc-likes > h1,
-.li-style-none,
-.li-style-none li p {
-  margin: 0.5rem;
+.li-style-none {
+  margin: 0;
   padding: 0;
+}
+
+.rc-text > div:last-child {
+  margin-top: 1rem;
 }
 
 .li-style-none {
@@ -130,7 +128,7 @@ div.ac-title p,
   }
 
   .rc-text {
-    padding: 1rem;
+    padding-left: 1rem;
     margin: 0;
   }
 
@@ -140,6 +138,7 @@ div.ac-title p,
 
   .carousel-container {
     width: 580px;
+    margin: auto;
   }
 
   .full-recipe-container {

@@ -15,26 +15,33 @@ export default class FullRecipe extends React.Component {
   }
 
   render() {
-    const { recipe } = this.props;
+    const {
+      title,
+      readyInMinutes,
+      servings,
+      analyzedInstructions,
+      extendedIngredients
+    } = this.props.recipe;
     const { isLoading } = this.state;
     if (isLoading) {
       return <h4>Loading...</h4>;
     }
     const basicContent = [
-      { number: '001', name: 'Time', value: recipe.readyInMinutes },
-      { number: '002', name: 'Servings', value: recipe.servings },
+      { number: '001', name: 'Time', value: readyInMinutes },
+      { number: '002', name: 'Servings', value: servings },
       { number: '003', name: 'Calories', value: 300 },
+      // Pending data to use in object literal. Update name and value
       { number: '004', name: 'Place', value: 'holder' }
     ];
-    const directInstructions = recipe.analyzedInstructions[0].steps;
+    const directInstructions = analyzedInstructions[0].steps;
     const recipeContent = [
-      { number: '010', name: 'Ingredients', value: recipe.extendedIngredients },
+      { number: '010', name: 'Ingredients', value: extendedIngredients },
       { number: '020', name: 'Instructions', value: directInstructions }
     ];
     return (
       <>
         <div className="fr-header">
-          <h2> { recipe.title } </h2>
+          <h2> { title } </h2>
           <div className="fr-basic">
             <ul className="li-style-none">
               <ListGenerator content={ basicContent } />
