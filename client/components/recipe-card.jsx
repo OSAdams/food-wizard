@@ -12,7 +12,7 @@ export default function recipeCard(props) {
         </div>
         <div>
           <ul className="li-style-none">
-            <li><p>time: { time }</p></li>
+            <li><p>time: { time } minutes</p></li>
             <li><p>servings: { servings }</p></li>
             <li><p>{ updatedDiet }</p></li>
           </ul>
