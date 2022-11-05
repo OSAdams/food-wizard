@@ -16,8 +16,12 @@
   and update objectLiterals being passed as props to ListGenerator
   and Accordion components
 
-  Add image to full recipe. Ponder mid-scale styling.
+  Add image to full recipe.
+
+  Ponder mid-scale styling and more data to display for the recipe.
 
   --display: none;
+
+  Maybe update variable names
 
 */
