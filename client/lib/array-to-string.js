@@ -2,5 +2,9 @@ export default function arrayToString(array) {
   if (!array) {
     return { error: 'invalid array' };
   }
-  return array.join(', ');
+  if (array.length === 0) {
+    return 'no diet information found';
+  }
+  const arrayToString = array.join(', ');
+  return `diet: ${arrayToString}`;
 }

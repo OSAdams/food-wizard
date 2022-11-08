@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line
 import Carousel from '../components/carousel';
 
 export default class Home extends React.Component {
@@ -17,26 +16,6 @@ export default class Home extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
-  updateRecipes(recipes) {
-    if (!recipes) {
-      return null;
-    }
-    recipes.map(index => {
-      const someObj = { recipeName: index.title, spoonApiLikes: index.aggregateLikes, spoonApiId: index.id };
-      fetch('/api/recipes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(someObj)
-      })
-        .then(res => res.json())
-        .then(recipes => null)
-        .catch(err => console.error({ error: err }));
-      return null;
-    });
-  }
-
   render() {
     const { recipes } = this.state;
 
@@ -45,7 +24,7 @@ export default class Home extends React.Component {
     }
 
     return (
-      <Carousel onLoad={ this.updateRecipes(recipes.recipes) } recipes={ recipes.recipes } />
+      <Carousel recipes={ recipes.recipes } />
     );
   }
 }

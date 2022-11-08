@@ -10,7 +10,7 @@ export default class Carousel extends React.Component {
     };
     this.startCarousel = this.startCarousel.bind(this);
     this.resetInterval = this.resetInterval.bind(this);
-    this.cycleCarousel = this.cycleCarousel.bind(this);
+    this.carouselControls = this.carouselControls.bind(this);
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
@@ -28,7 +28,7 @@ export default class Carousel extends React.Component {
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
-  cycleCarousel(event) {
+  carouselControls(event) {
     const { iterator } = this.state;
     const { recipes } = this.props;
     const { id } = event.target;
@@ -41,6 +41,25 @@ export default class Carousel extends React.Component {
       iterator === 0
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
+    } else {
+      const reqBody = {
+        recipeName: recipes[iterator].title,
+        spoonApiLikes: recipes[iterator].aggregateLikes,
+        spoonApiId: recipes[iterator].id
+      };
+      const data = JSON.stringify(reqBody);
+      fetch('/api/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      })
+        .then(res => {
+          window.location.hash = `recipeId?${recipes[iterator].id}`;
+          return null;
+        })
+        .catch(err => console.error({ error: err }));
     }
   }
 
@@ -48,7 +67,7 @@ export default class Carousel extends React.Component {
     const { iterator } = this.state;
     const { recipes } = this.props;
     return (
-      <div onClick={this.cycleCarousel} className="carousel-container">
+      <div onClick={this.carouselControls} className="carousel-container">
         <RecipeCard
           title={recipes[iterator].title}
           time={recipes[iterator].readyInMinutes}

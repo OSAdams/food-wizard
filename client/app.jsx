@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './pages/home';
+import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -16,8 +17,11 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === '') {
+    if (route.path === '' || route.path === '#') {
       return <Home />;
+    }
+    if (route.path === 'recipeId') {
+      return <Recipe recipeId={ route.queryString } />;
     }
     return null;
   }
