@@ -56,7 +56,7 @@ export default class Carousel extends React.Component {
         body: data
       })
         .then(res => {
-          window.location.hash = `recipe?id=${recipes[iterator].id}`;
+          window.location.hash = `recipeId?${recipes[iterator].id}`;
           return null;
         })
         .catch(err => console.error({ error: err }));

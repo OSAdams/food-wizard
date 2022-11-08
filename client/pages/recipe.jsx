@@ -10,8 +10,8 @@ export default class Recipe extends React.Component {
   }
 
   componentDidMount() {
-    const recipeId = window.location.hash.substring(11);
-    fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&addRecipeInformation=true`)
+    const recipeId = this.props.recipeId;
+    fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
       .then(res => res.json())
       .then(recipe => this.setState({ recipe }))
       .catch(err => console.error({ error: err }));

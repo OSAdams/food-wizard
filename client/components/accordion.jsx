@@ -29,8 +29,8 @@ export default class Accordion extends React.Component {
 
   render() {
     const { verifyID } = this.state;
-    const { data } = this.props;
-    const renderData = data.map(index => {
+    const recipeInstructions = this.props.data;
+    const renderData = recipeInstructions.map(index => {
       return (
         <div key={ index.number }>
           <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>

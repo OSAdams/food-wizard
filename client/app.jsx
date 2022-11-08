@@ -20,8 +20,8 @@ export default class App extends React.Component {
     if (route.path === '' || route.path === '#') {
       return <Home />;
     }
-    if (route.path === 'recipe') {
-      return <Recipe />;
+    if (route.path === 'recipeId') {
+      return <Recipe recipeId={ route.queryString } />;
     }
     return null;
   }

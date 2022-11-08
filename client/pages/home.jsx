@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line
 import Carousel from '../components/carousel';
 
 export default class Home extends React.Component {

@@ -8,17 +8,19 @@ export default function FullRecipe(props) {
     readyInMinutes,
     servings,
     analyzedInstructions,
-    extendedIngredients
+    extendedIngredients,
+    nutrition
   } = props.recipe;
   if (!Array.isArray(analyzedInstructions)) {
     return <h4>Loading...</h4>;
   }
+  const calories = nutrition.nutrients[0];
+  const { percentFat } = nutrition.caloricBreakdown;
   const basicContent = [
-    { number: '001', name: 'Time', value: readyInMinutes },
+    { number: '001', name: 'Time', value: `${readyInMinutes} min` },
     { number: '002', name: 'Servings', value: servings },
-    { number: '003', name: 'Calories', value: 300 },
-    // Pending data to use in object literal. Update name and value
-    { number: '004', name: 'Place', value: 'holder' }
+    { number: '003', name: calories.name, value: Math.floor(calories.amount) },
+    { number: '004', name: 'Fat', value: `${Math.floor(percentFat)}%` }
   ];
   const directInstructions = analyzedInstructions[0].steps;
   const recipeContent = [
