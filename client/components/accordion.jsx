@@ -39,9 +39,8 @@ export default class Accordion extends React.Component {
               { index.number === verifyID ? <i className="fa-solid fa-arrow-up" /> : <i className="fa-solid fa-arrow-down" /> }</p>
           </div>
           {
-          index.number === verifyID
-            ? <ContentList content={ index.value } />
-            : null
+          index.number === verifyID &&
+            <ContentList content={ index.value } />
            }
         </div>
       );
