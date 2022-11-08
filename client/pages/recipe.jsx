@@ -10,27 +10,11 @@ export default class Recipe extends React.Component {
   }
 
   componentDidMount() {
-    const recipe = localStorage.getItem('user-full-recipe');
-    if (!recipe) {
-      return null;
-    }
-    const parsedRecipe = JSON.parse(recipe);
-    const reqBody = {
-      recipeName: parsedRecipe.title,
-      spoonApiLikes: parsedRecipe.aggregateLikes,
-      spoonApiId: parsedRecipe.id
-    };
-    const data = JSON.stringify(reqBody);
-    fetch('/api/recipes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
+    const recipeId = window.location.hash.substring(11);
+    fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&addRecipeInformation=true`)
+      .then(res => res.json())
+      .then(recipe => this.setState({ recipe }))
       .catch(err => console.error({ error: err }));
-    this.setState({ recipe: parsedRecipe });
-    return null;
   }
 
   render() {

@@ -1,7 +1,6 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import IconGenerator from './icon-generator';
-import { setLocalStorage } from '../lib';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -43,9 +42,24 @@ export default class Carousel extends React.Component {
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
     } else {
-      setLocalStorage('user-full-recipe', recipes[iterator]);
-      const updatedTitle = recipes[iterator].title.split(' ').join('+');
-      window.location.hash += `recipe?title=${updatedTitle}`;
+      const reqBody = {
+        recipeName: recipes[iterator].title,
+        spoonApiLikes: recipes[iterator].aggregateLikes,
+        spoonApiId: recipes[iterator].id
+      };
+      const data = JSON.stringify(reqBody);
+      fetch('/api/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      })
+        .then(res => {
+          window.location.hash = `recipe?id=${recipes[iterator].id}`;
+          return null;
+        })
+        .catch(err => console.error({ error: err }));
     }
   }
 
