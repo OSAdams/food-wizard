@@ -13,27 +13,24 @@ app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
 app.get('/api/recipes', (req, res, next) => {
-  const sql = `
-    SELECT *
-      FROM recipes
-  `;
-  db.query(sql)
-    .then(result => res.json(result.rows))
-    .catch(err => next(err));
+  throw new ClientError(400, 'Use an id number to select a recipe');
 });
 
-// app.get('/api/recipes:id', (req, res, next) => {
-//   const sql = `
-//     SELECT *
-//       FROM recipes
-//      WHERE "spoonApiId" = ($1)
-//  RETURNING *
-//   `;
-//   const params = [req.id];
-//   db.query(sql)
-//     .then(result => res.json(result.rows))
-//     .catch(err => next(err));
-// });
+app.get('/api/recipes/:id', (req, res, next) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id < 1) {
+    throw new ClientError(400, 'id must be a positive whole integer');
+  }
+  const sql = `
+         SELECT *
+           FROM recipes
+          WHERE "recipeId" = $1
+  `;
+  const params = [id];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
 
 app.post('/api/recipes', (req, res, next) => {
   const { recipeName, spoonApiLikes, spoonApiId } = req.body;
