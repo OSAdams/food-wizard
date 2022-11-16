@@ -1,3 +1,43 @@
+.main-container {
+  padding-top: 3rem;
+}
+
+/* nav bar */
+
+.nav-bar {
+  position: absolute;
+  width: 375px;
+  padding: 0.75rem;
+  top: 0;
+}
+
+.nav-bar,
+.nav-search-form {
+  display: flex;
+}
+
+.nav-input {
+  width: 160px;
+  height: 30px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.nav-button {
+  width: 70px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+.nav-search-form > div {
+  margin: 0.2rem;
+}
+
+.render-page {
+  max-height: calc(100vh);
+  overflow-y: auto;
+}
+
 /* recipe card */
 
 .recipe-card {

@@ -34,8 +34,8 @@ export default class NavBar extends React.Component {
                 className="nav-input" />
             </div>
             <div>
-              <button type="submit">
-                <p>Search</p>
+              <button className="nav-button" type="submit">
+                Search
               </button>
             </div>
           </form>

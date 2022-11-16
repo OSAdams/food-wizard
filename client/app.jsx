@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
+import NavBar from './components/navbar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,13 @@ export default class App extends React.Component {
   }
 
   render() {
-    return this.renderPage();
+    return (
+      <div className="main-container">
+        <NavBar />
+        <div className="render-page">
+          { this.renderPage() }
+        </div>
+      </div>
+    );
   }
 }
