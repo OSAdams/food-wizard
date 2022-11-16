@@ -110,6 +110,10 @@ i:hover,
     -2px -2px 2px black;
 }
 
+.nav-bar {
+  background-color: #232127;
+}
+
 @media screen and (min-width: 700px) {
   .rc-image,
   .rc-shade {
