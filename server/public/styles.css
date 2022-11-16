@@ -74,12 +74,14 @@ i:hover,
 
 /* carousel */
 
-.carousel-container > i {
+.carousel-container > i,
+.nav-menu-icon > i {
   font-size: 2rem;
   opacity: 70%;
 }
 
-.ac-title > i {
+.ac-title > i,
+.nav-menu-icon > i {
   color: #e5e3e8;
   width: 25px;
   height: 25px;
@@ -122,7 +124,8 @@ i:hover,
 }
 
 .nav-input:focus,
-.nav-button:focus {
+.nav-button:focus,
+.nav-input:active {
   border: 2px solid rgba(100, 65, 164, 1);
 }
 

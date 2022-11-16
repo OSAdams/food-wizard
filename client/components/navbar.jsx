@@ -7,6 +7,7 @@ export default class NavBar extends React.Component {
       keyword: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -14,15 +15,23 @@ export default class NavBar extends React.Component {
     this.setState({ keyword: value });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const { keyword } = this.state;
+    window.location.hash = `recipeKeyword?${keyword}`;
+  }
+
   render() {
-    const { handleChange } = this;
+    const { handleChange, handleSubmit } = this;
+    // eslint-disable-next-line no-console
+    console.log(this.state.keyword);
     return (
       <div className="nav-bar">
         <div className="nav-menu-icon">
-          <i className="far fa-bars" />
+          <i className="fa-solid fa-bars" />
         </div>
         <div className="nav-search">
-          <form className="nav-search-form">
+          <form className="nav-search-form" onSubmit={ handleSubmit }>
             <div>
               <label htmlFor="keyword" />
               <input

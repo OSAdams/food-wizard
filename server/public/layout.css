@@ -1,19 +1,15 @@
-.main-container {
-  padding-top: 3rem;
-}
-
 /* nav bar */
+.nav-bar,
+.nav-search-form {
+  display: flex;
+}
 
 .nav-bar {
   position: absolute;
   width: 375px;
   padding: 0.75rem;
   top: 0;
-}
-
-.nav-bar,
-.nav-search-form {
-  display: flex;
+  justify-content: space-between;
 }
 
 .nav-input {
@@ -36,6 +32,7 @@
 .render-page {
   max-height: calc(100vh);
   overflow-y: auto;
+  padding-top: 60px;
 }
 
 /* recipe card */
