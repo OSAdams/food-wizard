@@ -40,6 +40,7 @@ export default class NavBar extends React.Component {
                 type="text"
                 name="keyword"
                 onChange={ handleChange }
+                placeholder="Type a keyword here"
                 className="nav-input" />
             </div>
             <div>
