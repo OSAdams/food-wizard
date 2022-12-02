@@ -3,6 +3,7 @@ import Home from './pages/home';
 import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
+import Search from './pages/search';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'recipeId') {
       return <Recipe recipeId={ route.queryString } />;
+    }
+    if (route.path === 'keyWord') {
+      return <Search keyWord={ route.queryString } />;
     }
     return null;
   }
