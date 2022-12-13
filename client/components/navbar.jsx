@@ -18,7 +18,7 @@ export default class NavBar extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { keyword } = this.state;
-    window.location.hash = `recipeKeyword?${keyword}`;
+    window.location.hash = `keyword?${keyword}`;
   }
 
   render() {
