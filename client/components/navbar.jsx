@@ -19,6 +19,7 @@ export default class NavBar extends React.Component {
     event.preventDefault();
     const { keyword } = this.state;
     window.location.hash = `keyword?${keyword}`;
+    this.setState({ keyword: '' });
   }
 
   render() {

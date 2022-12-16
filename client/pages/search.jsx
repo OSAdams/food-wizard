@@ -19,7 +19,7 @@ export default class Search extends React.Component {
     they keyword 'italian'. If you decide to search again using a different value,
     such as 'meatball', the fetch req still uses the value 'italian'
 
-    if the pace is reloaded, the value of this.props.keyword is updated and the
+    if the page is reloaded, the value of this.props.keyword is updated and the
     correct get req is sent. The return array will have recipes related to the 'meatball'
     keyword
 
@@ -42,6 +42,13 @@ export default class Search extends React.Component {
     console.log('search props:', this.props.keyword);
     // eslint-disable-next-line no-console
     console.log('get req result:', this.state.recipes);
-    return <h1>WhAt&apos;S gOiNg On HeRe</h1>;
+    if (this.state.recipes.length < 1) {
+      return <h1>WhAt&apos;S gOiNg On HeRe</h1>;
+    }
+    return (
+      <div>
+        <h2>Help placeholder </h2>
+      </div>
+    );
   }
 }
