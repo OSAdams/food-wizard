@@ -26,7 +26,7 @@ export default class App extends React.Component {
       return <Recipe recipeId={ route.queryString } />;
     }
     if (route.path === 'keyword') {
-      return <Search keyword={ route.queryString } />;
+      return <Search key={ route.queryString } keyword={ route.queryString } />;
     }
     return null;
   }
