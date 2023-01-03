@@ -7,6 +7,7 @@ export default class Search extends React.Component {
     this.state = {
       recipes: []
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -18,17 +19,21 @@ export default class Search extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
+  handleClick(event) {
+    const { id } = event.target;
+    window.location.hash = `recipeId?${id}`;
+  }
+
   render() {
     if (this.state.recipes.length < 1) {
-      return <h1>WhAt&apos;S gOiNg On HeRe</h1>;
+      return <h1>Loading...</h1>;
     }
     const { results } = this.state.recipes;
-    // eslint-disable-next-line
-    console.log(results);
     const recipeTitles = results.map(index => {
       return (
         <RecipeCard
           key={ index.id }
+          id={ index.id }
           title={ index.title }
           servings={ index.servings }
           likes={ index.aggregateLikes }
@@ -38,7 +43,7 @@ export default class Search extends React.Component {
       );
     });
     return (
-      <div className="search-recipe-render">
+      <div className="search-recipe-render" onClick={this.handleClick}>
         { recipeTitles }
       </div>
     );

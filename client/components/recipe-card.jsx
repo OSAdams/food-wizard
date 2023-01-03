@@ -2,13 +2,13 @@ import React from 'react';
 import { arrayToString } from '../lib';
 
 export default function recipeCard(props) {
-  const { title, time, servings, diet, image, likes } = props;
+  const { title, time, servings, diet, image, likes, id } = props;
   const updatedDiet = arrayToString(diet);
   return (
     <div className="recipe-card">
       <div className="rc-text">
         <div>
-          <h3 className="rc-title">{title}</h3>
+          <h3 className="rc-title" id={id}>{title}</h3>
         </div>
         <div>
           <ul className="li-style-none">
