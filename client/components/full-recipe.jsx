@@ -11,7 +11,7 @@ export default function FullRecipe(props) {
     extendedIngredients,
     nutrition
   } = props.recipe;
-  if (!Array.isArray(analyzedInstructions)) {
+  if (!Array.isArray(analyzedInstructions) || !props.recipe) {
     return <h4>Loading...</h4>;
   }
   const calories = nutrition.nutrients[0];

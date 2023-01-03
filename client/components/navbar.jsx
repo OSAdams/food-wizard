@@ -19,13 +19,10 @@ export default class NavBar extends React.Component {
     event.preventDefault();
     const { keyword } = this.state;
     window.location.hash = `keyword?${keyword}`;
-    this.setState({ keyword: '' });
   }
 
   render() {
     const { handleChange, handleSubmit } = this;
-    // eslint-disable-next-line no-console
-    console.log(this.state.keyword);
     return (
       <div className="nav-bar">
         <div className="nav-menu-icon">
