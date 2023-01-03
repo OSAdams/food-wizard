@@ -115,7 +115,7 @@ i:hover,
 /* nav bar */
 
 .nav-bar {
-  background-color: #232127d2;
+  background-color: #232127;
 }
 
 .nav-input,
@@ -137,5 +137,9 @@ i:hover,
   .rc-image,
   .rc-shade {
     border-radius: 50%;
+  }
+
+  .render-page {
+    max-width: 1500px;
   }
 }

@@ -38,7 +38,7 @@ export default class Search extends React.Component {
       );
     });
     return (
-      <div>
+      <div className="search-recipe-render">
         { recipeTitles }
       </div>
     );
