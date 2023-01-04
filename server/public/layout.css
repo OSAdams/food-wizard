@@ -197,13 +197,19 @@ div > .main-container {
   }
 
   .full-recipe-container {
-    width: 1125px;
-    display: flex;
+    width: 752px;
     margin: auto;
   }
 
   .fr-ingredients {
     display: flex;
     width: 750px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .full-recipe-container {
+    display: flex;
+    width: 1200px;
   }
 }

@@ -19,7 +19,10 @@ export default function ListGenerator(props) {
     }
     return (
       <li key={ index.number } >
-        <p>{ index.name }: { index.value }</p>
+        { !index.name
+          ? <p>{index.value}</p>
+          : <p>{index.name}: {index.value}</p>
+        }
       </li>
     );
   });
