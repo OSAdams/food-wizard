@@ -8,11 +8,12 @@ export default class NavBar extends React.Component {
     this.state = {
       keyword: '',
       windowWidth: 0,
-      showMenu: false
+      showMenu: this.windowWidth > 700
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -28,9 +29,13 @@ export default class NavBar extends React.Component {
 
   handleResize() {
     if (window.innerWidth > 700) {
-      this.setState({ showMenu: true });
+      this.setState({ showMenu: true, windowWidth: window.innerWidth });
     }
     this.setState({ windowWidth: window.innerWidth });
+  }
+
+  handleClick() {
+    this.setState(prevState => !prevState.showMenu);
   }
 
   componentDidMount() {
@@ -39,13 +44,13 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const { handleChange, handleSubmit } = this;
+    const { handleChange, handleSubmit, handleClick } = this;
     // eslint-disable-next-line
     const { windowWidth, showMenu } = this.state;
     return (
       <div className="nav-bar">
         <div className="nav-menu-icon">
-          <i className="fa-solid fa-bars" />
+          <i className="fa-solid fa-bars" onClick={ handleClick } />
           {/* {
             (windowWidth > 700 || showMenu) &&
               <MenuModal />
