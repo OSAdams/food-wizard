@@ -7,12 +7,12 @@ export default class NavBar extends React.Component {
     super(props);
     this.state = {
       keyword: '',
-      windowWidth: 0,
-      showMenu: this.windowWidth > 700
+      // windowWidth: 0,
+      showMenu: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleResize = this.handleResize.bind(this);
+    // this.handleResize = this.handleResize.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -27,34 +27,36 @@ export default class NavBar extends React.Component {
     window.location.hash = `keyword?${keyword}`;
   }
 
-  handleResize() {
-    if (window.innerWidth > 700) {
-      this.setState({ showMenu: true, windowWidth: window.innerWidth });
-    }
-    this.setState({ windowWidth: window.innerWidth });
-  }
+  // handleResize() {
+  //   if (window.innerWidth > 700) {
+  //     this.setState({ showMenu: true, windowWidth: window.innerWidth });
+  //   }
+  //   this.setState({ windowWidth: window.innerWidth });
+  // }
 
   handleClick() {
-    this.setState(prevState => !prevState.showMenu);
+    this.setState(prevState => ({
+      showMenu: !prevState.showMenu
+    }));
   }
 
-  componentDidMount() {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
-  }
+  // componentDidMount() {
+  //   this.handleResize();
+  //   window.addEventListener('resize', this.handleResize);
+  // }
 
   render() {
     const { handleChange, handleSubmit, handleClick } = this;
     // eslint-disable-next-line
-    const { windowWidth, showMenu } = this.state;
+    const { showMenu } = this.state;
     return (
       <div className="nav-bar">
         <div className="nav-menu-icon">
           <i className="fa-solid fa-bars" onClick={ handleClick } />
-          {/* {
-            (windowWidth > 700 || showMenu) &&
+          {
+            showMenu === true &&
               <MenuModal />
-          } */}
+          }
         </div>
         <div className="nav-search">
           <form className="nav-search-form" onSubmit={handleSubmit}>

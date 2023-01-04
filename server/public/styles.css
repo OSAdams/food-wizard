@@ -133,6 +133,10 @@ i:hover,
   cursor: pointer;
 }
 
+.menu-modal {
+  background-color: #232127;
+}
+
 @media screen and (min-width: 700px) {
   .rc-image,
   .rc-shade {

@@ -1,4 +1,4 @@
-import React from './react';
+import React from 'react';
 import ListGenerator from './list-generator';
 
 export default function MenuModal(props) {

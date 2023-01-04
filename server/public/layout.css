@@ -5,10 +5,8 @@
 }
 
 .nav-bar {
-  position: absolute;
   width: 100vw;
   padding: 0.75rem;
-  top: 0;
   justify-content: space-between;
 }
 
@@ -30,9 +28,8 @@
 }
 
 .render-page {
-  max-height: calc(93vh);
+  max-height: calc(91vh);
   overflow-y: auto;
-  margin-top: 60px;
 }
 
 /* recipe card */
@@ -40,7 +37,7 @@
 .recipe-card {
   width: 375px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .rc-text {
@@ -145,7 +142,7 @@ div.ac-title p,
 
 div > .main-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 700px) {
