@@ -31,9 +31,9 @@ export default function MenuModal(props) {
 // handleClick(event) {
 //   console.log(event.target.value (or) event.target.textContent)
 //
-//
-//
-//
-//
-//
 // }
+//
+// Update this function to a class react component
+// Look into using props to pass a method
+//
+//

@@ -150,9 +150,9 @@ div > .main-container {
 .menu-modal {
   position: absolute;
   left: 0;
-  right: 0;
-  bottom: 0;
   top: 3.5rem;
+  height: 10rem;
+  width: 7rem;
 }
 
 .menu-options {
@@ -172,6 +172,21 @@ div > .main-container {
 }
 
 @media screen and (min-width: 700px) {
+  .menu-modal {
+    position: static;
+    height: 2.2rem;
+    width: 28rem;
+  }
+
+  .menu-options {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .menu-li-block {
+    height: 2.2rem;
+  }
+
   /* nav bar */
   .nav-bar {
     max-width: 1500px;
@@ -229,6 +244,7 @@ div > .main-container {
   }
 
   .render-page {
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
   }

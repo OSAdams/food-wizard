@@ -45,7 +45,7 @@ export default class Accordion extends React.Component {
       return (
         <div key={ index.number }>
           <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
-            <h4>{index.name} </h4>
+            <h4>{index.name}</h4>
             <p>
               { index.number === verifyID ? <i className="fa-solid fa-arrow-up" /> : <i className="fa-solid fa-arrow-down" /> }</p>
           </div>
@@ -60,7 +60,7 @@ export default class Accordion extends React.Component {
       return (
         <div key={ index.number }>
           <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
-            <h4>{index.name} </h4>
+            <h4>{index.name}</h4>
             <p>
               <i className="fa-solid fa-arrow-down"/>
             </p>

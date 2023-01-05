@@ -54,6 +54,10 @@ export default class NavBar extends React.Component {
         <div className="nav-menu-icon">
           <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
+        {
+          showMenu === true &&
+          <MenuModal />
+        }
         <div className="nav-search">
           <form className="nav-search-form" onSubmit={handleSubmit}>
             <div>
@@ -74,10 +78,6 @@ export default class NavBar extends React.Component {
             </div>
           </form>
         </div>
-        {
-          showMenu === true &&
-          <MenuModal />
-        }
       </div>
     );
   }
