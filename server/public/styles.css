@@ -134,7 +134,17 @@ i:hover,
 }
 
 .menu-modal {
+  background-color: #232127d3;
+}
+
+.menu-li-block {
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.menu-li-block:hover {
   background-color: #232127;
+  color: #fefefe;
 }
 
 @media screen and (min-width: 700px) {

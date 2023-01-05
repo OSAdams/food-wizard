@@ -17,6 +17,29 @@ export default function ListGenerator(props) {
         </li>
       );
     }
+    /*
+    ###################
+    This is ugly
+    ###################
+    */
+    if (index.className) {
+      return (
+        <li key={index.number} className={index.className}>
+          <div>
+            {
+              !index.name
+                ? <p>{index.value}</p>
+                : <p>{index.name}: {index.value}</p>
+            }
+          </div>
+        </li>
+      );
+    }
+    /*
+    #####################
+    Look into refactor
+    #####################
+    */
     return (
       <li key={ index.number } >
         { !index.name

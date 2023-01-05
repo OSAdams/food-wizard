@@ -69,6 +69,6 @@ export default class Accordion extends React.Component {
         </div>
       );
     });
-    return windowWidth < 750 ? renderData : renderDataWide;
+    return windowWidth < 700 ? renderData : renderDataWide;
   }
 }
