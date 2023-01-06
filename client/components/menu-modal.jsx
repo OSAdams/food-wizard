@@ -1,21 +1,36 @@
 import React from 'react';
 import ListGenerator from './list-generator';
 
-export default function MenuModal(props) {
-  const elementClass = 'menu-li-block';
-  const menuOptions = [
-    { number: '30003333', value: 'Home', className: elementClass },
-    { number: '30002222', value: 'Search', className: elementClass },
-    { number: '30001111', value: 'Favorites', className: elementClass },
-    { number: '30004444', value: 'Account', className: elementClass }
-  ];
-  return (
-    <div className="menu-modal">
-      <ul className="menu-options">
-        <ListGenerator content={menuOptions} />
-      </ul>
-    </div>
-  );
+export default class MenuModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      windowHash: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    // eslint-disable-next-line
+    console.log(event.target.textContent);
+  }
+
+  render() {
+    const elementClass = 'menu-li-block';
+    const menuOptions = [
+      { number: '30003333', value: 'Home', className: elementClass },
+      { number: '30002222', value: 'Search', className: elementClass },
+      { number: '30001111', value: 'Favorites', className: elementClass },
+      { number: '30004444', value: 'Account', className: elementClass }
+    ];
+    return (
+      <div className="menu-modal">
+        <ul className="menu-options">
+          <ListGenerator onClick={this.handleClick} content={menuOptions} />
+        </ul>
+      </div>
+    );
+  }
 }
 
 // Add event listener to ListGenerator to spy on children

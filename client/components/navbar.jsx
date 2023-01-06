@@ -35,9 +35,12 @@ export default class NavBar extends React.Component {
   // }
 
   handleClick() {
-    this.setState(prevState => ({
-      showMenu: !prevState.showMenu
-    }));
+    const { windowWidth } = this.state;
+    if (windowWidth <= 700) {
+      this.setState(prevState => ({
+        showMenu: !prevState.showMenu
+      }));
+    }
   }
 
   // componentDidMount() {
@@ -47,7 +50,6 @@ export default class NavBar extends React.Component {
 
   render() {
     const { handleChange, handleSubmit, handleClick } = this;
-    // eslint-disable-next-line
     const { showMenu } = this.state;
     return (
       <div className="nav-bar">

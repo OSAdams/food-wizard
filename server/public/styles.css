@@ -97,16 +97,16 @@ i {
 
 .nav-menu-icon > i:active {
   color: #6441a4;
-}
-
-.carousel-container i:hover,
-.rc-likes h2 i:hover {
-  opacity: 100%;
   text-shadow:
     2px 2px 2px black,
     2px -2px 2px black,
     -2px 2px 2px black,
     -2px -2px 2px black;
+}
+
+.carousel-container i:hover,
+.rc-likes h2 i:hover {
+  opacity: 100%;
 }
 
 .ac-title:hover {
