@@ -4,6 +4,7 @@ import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
 import Search from './pages/search';
+import UnderConstruction from './pages/under-construction';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === '' || route.path === '#') {
+    if (route.path === '' || route.path === '#' || route.path === 'home') {
       return <Home />;
     }
     if (route.path === 'recipeId') {
@@ -28,7 +29,7 @@ export default class App extends React.Component {
     if (route.path === 'keyword') {
       return <Search key={ route.queryString } keyword={ route.queryString } />;
     }
-    return null;
+    return <UnderConstruction />;
   }
 
   render() {

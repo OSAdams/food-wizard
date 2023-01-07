@@ -7,12 +7,14 @@ export default class MenuModal extends React.Component {
     this.state = {
       windowHash: false
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.updateWindowHash = this.updateWindowHash.bind(this);
   }
 
-  handleClick(event) {
+  updateWindowHash(event) {
     // eslint-disable-next-line
     console.log(event.target.textContent);
+    const textHash = event.target.textContent.toLowerCase();
+    window.location.hash = textHash;
   }
 
   render() {
@@ -26,29 +28,9 @@ export default class MenuModal extends React.Component {
     return (
       <div className="menu-modal">
         <ul className="menu-options">
-          <ListGenerator onClick={this.handleClick} content={menuOptions} />
+          <ListGenerator helperMethod={ this.updateWindowHash }content={menuOptions} />
         </ul>
       </div>
     );
   }
 }
-
-// Add event listener to ListGenerator to spy on children
-// if value === X update the window hash
-//  impliment error handling (improve over time)
-//  if windowWidth < 700
-//    showMenu: false
-//    update window hash
-//  update window hash
-//
-//
-// prototype
-// handleClick(event) {
-//   console.log(event.target.value (or) event.target.textContent)
-//
-// }
-//
-// Update this function to a class react component
-// Look into using props to pass a method
-//
-//
