@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from '../components/carousel';
+import LoadingModal from '../components/loading-modal';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class Home extends React.Component {
     const { recipes } = this.state;
 
     if (!recipes.recipes) {
-      return <h1>Loading ...</h1>;
+      return <LoadingModal />;
     }
 
     return (

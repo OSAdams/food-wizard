@@ -29,8 +29,9 @@ export default class NavBar extends React.Component {
   handleResize() {
     if (window.innerWidth > 700) {
       this.setState({ showMenu: true, windowWidth: window.innerWidth });
+    } else {
+      this.setState({ showMenu: false, windowWidth: window.innerWidth });
     }
-    this.setState({ windowWidth: window.innerWidth });
   }
 
   handleClick() {

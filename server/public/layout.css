@@ -28,7 +28,7 @@
 }
 
 .render-page {
-  max-height: calc(91vh);
+  max-height: calc(92.7vh);
   overflow-y: auto;
 }
 
@@ -171,20 +171,28 @@ div > .main-container {
   height: 2.5rem;
 }
 
+.loading-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.loading-modal img {
+  width: 320px;
+}
+
 @media screen and (min-width: 700px) {
   .menu-modal {
     position: static;
-    height: 2.2rem;
+    height: 100%;
     width: 28rem;
   }
 
   .menu-options {
     display: flex;
     justify-content: space-evenly;
-  }
-
-  .menu-li-block {
-    height: 2.2rem;
   }
 
   /* nav bar */
@@ -207,6 +215,10 @@ div > .main-container {
 
   .recipe-card > div {
     width: 200px;
+  }
+
+  .fr-header {
+    margin: auto;
   }
 
   .fr-ingredients > div,
@@ -244,7 +256,6 @@ div > .main-container {
   }
 
   .render-page {
-    margin-top: 1rem;
     display: flex;
     justify-content: center;
   }
@@ -254,5 +265,11 @@ div > .main-container {
   .full-recipe-container {
     display: flex;
     max-width: 1200px;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ListGenerator from './list-generator';
 import Accordion from './accordion';
+import LoadingModal from './loading-modal';
 
 export default function FullRecipe(props) {
   const {
@@ -12,7 +13,7 @@ export default function FullRecipe(props) {
     nutrition
   } = props.recipe;
   if (!Array.isArray(analyzedInstructions) || !props.recipe) {
-    return <h4>Loading...</h4>;
+    return <LoadingModal />;
   }
   const calories = nutrition.nutrients[0];
   const { percentFat } = nutrition.caloricBreakdown;

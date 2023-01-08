@@ -28,7 +28,7 @@ export default class MenuModal extends React.Component {
     return (
       <div className="menu-modal">
         <ul className="menu-options">
-          <ListGenerator helperMethod={ this.updateWindowHash }content={menuOptions} />
+          <ListGenerator helperMethod={ this.updateWindowHash } content={menuOptions} />
         </ul>
       </div>
     );
