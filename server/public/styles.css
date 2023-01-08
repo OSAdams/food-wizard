@@ -74,12 +74,14 @@ i:hover,
 
 /* carousel */
 
-.carousel-container > i {
+.carousel-container > i,
+.nav-menu-icon > i {
   font-size: 2rem;
   opacity: 70%;
 }
 
-.ac-title > i {
+.ac-title > i,
+.nav-menu-icon > i {
   color: #e5e3e8;
   width: 25px;
   height: 25px;
@@ -98,7 +100,7 @@ i:hover,
 .ac-title {
   opacity: 75%;
   background-color: #232127;
-  transition: all 300ms;
+  transition: all 300ms ease-in-out;
 }
 
 .ac-title:hover {
@@ -110,9 +112,34 @@ i:hover,
     -2px -2px 2px black;
 }
 
+/* nav bar */
+
+.nav-bar {
+  background-color: #232127;
+}
+
+.nav-input,
+.nav-button {
+  border: none;
+}
+
+.nav-input:focus,
+.nav-button:focus,
+.nav-input:active {
+  border: 2px solid rgba(100, 65, 164, 1);
+}
+
+.nav-button:hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 700px) {
   .rc-image,
   .rc-shade {
     border-radius: 50%;
+  }
+
+  .render-page {
+    max-width: 1500px;
   }
 }

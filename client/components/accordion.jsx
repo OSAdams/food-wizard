@@ -15,8 +15,10 @@ export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      verifyID: null
+      verifyID: null,
+      windowWidth: 0
     };
+    this.handleResize = this.handleResize.bind(this);
   }
 
   handleClick(id) {
@@ -27,8 +29,17 @@ export default class Accordion extends React.Component {
       : this.setState({ verifyID: targetID });
   }
 
+  handleResize() {
+    this.setState({ windowWidth: window.innerWidth });
+  }
+
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  }
+
   render() {
-    const { verifyID } = this.state;
+    const { verifyID, windowWidth } = this.state;
     const recipeInstructions = this.props.data;
     const renderData = recipeInstructions.map(index => {
       return (
@@ -45,6 +56,19 @@ export default class Accordion extends React.Component {
         </div>
       );
     });
-    return renderData;
+    const renderDataWide = recipeInstructions.map(index => {
+      return (
+        <div key={ index.number }>
+          <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
+            <h4>{index.name} </h4>
+            <p>
+              <i className="fa-solid fa-arrow-down"/>
+            </p>
+          </div>
+          <ContentList content={index.value} />
+        </div>
+      );
+    });
+    return windowWidth < 1100 ? renderData : renderDataWide;
   }
 }
