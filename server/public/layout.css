@@ -86,6 +86,7 @@
 
 .carousel-container {
   position: relative;
+  padding-top: 9rem;
 }
 
 .carousel-container > .fa-arrow-left {
