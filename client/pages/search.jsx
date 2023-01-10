@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeCard from '../components/recipe-card';
+import LoadingModal from '../components/loading-modal';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -11,7 +12,6 @@ export default class Search extends React.Component {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line
     const keyword = this.props.keyword;
     fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${keyword}&apiKey=${process.env.SPOONACULAR_API_KEY}&number=10&addRecipeNutrition=true&instructionsRequired=true`)
       .then(res => res.json())
@@ -26,7 +26,7 @@ export default class Search extends React.Component {
 
   render() {
     if (this.state.recipes.length < 1) {
-      return <h1>Loading...</h1>;
+      return <LoadingModal />;
     }
     const { results } = this.state.recipes;
     const recipeTitles = results.map(index => {

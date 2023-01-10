@@ -1,13 +1,18 @@
 import React from 'react';
+import MenuModal from './menu-modal';
 
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: ''
+      keyword: '',
+      windowWidth: 0,
+      showMenu: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -21,15 +26,42 @@ export default class NavBar extends React.Component {
     window.location.hash = `keyword?${keyword}`;
   }
 
+  handleResize() {
+    if (window.innerWidth > 700) {
+      this.setState({ showMenu: true, windowWidth: window.innerWidth });
+    } else {
+      this.setState({ showMenu: false, windowWidth: window.innerWidth });
+    }
+  }
+
+  handleClick() {
+    const { windowWidth } = this.state;
+    if (windowWidth <= 700) {
+      this.setState(prevState => ({
+        showMenu: !prevState.showMenu
+      }));
+    }
+  }
+
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  }
+
   render() {
-    const { handleChange, handleSubmit } = this;
+    const { handleChange, handleSubmit, handleClick } = this;
+    const { showMenu } = this.state;
     return (
       <div className="nav-bar">
         <div className="nav-menu-icon">
-          <i className="fa-solid fa-bars" />
+          <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
+        {
+          showMenu === true &&
+          <MenuModal />
+        }
         <div className="nav-search">
-          <form className="nav-search-form" onSubmit={ handleSubmit }>
+          <form className="nav-search-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="keyword" />
               <input
@@ -37,7 +69,7 @@ export default class NavBar extends React.Component {
                 id="keyword"
                 type="text"
                 name="keyword"
-                onChange={ handleChange }
+                onChange={handleChange}
                 placeholder="Type a keyword here"
                 className="nav-input" />
             </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
-import IconGenerator from './icon-generator';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -75,8 +74,8 @@ export default class Carousel extends React.Component {
           servings={recipes[iterator].servings}
           likes={recipes[iterator].aggregateLikes}
           image={recipes[iterator].image} />
-        <IconGenerator className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
-        <IconGenerator className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
+        <i className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
+        <i className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
       </div>
     );
   }

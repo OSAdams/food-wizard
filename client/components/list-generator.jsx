@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ListGenerator(props) {
-  const { content } = props;
+  const { content, helperMethod } = props;
   const liData = content.map(index => {
     if (!index.original && !index.value) {
       return (
@@ -17,9 +17,35 @@ export default function ListGenerator(props) {
         </li>
       );
     }
+    /*
+    ###################
+    This is ugly
+    ###################
+    */
+    if (helperMethod) {
+      return (
+        <li onClick={ helperMethod } key={index.number} className={index.className}>
+          <div>
+            {
+              !index.name
+                ? <p>{index.value}</p>
+                : <p>{index.name}: {index.value}</p>
+            }
+          </div>
+        </li>
+      );
+    }
+    /*
+    #####################
+    Look into refactor
+    #####################
+    */
     return (
       <li key={ index.number } >
-        <p>{ index.name }: { index.value }</p>
+        { !index.name
+          ? <p>{index.value}</p>
+          : <p>{index.name}: {index.value}</p>
+        }
       </li>
     );
   });
