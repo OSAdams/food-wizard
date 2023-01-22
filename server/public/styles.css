@@ -1,3 +1,12 @@
+:root {
+  --main-color: #6441a4;
+  --main-dark-color: #201c2b;
+  --main-light-color: #e2dbf0;
+  --alt-color: #54595e;
+  --alt-dark-color: #232127;
+  --alt-light-color: #e5e3e8;
+}
+
 body {
   background-color: #201c2b;
   font-family:
@@ -15,24 +24,12 @@ Secondary Dark: #232127
 Secondary Light: #E5E3E8
 */
 
-.font-dark-2 {
-  color: #232127;
-}
-
-.font-light-1 {
-  color: #e2dbf0;
-}
-
-.font-light-2 {
-  color: #e5e3e8;
-}
-
 .txt-shadow {
   text-shadow:
-    2px 2px 2px black,
-    2px -2px 2px black,
-    -2px 2px 2px black,
-    -2px -2px 2px black;
+    2px 2px 2px var(--main-dark-color),
+    2px -2px 2px var(--main-dark-color),
+    -2px 2px 2px var(--main-dark-color),
+    -2px -2px 2px var(--main-dark-color);
 }
 
 i {
@@ -98,10 +95,10 @@ i {
 .nav-menu-icon > i:active {
   color: #6441a4;
   text-shadow:
-    2px 2px 2px black,
-    2px -2px 2px black,
-    -2px 2px 2px black,
-    -2px -2px 2px black;
+    2px 2px 2px var(--main-dark-color),
+    2px -2px 2px var(--main-dark-color),
+    -2px 2px 2px var(--main-dark-color),
+    -2px -2px 2px var(--main-dark-color);
 }
 
 .carousel-container i:hover,
@@ -112,10 +109,10 @@ i {
 .ac-title:hover {
   opacity: 100%;
   text-shadow:
-    2px 2px 2px black,
-    2px -2px 2px black,
-    -2px 2px 2px black,
-    -2px -2px 2px black;
+    2px 2px 2px var(--main-dark-color),
+    2px -2px 2px var(--main-dark-color),
+    -2px 2px 2px var(--main-dark-color),
+    -2px -2px 2px var(--main-dark-color);
 }
 
 /* nav bar */
@@ -163,10 +160,6 @@ i {
   .rc-image,
   .rc-shade {
     border-radius: 50%;
-  }
-
-  .render-page {
-    max-width: 1500px;
   }
 
   .ac-title {

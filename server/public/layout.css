@@ -1,3 +1,27 @@
+/*
+
+.flex {
+  display: flex;
+}
+
+.nav-bar,
+.nav-search-form,
+.recipe-card,
+.rc-image,
+.ac-title,
+.fr-basic-ul,
+div > .main-container,
+.menu-li-block,
+.loading-modal,
+.menu-options,
+.search-recipe-container,
+.fr-ingredients,
+.page-container,
+.full-recipe-container,
+.main-container
+
+*/
+
 /* nav bar */
 .nav-bar,
 .nav-search-form {
@@ -12,7 +36,7 @@
 
 .nav-input {
   width: 160px;
-  height: 30px;
+  height: 2.5rem;
   border-radius: 4px;
   padding: 4px;
 }
@@ -27,8 +51,10 @@
   margin: 0.2rem;
 }
 
-.render-page {
-  max-height: calc(92.7vh);
+/* div holding content */
+
+.page-container {
+  max-height: calc(100vh - 2.5rem);
   overflow-y: auto;
 }
 
@@ -256,9 +282,10 @@ div > .main-container {
     display: flex;
   }
 
-  .render-page {
+  .page-container {
     display: flex;
     justify-content: center;
+    max-width: 1500px;
   }
 }
 

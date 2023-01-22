@@ -5,6 +5,7 @@ import { parseRoute } from './lib';
 import NavBar from './components/navbar';
 import Search from './pages/search';
 import UnderConstruction from './pages/under-construction';
+import PageContainer from './components/page-container';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,9 +37,9 @@ export default class App extends React.Component {
     return (
       <div className="main-container">
         <NavBar />
-        <div className="render-page">
+        <PageContainer>
           { this.renderPage() }
-        </div>
+        </PageContainer>
       </div>
     );
   }
