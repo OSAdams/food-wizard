@@ -52,8 +52,8 @@ export default class NavBar extends React.Component {
     const { handleChange, handleSubmit, handleClick } = this;
     const { showMenu } = this.state;
     return (
-      <div className="nav-bar">
-        <div className="nav-menu-icon">
+      <div className="nav-bar flex">
+        <div className="nav-menu-icon flex">
           <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
         {

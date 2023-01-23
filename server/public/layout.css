@@ -4,8 +4,6 @@
   display: flex;
 }
 
-.nav-bar,
-.nav-search-form,
 .recipe-card,
 .rc-image,
 .ac-title,
@@ -22,21 +20,39 @@ div > .main-container,
 
 */
 
-/* nav bar */
-.nav-bar,
-.nav-search-form {
+/* FLEX */
+
+.flex {
   display: flex;
 }
 
+.f-dir-col {
+  flex-direction: column;
+}
+
+.f-align-items-center {
+  align-items: center;
+}
+
+.f-align-items-f-end {
+  align-items: flex-end;
+}
+
+.f-justify-content-center {
+  justify-content: center;
+}
+
+/* nav bar */
+
 .nav-bar {
   width: 100vw;
+  height: 3.5rem;
   padding: 0.75rem;
   justify-content: space-between;
 }
 
 .nav-input {
-  width: 160px;
-  height: 2.5rem;
+  width: 8rem;
   border-radius: 4px;
   padding: 4px;
 }
@@ -51,19 +67,18 @@ div > .main-container,
   margin: 0.2rem;
 }
 
-/* div holding content */
+/* div holding components */
 
 .page-container {
-  max-height: calc(100vh - 2.5rem);
+  max-height: calc(100vh - 3.5rem);
   overflow-y: auto;
+  width: 100vw;
 }
 
 /* recipe card */
 
 .recipe-card {
-  width: 375px;
-  display: flex;
-  flex-direction: column;
+  max-width: 375px;
 }
 
 .rc-text {
@@ -90,18 +105,7 @@ div > .main-container,
 .rc-image {
   height: 200px;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   position: relative;
-}
-
-.rc-shade {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .rc-likes h2 {
@@ -169,11 +173,6 @@ div.ac-title p,
   margin: 0;
 }
 
-div > .main-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .menu-modal {
   position: absolute;
   left: 0;
@@ -189,9 +188,6 @@ div > .main-container {
 }
 
 .menu-li-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -199,10 +195,6 @@ div > .main-container {
 }
 
 .loading-modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding-top: 1rem;
 }
 

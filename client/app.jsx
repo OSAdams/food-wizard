@@ -35,7 +35,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="main-container">
+      <div className="main-container flex f-dir-col">
         <NavBar />
         <PageContainer>
           { this.renderPage() }
