@@ -26,6 +26,10 @@ div > .main-container,
   display: flex;
 }
 
+.f-wrap-wrap {
+  flex-wrap: wrap;
+}
+
 .f-dir-col {
   flex-direction: column;
 }
@@ -151,11 +155,6 @@ div > .main-container,
 .fr-header h2 {
   text-align: center;
   margin-top: 0;
-}
-
-.fr-basic ul {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .fr-basic ul > li {
@@ -288,8 +287,6 @@ div.ac-title p,
   }
 
   .main-container {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
   }
 }
