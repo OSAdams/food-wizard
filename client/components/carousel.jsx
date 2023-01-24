@@ -9,7 +9,8 @@ export default class Carousel extends React.Component {
     };
     this.startCarousel = this.startCarousel.bind(this);
     this.resetInterval = this.resetInterval.bind(this);
-    this.carouselControls = this.carouselControls.bind(this);
+    this.loadRecipe = this.loadRecipe.bind(this);
+    this.navigateCarousel = this.navigateCarousel.bind(this);
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
@@ -27,55 +28,68 @@ export default class Carousel extends React.Component {
     this.intervalID = setInterval(this.startCarousel, 4000);
   }
 
-  carouselControls(event) {
+  loadRecipe(event) {
     const { iterator } = this.state;
     const { recipes } = this.props;
-    const { id } = event.target;
     this.resetInterval();
-    if (id === 'cara-next') {
+    const reqBody = {
+      recipeName: recipes[iterator].title,
+      spoonApiLikes: recipes[iterator].aggregateLikes,
+      spoonApiId: recipes[iterator].id
+    };
+    const data = JSON.stringify(reqBody);
+    fetch('/api/recipes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    })
+      .then(res => {
+        window.location.hash = `recipeId?${recipes[iterator].id}`;
+        return null;
+      })
+      .catch(err => console.error({ error: err }));
+  }
+
+  navigateCarousel(event) {
+    const { iterator } = this.state;
+    const { recipes } = this.props;
+    const { className, parentNode } = event.target;
+    this.resetInterval();
+    if (className === 'carousel-next' || parentNode.className === 'carousel-next') {
       iterator === recipes.length - 1
         ? this.setState({ iterator: 0 })
         : this.setState({ iterator: iterator + 1 });
-    } else if (id === 'cara-prev') {
+    } else if (className === 'carousel-previous' || parentNode.className === 'carousel-previous') {
       iterator === 0
         ? this.setState({ iterator: recipes.length - 1 })
         : this.setState({ iterator: iterator - 1 });
-    } else {
-      const reqBody = {
-        recipeName: recipes[iterator].title,
-        spoonApiLikes: recipes[iterator].aggregateLikes,
-        spoonApiId: recipes[iterator].id
-      };
-      const data = JSON.stringify(reqBody);
-      fetch('/api/recipes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: data
-      })
-        .then(res => {
-          window.location.hash = `recipeId?${recipes[iterator].id}`;
-          return null;
-        })
-        .catch(err => console.error({ error: err }));
     }
   }
 
   render() {
     const { iterator } = this.state;
     const { recipes } = this.props;
+    const { navigateCarousel, loadRecipe } = this;
     return (
-      <div onClick={this.carouselControls} className="carousel-container">
+      <div className="carousel-container">
         <RecipeCard
+          methods={ [loadRecipe] }
           title={recipes[iterator].title}
           time={recipes[iterator].readyInMinutes}
           diet={recipes[iterator].diets}
           servings={recipes[iterator].servings}
           likes={recipes[iterator].aggregateLikes}
           image={recipes[iterator].image} />
-        <i className='fa-sharp fa-solid fa-arrow-left txt-shadow' id='cara-prev' />
-        <i className='fa-sharp fa-solid fa-arrow-right txt-shadow' id='cara-next' />
+        <div className='carousel-controls'>
+          <button onClick={ navigateCarousel } type='button' className='carousel-previous'>
+            <i className='fa-sharp fa-solid fa-arrow-left txt-shadow' />
+          </button>
+          <button onClick={ navigateCarousel } type='button' className='carousel-next'>
+            <i className='fa-sharp fa-solid fa-arrow-right txt-shadow' />
+          </button>
+        </div>
       </div>
     );
   }

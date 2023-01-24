@@ -1,26 +1,4 @@
-/*
-
-.flex {
-  display: flex;
-}
-
-.recipe-card,
-.rc-image,
-.ac-title,
-.fr-basic-ul,
-div > .main-container,
-.menu-li-block,
-.loading-modal,
-.menu-options,
-.search-recipe-container,
-.fr-ingredients,
-.page-container,
-.full-recipe-container,
-.main-container
-
-*/
-
-/* FLEX */
+/* FLEX OPTIONS */
 
 .flex {
   display: flex;
@@ -46,6 +24,12 @@ div > .main-container,
   justify-content: center;
 }
 
+/* PADDING */
+
+.pad-1rem {
+  padding: 1rem;
+}
+
 /* nav bar */
 
 .nav-bar {
@@ -69,6 +53,17 @@ div > .main-container,
 
 .nav-search-form > div {
   margin: 0.2rem;
+}
+
+/* CAROUSEL */
+
+.carousel-controls {
+  margin-top: 0.1rem;
+}
+
+.carousel-controls button {
+  width: 50%;
+  height: 3rem;
 }
 
 /* div holding components */
@@ -114,25 +109,6 @@ div > .main-container,
 
 .rc-likes h2 {
   margin-bottom: 1rem;
-}
-
-/* Carousel */
-
-.carousel-container {
-  position: relative;
-  padding-top: 9rem;
-}
-
-.carousel-container > .fa-arrow-left {
-  position: absolute;
-  left: 1rem;
-  bottom: 5rem;
-}
-
-.carousel-container > .fa-arrow-right {
-  position: absolute;
-  right: 1rem;
-  bottom: 5rem;
 }
 
 /* full recipe */

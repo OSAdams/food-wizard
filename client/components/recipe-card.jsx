@@ -2,10 +2,12 @@ import React from 'react';
 import { arrayToString } from '../lib';
 
 export default function recipeCard(props) {
-  const { title, time, servings, diet, image, likes, id } = props;
+  const { title, time, servings, diet, image, likes, id, methods } = props;
   const updatedDiet = arrayToString(diet);
   return (
-    <div className="recipe-card flex f-dir-col">
+    <div
+      onClick={ methods[0] }
+      className="recipe-card flex f-dir-col">
       <div className="rc-text">
         <div>
           <h3 className="rc-title" id={id}>{title}</h3>

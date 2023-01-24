@@ -44,3 +44,10 @@ export default class App extends React.Component {
     );
   }
 }
+
+/*  HEY IDIOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+recipe card image is a background, use flex for like icon positioning
+instead of position relative/absolute
+
+*/
