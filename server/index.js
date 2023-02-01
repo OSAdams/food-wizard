@@ -1,15 +1,15 @@
 require('dotenv/config');
 const express = require('express');
 const jsonMiddleware = express.json();
-const db = require('./db');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
+const db = require('./db');
+const argon2 = require('argon2');
 
 const app = express();
 
 app.use(staticMiddleware);
-
 app.use(jsonMiddleware);
 
 app.get('/api/recipes', (req, res, next) => {
@@ -52,6 +52,29 @@ app.post('/api/recipes', (req, res, next) => {
     .then(result => {
       const [recipes] = result.rows;
       res.status(201).json(recipes);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'username and password are required fields');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+        INSERT INTO users (username, "hashedPassword")
+             VALUES ($1, $2)
+        RETURNING "userId", username, "createdAt"
+      `;
+      const params = [username, hashedPassword];
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      res.status(201).json(user);
     })
     .catch(err => next(err));
 });
