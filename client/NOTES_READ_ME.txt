@@ -12,3 +12,10 @@ Refactor index.js - this thing is ugly and overwhelming. Comments
 would be helpful.
 
 timestamptz in your schema.sql needs to be updated. Read documentation
+
+The user can register. Overthinking this cost you many hours of coding.
+
+Update CSS
+
+02-01-2023
+###########
