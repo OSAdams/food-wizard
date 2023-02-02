@@ -6,6 +6,7 @@ import NavBar from './components/navbar';
 import Search from './pages/search';
 import UnderConstruction from './pages/under-construction';
 import PageContainer from './components/page-container';
+import AuthForm from './components/auth-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,6 +31,9 @@ export default class App extends React.Component {
     if (route.path === 'keyword') {
       return <Search key={ route.queryString } keyword={ route.queryString } />;
     }
+    if (route.path === 'account') {
+      return <AuthForm action={ route.queryString } />;
+    }
     return <UnderConstruction />;
   }
 
@@ -44,10 +48,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-/*  HEY IDIOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-recipe card image is a background, use flex for like icon positioning
-instead of position relative/absolute
-
-*/

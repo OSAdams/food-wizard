@@ -11,10 +11,12 @@ export default class MenuModal extends React.Component {
   }
 
   updateWindowHash(event) {
-    // eslint-disable-next-line
-    console.log(event.target.textContent);
     const textHash = event.target.textContent.toLowerCase();
-    window.location.hash = textHash;
+    if (textHash === 'account') {
+      window.location.hash = '#account?sign-up';
+    } else {
+      window.location.hash = textHash;
+    }
   }
 
   render() {

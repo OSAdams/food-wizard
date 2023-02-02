@@ -21,3 +21,19 @@ Update CSS
 ###########
 
 create auth component
+
+02-02-2023
+###########
+
+Alright, today we're going to create the component so a user
+can register
+
+Creating a form to do this should not be an issue
+
+First thing you need to do is update the window hash with an anchor
+tag for the drop-down modal (or nav bar for wider screens) to
+#auth?sign-up
+
+
+recipe card image is a background, use flex for like icon positioning
+instead of position relative/absolute
