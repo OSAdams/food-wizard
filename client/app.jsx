@@ -1,12 +1,13 @@
 import React from 'react';
-import Home from './pages/home';
-import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
-import Search from './pages/search';
-import UnderConstruction from './pages/under-construction';
 import PageContainer from './components/page-container';
 import AuthForm from './components/auth-form';
+import { Home, Recipe, SearchResult, UnderConstruction, Search } from './components';
+// import SearchResult from './pages/search-result';
+// import UnderConstruction from './pages/under-construction';
+// import Home from './pages/home';
+// import Recipe from './pages/recipe';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,10 +30,13 @@ export default class App extends React.Component {
       return <Recipe recipeId={ route.queryString } />;
     }
     if (route.path === 'keyword') {
-      return <Search key={ route.queryString } keyword={ route.queryString } />;
+      return <SearchResult key={ route.queryString } keyword={ route.queryString } />;
     }
     if (route.path === 'account') {
       return <AuthForm action={ route.queryString } />;
+    }
+    if (route.path === 'search') {
+      return <Search />;
     }
     return <UnderConstruction />;
   }
