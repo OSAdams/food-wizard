@@ -33,21 +33,20 @@ app.get('/api/recipes/:id', (req, res, next) => {
 });
 
 app.post('/api/recipes', (req, res, next) => {
-  const { recipeName, spoonApiLikes, spoonApiId } = req.body;
-  const apiRatingInt = parseInt(spoonApiLikes);
+  const { recipeName, spoonApiId } = req.body;
   const apiIdInt = parseInt(spoonApiId);
-  if (!recipeName || !spoonApiLikes || !spoonApiId) {
-    throw new ClientError(400, 'recipeName, spoonApiLikes, and spoonApiId are required fields');
+  if (!recipeName || !spoonApiId) {
+    throw new ClientError(400, 'recipeName, and spoonApiId are required fields');
   }
-  if (!apiRatingInt || !apiIdInt) {
-    throw new ClientError(400, 'spoonApiLikes and spoonApiId must be an integer');
+  if (!apiIdInt) {
+    throw new ClientError(400, 'spoonApiId must be an integer');
   }
   const sql = `
-    INSERT INTO recipes ("recipeName", "spoonApiLikes", "spoonApiId")
-         VALUES ($1, $2, $3)
+    INSERT INTO recipes ("recipeName", "spoonApiId")
+         VALUES ($1, $2)
     ON CONFLICT DO NOTHING
   `;
-  const params = [recipeName, spoonApiLikes, spoonApiId];
+  const params = [recipeName, spoonApiId];
   db.query(sql, params)
     .then(result => {
       const [recipes] = result.rows;
@@ -67,7 +66,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const sql = `
         INSERT INTO users (username, "hashedPassword")
              VALUES ($1, $2)
-        RETURNING "userId", username, "createdAt"
+          RETURNING "userId", username, "createdAt"
       `;
       const params = [username, hashedPassword];
       return db.query(sql, params);

@@ -34,7 +34,6 @@ export default class Carousel extends React.Component {
     this.resetInterval();
     const reqBody = {
       recipeName: recipes[iterator].title,
-      spoonApiLikes: recipes[iterator].aggregateLikes,
       spoonApiId: recipes[iterator].id
     };
     const data = JSON.stringify(reqBody);

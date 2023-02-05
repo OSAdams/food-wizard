@@ -3,11 +3,11 @@ import { parseRoute } from './lib';
 import NavBar from './components/navbar';
 import PageContainer from './components/page-container';
 import AuthForm from './components/auth-form';
-import { Home, Recipe, SearchResult, UnderConstruction, Search } from './components';
-// import SearchResult from './pages/search-result';
-// import UnderConstruction from './pages/under-construction';
-// import Home from './pages/home';
-// import Recipe from './pages/recipe';
+import SearchResult from './pages/search-result';
+import UnderConstruction from './pages/under-construction';
+import Home from './pages/home';
+import Recipe from './pages/recipe';
+import Search from './pages/search';
 
 export default class App extends React.Component {
   constructor(props) {
