@@ -6,7 +6,7 @@ export default function recipeCard(props) {
   const updatedDiet = arrayToString(diet);
   return (
     <div
-      onClick={ methods[0] }
+      onClick={ methods ? methods[0] : null }
       className="recipe-card flex f-dir-col">
       <div className="rc-text">
         <div>
