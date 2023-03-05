@@ -36,8 +36,8 @@ export default class AuthForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     return (
-      <form className="placeholder" onSubmit={ handleSubmit }>
-        <div className="placeholder">
+      <form className="auth-form" onSubmit={ handleSubmit }>
+        <div className="auth-username">
           <label htmlFor="username">
             Username
           </label>
@@ -49,7 +49,7 @@ export default class AuthForm extends React.Component {
             name="username"
             onChange={ handleChange } />
         </div>
-        <div className="placeholder">
+        <div className="auth-password">
           <label htmlFor="password">
             Password
           </label>

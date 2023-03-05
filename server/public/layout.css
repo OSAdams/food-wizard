@@ -202,14 +202,26 @@ div.ac-title p,
   }
 
   /* recipe card  */
-  .recipe-card {
-    width: 500px;
-    flex-direction: row-reverse;
-    margin: 3.5rem;
+  .rc-text {
+    padding: 1.5rem;
+    padding-left: 2rem;
+    margin: 0;
   }
 
-  .recipe-card > div {
-    width: 200px;
+  .rc-title {
+    margin-top: 0;
+  }
+
+  .recipe-card {
+    max-width: 580px;
+    margin: 2rem;
+    flex-direction: row-reverse;
+  }
+
+  .recipe-card > .rc-text,
+  .recipe-card > .rc-image {
+    width: 290px;
+    height: 250px;
   }
 
   .fr-header {
@@ -220,20 +232,6 @@ div.ac-title p,
   div.ac-title {
     min-width: 350px;
     max-width: 400px;
-  }
-
-  .recipe-card > div:first-child {
-    width: 300px;
-  }
-
-  .rc-text {
-    padding: 1.5rem;
-    padding-left: 2rem;
-    margin: 0;
-  }
-
-  .rc-title {
-    margin-top: 0;
   }
 
   .carousel-container {
