@@ -7,7 +7,6 @@ import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
-import Search from './pages/search';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,10 +34,11 @@ export default class App extends React.Component {
     if (route.path === 'account') {
       return <AuthForm action={ route.queryString } />;
     }
-    if (route.path === 'search') {
-      return <Search />;
-    }
-    return <UnderConstruction />;
+    return (
+      <div className="flex f-justify-content-center">
+        <UnderConstruction />
+      </div>
+    );
   }
 
   render() {

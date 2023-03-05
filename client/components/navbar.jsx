@@ -61,7 +61,7 @@ export default class NavBar extends React.Component {
           <MenuModal />
         }
         <div className="nav-search">
-          <form className="nav-search-form" onSubmit={handleSubmit}>
+          <form className="nav-search-form flex" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="keyword" />
               <input
