@@ -36,10 +36,10 @@ export default class AuthForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     return (
-      <form className="auth-form" onSubmit={ handleSubmit }>
+      <form className="auth-form flex f-dir-col f-align-items-center f-justify-content-center" onSubmit={ handleSubmit }>
         <div className="auth-username">
           <label htmlFor="username">
-            Username
+            Username:
           </label>
           <input
             required
@@ -51,7 +51,7 @@ export default class AuthForm extends React.Component {
         </div>
         <div className="auth-password">
           <label htmlFor="password">
-            Password
+            Password:
           </label>
           <input
             required
@@ -60,7 +60,7 @@ export default class AuthForm extends React.Component {
             name="password"
             onChange={ handleChange } />
         </div>
-        <div className="placeholder">
+        <div className="auth-buttons">
           <button type="submit" className="placeholder">
             Register
           </button>

@@ -94,6 +94,10 @@
   padding: 0;
 }
 
+.auth-form > div {
+  margin-top: 0.5rem;
+}
+
 .rc-text > div:last-child {
   margin-top: 1rem;
 }
@@ -176,6 +180,19 @@ div.ac-title p,
 
 .loading-modal img {
   width: 320px;
+}
+
+.auth-form label {
+  margin-right: 1rem;
+}
+
+.auth-password {
+  margin-left: 0.2rem;
+}
+
+.auth-buttons > button {
+  width: 5rem;
+  height: 1.7rem;
 }
 
 @media screen and (min-width: 700px) {
