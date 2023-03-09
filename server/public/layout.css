@@ -100,8 +100,16 @@
   padding: 0;
 }
 
+.auth-form {
+  margin-top: 3rem;
+}
+
 .auth-form > div {
   margin-top: 0.5rem;
+}
+
+.auth-form input {
+  height: 30px;
 }
 
 .rc-text > div:last-child {
@@ -287,6 +295,6 @@ div.ac-title p,
   }
 
   .main-container {
-    justify-content: center;
+    align-items: center;
   }
 }
