@@ -28,6 +28,10 @@
   justify-content: center;
 }
 
+.f-justify-content-space-around {
+  align-items: space-around;
+}
+
 /* PADDING */
 
 .pad-1rem {
@@ -209,6 +213,8 @@ div.ac-title p,
 .auth-buttons > button {
   width: 5rem;
   height: 1.7rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 @media screen and (min-width: 700px) {

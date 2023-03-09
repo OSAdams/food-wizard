@@ -18,7 +18,16 @@ export default class AuthForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { action } = this.props;
+    let action = '';
+    if (this.state.username.length < 1 || this.state.password.length < 1) {
+      alert('Username and Password are required fields');
+      return;
+    }
+    if (e.target.className === 'auth-register') {
+      action = 'sign-up';
+    } else {
+      action = 'sign-in';
+    }
     const req = {
       method: 'POST',
       headers: {
@@ -29,8 +38,9 @@ export default class AuthForm extends React.Component {
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
-        window.location.hash = '#home';
-      });
+        console.log(result); // eslint-disable-line
+      })
+      .catch(err => console.error({ error: err }));
   }
 
   render() {
@@ -60,9 +70,12 @@ export default class AuthForm extends React.Component {
             name="password"
             onChange={ handleChange } />
         </div>
-        <div className="auth-buttons">
-          <button type="submit" className="placeholder">
+        <div className="auth-buttons" onClick={ handleSubmit }>
+          <button type="submit" className="auth-register">
             Register
+          </button>
+          <button type="submit" className="auth-loggin">
+            Log In
           </button>
         </div>
       </form>
