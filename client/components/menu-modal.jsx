@@ -12,14 +12,20 @@ export default class MenuModal extends React.Component {
 
   updateWindowHash(event) {
     const textHash = event.target.textContent.toLowerCase();
-    if (textHash === 'Sign Up') {
+    if (textHash === 'sign up') {
       window.location.hash = '#sign-up';
-    } if (textHash === 'Sign In') {
+    } if (textHash === 'sign in') {
       window.location.hash = '#sign-in';
     } else {
       window.location.hash = textHash;
     }
   }
+
+  // update this to handle if the user is signed in, or not by using the user
+  // value from the app page. If null, use sign up or sign in. If not, use
+  // log out
+  //
+  // Come back to this later.
 
   render() {
     const elementClass = 'menu-li-block flex f-justify-content-center f-align-items-center';
