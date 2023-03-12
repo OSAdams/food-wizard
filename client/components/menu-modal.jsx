@@ -12,8 +12,10 @@ export default class MenuModal extends React.Component {
 
   updateWindowHash(event) {
     const textHash = event.target.textContent.toLowerCase();
-    if (textHash === 'account') {
-      window.location.hash = '#account';
+    if (textHash === 'Sign Up') {
+      window.location.hash = '#sign-up';
+    } if (textHash === 'Sign In') {
+      window.location.hash = '#sign-in';
     } else {
       window.location.hash = textHash;
     }
@@ -25,7 +27,8 @@ export default class MenuModal extends React.Component {
       { number: '30003333', value: 'Home', className: elementClass },
       { number: '30002222', value: 'Search', className: elementClass },
       { number: '30001111', value: 'Favorites', className: elementClass },
-      { number: '30004444', value: 'Account', className: elementClass }
+      { number: '30004444', value: 'Sign Up', className: elementClass },
+      { number: '30005555', value: 'Sign In', className: elementClass }
     ];
     return (
       <div className="menu-modal">

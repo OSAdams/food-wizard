@@ -44,7 +44,7 @@ export default class App extends React.Component {
     if (path === 'keyword') {
       return <SearchResult key={ queryString } keyword={ queryString } />;
     }
-    if (path === 'account') {
+    if (path === 'sign-up' || path === 'sign-in') {
       return <AuthForm action={ queryString } />;
     }
     return (
