@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuModal from './menu-modal';
-import searchString from '../lib/index';
+import searchString from '../lib/search-string';
 
 export default class NavBar extends React.Component {
   constructor(props) {
