@@ -3,6 +3,22 @@ import ListGenerator from './list-generator';
 import Accordion from './accordion';
 import LoadingModal from './loading-modal';
 
+function onLoad(spoonId, title) {
+  const reqBody = {
+    recipeName: title,
+    spoonApiId: spoonId
+  };
+  const data = JSON.stringify(reqBody);
+  fetch('/api/recipes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: data
+  })
+    .catch(err => console.error({ error: err }));
+}
+
 export default function FullRecipe(props) {
   const {
     title,
@@ -10,11 +26,13 @@ export default function FullRecipe(props) {
     servings,
     analyzedInstructions,
     extendedIngredients,
-    nutrition
+    nutrition,
+    id
   } = props.recipe;
   if (!Array.isArray(analyzedInstructions) || !props.recipe) {
     return <LoadingModal />;
   }
+  onLoad(id, title);
   const calories = nutrition.nutrients[0];
   const { percentFat } = nutrition.caloricBreakdown;
   const basicContent = [
