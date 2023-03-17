@@ -28,9 +28,20 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-    const token = window.localStorage.getItme('food-wizard-jwt');
+    const token = window.localStorage.getItem('food-wizard-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('food-wizard-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
