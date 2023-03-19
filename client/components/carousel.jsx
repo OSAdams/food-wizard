@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
+import dbPostRecipe from '../lib/db-post-recipe';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -32,23 +33,8 @@ export default class Carousel extends React.Component {
     const { iterator } = this.state;
     const { recipes } = this.props;
     this.resetInterval();
-    const reqBody = {
-      recipeName: recipes[iterator].title,
-      spoonApiId: recipes[iterator].id
-    };
-    const data = JSON.stringify(reqBody);
-    fetch('/api/recipes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
-      .then(res => {
-        window.location.hash = `recipeId?${recipes[iterator].id}`;
-        return null;
-      })
-      .catch(err => console.error({ error: err }));
+    window.location.hash = `recipeId?${recipes[iterator].id}`;
+    dbPostRecipe(recipes[iterator].id, recipes[iterator].title);
   }
 
   navigateCarousel(event) {

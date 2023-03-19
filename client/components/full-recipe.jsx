@@ -2,22 +2,7 @@ import React from 'react';
 import ListGenerator from './list-generator';
 import Accordion from './accordion';
 import LoadingModal from './loading-modal';
-
-function onLoad(spoonId, title) {
-  const reqBody = {
-    recipeName: title,
-    spoonApiId: spoonId
-  };
-  const data = JSON.stringify(reqBody);
-  fetch('/api/recipes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: data
-  })
-    .catch(err => console.error({ error: err }));
-}
+import { dbPostRecipe } from '../lib';
 
 export default function FullRecipe(props) {
   const {
@@ -32,7 +17,7 @@ export default function FullRecipe(props) {
   if (!Array.isArray(analyzedInstructions) || !props.recipe) {
     return <LoadingModal />;
   }
-  onLoad(id, title);
+  dbPostRecipe(id, title);
   const calories = nutrition.nutrients[0];
   const { percentFat } = nutrition.caloricBreakdown;
   const basicContent = [
