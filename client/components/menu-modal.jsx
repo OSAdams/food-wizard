@@ -14,7 +14,7 @@ export default class MenuModal extends React.Component {
     const textHash = event.target.textContent.toLowerCase();
     if (textHash === 'sign up') {
       window.location.hash = '#sign-up';
-    } if (textHash === 'sign in') {
+    } else if (textHash === 'sign in') {
       window.location.hash = '#sign-in';
     } else {
       window.location.hash = textHash;
