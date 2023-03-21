@@ -12,7 +12,7 @@ export default function LoadingModal(props) {
             : <img src={ loadingModal } alt='Loading' className={ className } />
         }
       </div>
-      <div>
+      <div style={ { textAlign: 'center' } }>
         <p>Loading</p>
       </div>
     </div>

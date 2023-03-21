@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import AppContext from './lib/app-context';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
-import PageContainer from './components/page-container';
+import Container from './components/container';
 import AuthForm from './components/auth-form';
 import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
@@ -59,9 +59,9 @@ export default class App extends React.Component {
       return <AuthForm action={ queryString } />;
     }
     return (
-      <div className="flex f-justify-content-center">
+      <Container className="flex f-justify-content-center">
         <UnderConstruction />
-      </div>
+      </Container>
     );
   }
 
@@ -72,12 +72,12 @@ export default class App extends React.Component {
     const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
-        <div className="main-container flex f-dir-col">
+        <Container className="main-container flex f-dir-col">
           <NavBar />
-          <PageContainer>
+          <Container className="page-container">
             { this.renderPage() }
-          </PageContainer>
-        </div>
+          </Container>
+        </Container>
       </AppContext.Provider>
     );
   }
