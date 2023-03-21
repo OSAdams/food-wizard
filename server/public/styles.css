@@ -23,6 +23,16 @@ body {
     -2px -2px 2px var(--main-dark-color);
 }
 
+a {
+  text-decoration: none;
+  color: var(--main-light-color);
+  transition: all 300ms ease-in-out;
+}
+
+a:hover {
+  color: var(--main-color);
+}
+
 button,
 i {
   cursor: pointer;

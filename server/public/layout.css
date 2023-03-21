@@ -32,6 +32,10 @@
   align-items: space-around;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
 /* PADDING */
 
 .pad-1rem {

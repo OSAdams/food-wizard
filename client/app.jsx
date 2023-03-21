@@ -4,7 +4,7 @@ import AppContext from './lib/app-context';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
 import Container from './components/container';
-import AuthForm from './components/auth-form';
+import Auth from './pages/auth';
 import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
@@ -56,7 +56,7 @@ export default class App extends React.Component {
       return <SearchResult key={ queryString } keyword={ queryString } />;
     }
     if (path === 'sign-up' || path === 'sign-in') {
-      return <AuthForm action={ queryString } />;
+      return <Auth action={ queryString } />;
     }
     return (
       <Container className="flex f-justify-content-center">

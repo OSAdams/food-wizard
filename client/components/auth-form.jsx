@@ -18,15 +18,10 @@ export default class AuthForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let action = '';
+    const { action } = this.props;
     if (this.state.username.length < 1 || this.state.password.length < 1) {
       alert('Username and Password are required fields');
       return;
-    }
-    if (e.target.className === 'auth-register') {
-      action = 'sign-up';
-    } else {
-      action = 'sign-in';
     }
     const req = {
       method: 'POST',
@@ -44,7 +39,17 @@ export default class AuthForm extends React.Component {
   }
 
   render() {
+    const { action } = this.props;
     const { handleChange, handleSubmit } = this;
+    const alternateActionHref = action === 'sign-up'
+      ? '#sign-in'
+      : '#sign-up';
+    const alternateActionText = action === 'sign-up'
+      ? 'Sign in instead'
+      : 'Register now';
+    const submitButtonText = action === 'sign-up'
+      ? 'Register'
+      : 'Log In';
     return (
       <form className="auth-form flex f-dir-col f-align-items-center f-justify-content-center" onSubmit={ handleSubmit }>
         <div className="auth-username">
@@ -70,12 +75,12 @@ export default class AuthForm extends React.Component {
             name="password"
             onChange={ handleChange } />
         </div>
-        <div className="auth-buttons" onClick={ handleSubmit }>
-          <button type="submit" className="auth-register">
-            Register
-          </button>
+        <div className="auth-buttons">
+          <a href={alternateActionHref}>
+            { alternateActionText }
+          </a>
           <button type="submit" className="auth-loggin">
-            Log In
+            { submitButtonText }
           </button>
         </div>
       </form>
