@@ -32,7 +32,7 @@ export default function FullRecipe(props) {
     <>
       <div className="fr-header">
         <h2> { title } </h2>
-        <div className="fr-basic">
+        <div className="fr-basic flex f-wrap-wrap">
           <ul className="li-style-none">
             <ListGenerator content={ basicContent } />
           </ul>

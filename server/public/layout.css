@@ -1,17 +1,46 @@
-/* nav bar */
-.nav-bar,
-.nav-search-form {
+/* FLEX OPTIONS */
+
+.flex {
   display: flex;
 }
 
+.f-wrap-wrap {
+  flex-wrap: wrap;
+}
+
+.f-dir-col {
+  flex-direction: column;
+}
+
+.f-align-items-center {
+  align-items: center;
+}
+
+.f-align-items-f-end {
+  align-items: flex-end;
+}
+
+.f-justify-content-center {
+  justify-content: center;
+}
+
+/* PADDING */
+
+.pad-1rem {
+  padding: 1rem;
+}
+
+/* nav bar */
+
 .nav-bar {
   width: 100vw;
+  height: 3.5rem;
   padding: 0.75rem;
   justify-content: space-between;
 }
 
 .nav-input {
-  width: 160px;
+  width: 9rem;
   height: 30px;
   border-radius: 4px;
   padding: 4px;
@@ -27,17 +56,29 @@
   margin: 0.2rem;
 }
 
-.render-page {
-  max-height: calc(92.7vh);
+/* CAROUSEL */
+
+.carousel-controls {
+  margin-top: 0.1rem;
+}
+
+.carousel-controls button {
+  width: 50%;
+  height: 3rem;
+}
+
+/* div holding components */
+
+.page-container {
+  max-height: calc(100vh - 3.5rem);
   overflow-y: auto;
+  width: 100vw;
 }
 
 /* recipe card */
 
 .recipe-card {
-  width: 375px;
-  display: flex;
-  flex-direction: column;
+  max-width: 375px;
 }
 
 .rc-text {
@@ -53,6 +94,10 @@
   padding: 0;
 }
 
+.auth-form > div {
+  margin-top: 0.5rem;
+}
+
 .rc-text > div:last-child {
   margin-top: 1rem;
 }
@@ -64,41 +109,11 @@
 .rc-image {
   height: 200px;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   position: relative;
-}
-
-.rc-shade {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .rc-likes h2 {
   margin-bottom: 1rem;
-}
-
-/* Carousel */
-
-.carousel-container {
-  position: relative;
-  padding-top: 9rem;
-}
-
-.carousel-container > .fa-arrow-left {
-  position: absolute;
-  left: 1rem;
-  bottom: 5rem;
-}
-
-.carousel-container > .fa-arrow-right {
-  position: absolute;
-  right: 1rem;
-  bottom: 5rem;
 }
 
 /* full recipe */
@@ -123,11 +138,6 @@
   margin-top: 0;
 }
 
-.fr-basic ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .fr-basic ul > li {
   width: 50%;
   text-align: center;
@@ -141,11 +151,6 @@ div.ac-title {
 div.ac-title p,
 .ac-title i {
   margin: 0;
-}
-
-div > .main-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .menu-modal {
@@ -163,9 +168,6 @@ div > .main-container {
 }
 
 .menu-li-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -173,15 +175,24 @@ div > .main-container {
 }
 
 .loading-modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding-top: 1rem;
 }
 
 .loading-modal img {
   width: 320px;
+}
+
+.auth-form label {
+  margin-right: 1rem;
+}
+
+.auth-password {
+  margin-left: 0.2rem;
+}
+
+.auth-buttons > button {
+  width: 5rem;
+  height: 1.7rem;
 }
 
 @media screen and (min-width: 700px) {
@@ -208,14 +219,26 @@ div > .main-container {
   }
 
   /* recipe card  */
-  .recipe-card {
-    width: 500px;
-    flex-direction: row-reverse;
-    margin: 3.5rem;
+  .rc-text {
+    padding: 1.5rem;
+    padding-left: 2rem;
+    margin: 0;
   }
 
-  .recipe-card > div {
-    width: 200px;
+  .rc-title {
+    margin-top: 0;
+  }
+
+  .recipe-card {
+    max-width: 580px;
+    margin: 2rem;
+    flex-direction: row-reverse;
+  }
+
+  .recipe-card > .rc-text,
+  .recipe-card > .rc-image {
+    width: 290px;
+    height: 250px;
   }
 
   .fr-header {
@@ -226,20 +249,6 @@ div > .main-container {
   div.ac-title {
     min-width: 350px;
     max-width: 400px;
-  }
-
-  .recipe-card > div:first-child {
-    width: 300px;
-  }
-
-  .rc-text {
-    padding: 1.5rem;
-    padding-left: 2rem;
-    margin: 0;
-  }
-
-  .rc-title {
-    margin-top: 0;
   }
 
   .carousel-container {
@@ -256,9 +265,10 @@ div > .main-container {
     display: flex;
   }
 
-  .render-page {
+  .page-container {
     display: flex;
     justify-content: center;
+    max-width: 1500px;
   }
 }
 
@@ -269,8 +279,6 @@ div > .main-container {
   }
 
   .main-container {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
   }
 }

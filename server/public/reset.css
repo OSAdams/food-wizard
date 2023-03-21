@@ -1,7 +1,21 @@
+:root {
+  --main-color: #6441a4;
+  --main-dark-color: #201c2b;
+  --main-light-color: #e2dbf0;
+  --alt-color: #54595e;
+  --alt-dark-color: #232127;
+  --alt-light-color: #e5e3e8;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family:
+    Inter,
+    sans-serif;
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
 }

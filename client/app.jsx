@@ -1,10 +1,12 @@
 import React from 'react';
-import Home from './pages/home';
-import Recipe from './pages/recipe';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
-import Search from './pages/search';
+import PageContainer from './components/page-container';
+import AuthForm from './components/auth-form';
+import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
+import Home from './pages/home';
+import Recipe from './pages/recipe';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,18 +29,25 @@ export default class App extends React.Component {
       return <Recipe recipeId={ route.queryString } />;
     }
     if (route.path === 'keyword') {
-      return <Search key={ route.queryString } keyword={ route.queryString } />;
+      return <SearchResult key={ route.queryString } keyword={ route.queryString } />;
     }
-    return <UnderConstruction />;
+    if (route.path === 'account') {
+      return <AuthForm action={ route.queryString } />;
+    }
+    return (
+      <div className="flex f-justify-content-center">
+        <UnderConstruction />
+      </div>
+    );
   }
 
   render() {
     return (
-      <div className="main-container">
+      <div className="main-container flex f-dir-col">
         <NavBar />
-        <div className="render-page">
+        <PageContainer>
           { this.renderPage() }
-        </div>
+        </PageContainer>
       </div>
     );
   }

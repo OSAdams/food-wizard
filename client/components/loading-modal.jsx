@@ -4,7 +4,7 @@ export default function LoadingModal(props) {
   const { className } = props;
   const loadingModal = 'https://i.imgur.com/crcBUbV.gif';
   return (
-    <div className='loading-modal'>
+    <div className='loading-modal flex f-justify-content-center f-align-items-center f-dir-col'>
       <div>
         {
           !className

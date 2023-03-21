@@ -11,14 +11,16 @@ export default class MenuModal extends React.Component {
   }
 
   updateWindowHash(event) {
-    // eslint-disable-next-line
-    console.log(event.target.textContent);
     const textHash = event.target.textContent.toLowerCase();
-    window.location.hash = textHash;
+    if (textHash === 'account') {
+      window.location.hash = '#account?sign-up';
+    } else {
+      window.location.hash = textHash;
+    }
   }
 
   render() {
-    const elementClass = 'menu-li-block';
+    const elementClass = 'menu-li-block flex f-justify-content-center f-align-items-center';
     const menuOptions = [
       { number: '30003333', value: 'Home', className: elementClass },
       { number: '30002222', value: 'Search', className: elementClass },
