@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from '../components/carousel';
 import LoadingModal from '../components/loading-modal';
+import AppContext from '../lib/app-context';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -19,13 +20,18 @@ export default class Home extends React.Component {
 
   render() {
     const { recipes } = this.state;
-
+    const { user } = this.context;
     if (!recipes.recipes) {
       return <LoadingModal />;
     }
-
     return (
-      <Carousel recipes={ recipes.recipes } />
+      <>
+        <h2 className="text-align-center">{ user ? `Welcome ${user.username}!` : 'Welcome!' }</h2>
+        <h4 className="text-align-center">Cycle through the carousel or<br />search using keywords!</h4>
+        <Carousel recipes={ recipes.recipes } />
+      </>
     );
   }
 }
+
+Home.contextType = AppContext;

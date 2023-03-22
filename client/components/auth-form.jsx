@@ -19,10 +19,6 @@ export default class AuthForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { action } = this.props;
-    if (this.state.username.length < 1 || this.state.password.length < 1) {
-      alert('Username and Password are required fields');
-      return;
-    }
     const req = {
       method: 'POST',
       headers: {
@@ -33,7 +29,12 @@ export default class AuthForm extends React.Component {
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
-        console.log(result); // eslint-disable-line
+        if (action === 'sign-up') {
+          window.location.hash = 'sign-in';
+        } else if (result.user && result.token) {
+          console.log(result) // eslint-disable-line
+          this.props.onSignIn(result);
+        }
       })
       .catch(err => console.error({ error: err }));
   }
