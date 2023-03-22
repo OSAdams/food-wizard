@@ -29,12 +29,28 @@ export default class AuthForm extends React.Component {
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
-        window.location.hash = '#home';
-      });
+        if (action === 'sign-up') {
+          window.location.hash = 'sign-in';
+        } else if (result.user && result.token) {
+          console.log(result) // eslint-disable-line
+          this.props.onSignIn(result);
+        }
+      })
+      .catch(err => console.error({ error: err }));
   }
 
   render() {
+    const { action } = this.props;
     const { handleChange, handleSubmit } = this;
+    const alternateActionHref = action === 'sign-up'
+      ? '#sign-in'
+      : '#sign-up';
+    const alternateActionText = action === 'sign-up'
+      ? 'Sign in instead'
+      : 'Register now';
+    const submitButtonText = action === 'sign-up'
+      ? 'Register'
+      : 'Log In';
     return (
       <form className="auth-form flex f-dir-col f-align-items-center f-justify-content-center" onSubmit={ handleSubmit }>
         <div className="auth-username">
@@ -61,8 +77,11 @@ export default class AuthForm extends React.Component {
             onChange={ handleChange } />
         </div>
         <div className="auth-buttons">
-          <button type="submit" className="placeholder">
-            Register
+          <a href={alternateActionHref}>
+            { alternateActionText }
+          </a>
+          <button type="submit" className="auth-loggin">
+            { submitButtonText }
           </button>
         </div>
       </form>

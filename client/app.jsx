@@ -1,8 +1,10 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode';
+import AppContext from './lib/app-context';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
-import PageContainer from './components/page-container';
-import AuthForm from './components/auth-form';
+import Container from './components/container';
+import Auth from './pages/auth';
 import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
@@ -12,43 +14,71 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('hashchange', () => this.setState({ route: parseRoute(window.location.hash) }));
+    window.addEventListener('hashchange', () => {
+      this.setState({
+        route: parseRoute(window.location.hash)
+      });
+    });
+    const token = window.localStorage.getItem('food-wizard-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('food-wizard-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
-    const { route } = this.state;
-    if (route.path === '' || route.path === '#' || route.path === 'home') {
+    const { path, queryString } = this.state.route;
+    if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
-    if (route.path === 'recipeId') {
-      return <Recipe recipeId={ route.queryString } />;
+    if (path === 'recipeId') {
+      return <Recipe recipeId={ queryString } />;
     }
-    if (route.path === 'keyword') {
-      return <SearchResult key={ route.queryString } keyword={ route.queryString } />;
+    if (path === 'keyword') {
+      return <SearchResult key={ queryString } keyword={ queryString } />;
     }
-    if (route.path === 'account') {
-      return <AuthForm action={ route.queryString } />;
+    if (path === 'sign-up' || path === 'sign-in') {
+      return <Auth action={ queryString } />;
     }
     return (
-      <div className="flex f-justify-content-center">
+      <Container className="flex f-justify-content-center">
         <UnderConstruction />
-      </div>
+      </Container>
     );
   }
 
   render() {
+    if (this.state.isAuthorizing) return null;
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
-      <div className="main-container flex f-dir-col">
-        <NavBar />
-        <PageContainer>
-          { this.renderPage() }
-        </PageContainer>
-      </div>
+      <AppContext.Provider value={contextValue}>
+        <Container className="main-container flex f-dir-col">
+          <NavBar />
+          <Container className="page-container">
+            { this.renderPage() }
+          </Container>
+        </Container>
+      </AppContext.Provider>
     );
   }
 }

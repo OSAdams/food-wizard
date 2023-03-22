@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuModal from './menu-modal';
+import searchString from '../lib/search-string';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,7 +24,8 @@ export default class NavBar extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { keyword } = this.state;
-    window.location.hash = `keyword?${keyword}`;
+    const updatedKeyword = searchString(keyword);
+    window.location.hash = `keyword?${updatedKeyword}`;
   }
 
   handleResize() {

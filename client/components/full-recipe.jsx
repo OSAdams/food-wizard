@@ -2,6 +2,7 @@ import React from 'react';
 import ListGenerator from './list-generator';
 import Accordion from './accordion';
 import LoadingModal from './loading-modal';
+import { dbPostRecipe } from '../lib';
 
 export default function FullRecipe(props) {
   const {
@@ -10,11 +11,13 @@ export default function FullRecipe(props) {
     servings,
     analyzedInstructions,
     extendedIngredients,
-    nutrition
+    nutrition,
+    id
   } = props.recipe;
   if (!Array.isArray(analyzedInstructions) || !props.recipe) {
     return <LoadingModal />;
   }
+  dbPostRecipe(id, title);
   const calories = nutrition.nutrients[0];
   const { percentFat } = nutrition.caloricBreakdown;
   const basicContent = [
@@ -32,8 +35,8 @@ export default function FullRecipe(props) {
     <>
       <div className="fr-header">
         <h2> { title } </h2>
-        <div className="fr-basic flex f-wrap-wrap">
-          <ul className="li-style-none">
+        <div className="fr-basic flex">
+          <ul className="li-style-none flex f-wrap-wrap">
             <ListGenerator content={ basicContent } />
           </ul>
         </div>

@@ -1,3 +1,8 @@
 export default function searchString(string) {
-  return string.split(' ').join(',');
+  const keyword = string.includes(',')
+    ? string.split(' ').join('').split(',').join('+')
+    : string.includes(' ')
+      ? string.split(' ').join('+')
+      : string;
+  return keyword;
 }

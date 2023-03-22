@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+.f-dir-row {
+  flex-direction: row;
+}
+
 .f-align-items-center {
   align-items: center;
 }
@@ -24,10 +28,22 @@
   justify-content: center;
 }
 
+.f-justify-content-space-around {
+  align-items: space-around;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
 /* PADDING */
 
 .pad-1rem {
   padding: 1rem;
+}
+
+.marg-bot-2rem {
+  margin-bottom: 2rem;
 }
 
 /* nav bar */
@@ -40,16 +56,11 @@
 }
 
 .nav-input {
-  width: 9rem;
+  width: 11rem;
   height: 30px;
   border-radius: 4px;
-  padding: 4px;
-}
-
-.nav-button {
-  width: 70px;
-  height: 30px;
-  border-radius: 4px;
+  border: none;
+  padding-left: 4px;
 }
 
 .nav-search-form > div {
@@ -59,12 +70,14 @@
 /* CAROUSEL */
 
 .carousel-controls {
-  margin-top: 0.1rem;
+  margin-top: 0.3rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 .carousel-controls button {
-  width: 50%;
-  height: 3rem;
+  width: 48%;
+  height: 2.5rem;
 }
 
 /* div holding components */
@@ -79,11 +92,12 @@
 
 .recipe-card {
   max-width: 375px;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .rc-text {
   height: 200px;
-  margin: 1rem;
   padding: 1.5rem;
 }
 
@@ -94,8 +108,16 @@
   padding: 0;
 }
 
+.auth-form {
+  margin-top: 3rem;
+}
+
 .auth-form > div {
   margin-top: 0.5rem;
+}
+
+.auth-form input {
+  height: 30px;
 }
 
 .rc-text > div:last-child {
@@ -108,8 +130,10 @@
 
 .rc-image {
   height: 200px;
+  width: 200px;
   background-position: center;
   position: relative;
+  margin: 1rem;
 }
 
 .rc-likes h2 {
@@ -193,6 +217,8 @@ div.ac-title p,
 .auth-buttons > button {
   width: 5rem;
   height: 1.7rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 @media screen and (min-width: 700px) {
@@ -279,6 +305,6 @@ div.ac-title p,
   }
 
   .main-container {
-    justify-content: center;
+    align-items: center;
   }
 }

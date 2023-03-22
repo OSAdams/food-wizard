@@ -7,7 +7,7 @@ export default function recipeCard(props) {
   return (
     <div
       onClick={ methods ? methods[0] : null }
-      className="recipe-card flex f-dir-col">
+      className="recipe-card flex f-dir-col marg-bot-2rem">
       <div className="rc-text">
         <div>
           <h3 className="rc-title" id={id}>{title}</h3>
