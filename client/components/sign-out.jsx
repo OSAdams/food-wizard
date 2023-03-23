@@ -8,9 +8,9 @@ export default class SignOut extends React.Component {
     return (
       <Container>
         <h3 className="text-align-center">
-          Are you sure you would like to sign out?
+          Are you sure you<br /> would like to sign out?
         </h3>
-        <div className="flex f-align-items-center f-justify-content-center">
+        <div className="flex f-justify-content-center f-align-items-center auth-sign-out">
           <a href="#home">
             No, take me back home!
           </a>

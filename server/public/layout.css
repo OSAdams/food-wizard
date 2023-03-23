@@ -28,8 +28,12 @@
   justify-content: center;
 }
 
-.f-justify-content-space-around {
+.f-align-items-space-around {
   align-items: space-around;
+}
+
+.f-align-items-space-between {
+  align-items: space-between;
 }
 
 .text-align-center {
@@ -219,6 +223,10 @@ div.ac-title p,
   height: 1.7rem;
   margin-right: 1rem;
   margin-left: 1rem;
+}
+
+.auth-sign-out > a {
+  margin-right: 1rem;
 }
 
 @media screen and (min-width: 700px) {
