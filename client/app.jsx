@@ -77,12 +77,12 @@ export default class App extends React.Component {
     const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
-        <Container className="main-container flex f-dir-col">
+        <div className="main-container flex f-justify-content-center f-dir-col">
           <NavBar />
           <Container className="page-container">
             { this.renderPage() }
           </Container>
-        </Container>
+        </div>
       </AppContext.Provider>
     );
   }
