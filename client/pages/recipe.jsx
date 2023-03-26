@@ -1,5 +1,6 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
+import Comments from '../pages/comments';
 
 export default class Recipe extends React.Component {
   constructor(props) {
@@ -20,9 +21,12 @@ export default class Recipe extends React.Component {
   render() {
     const { recipe } = this.state;
     return (
-      <div className="full-recipe-container">
-        <FullRecipe recipe={ recipe } />
-      </div>
+      <>
+        <div className="full-recipe-container">
+          <FullRecipe recipe={ recipe } />
+        </div>
+        <Comments />
+      </>
     );
   }
 }
