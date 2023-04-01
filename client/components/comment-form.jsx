@@ -32,10 +32,14 @@ export default class CommentForm extends React.Component {
               onChange={ handleChange } />
         </div>
         <div className="comment-buttons flex f-justify-content-space-around">
-          <p>Delete Comment</p>
-          <button type="submit" className="comment-button margin-auto">
-            Submit
-          </button>
+          <div>
+            <p>Delete Comment</p>
+          </div>
+          <div>
+            <button type="submit" className="comment-button">
+              Submit
+            </button>
+          </div>
         </div>
       </form>
     );
