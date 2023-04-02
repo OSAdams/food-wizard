@@ -11,14 +11,9 @@ export default class Comments extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="comment-title text-align-center">
-          <h3>Leave a comment!</h3>
-        </div>
-        <div>
-          <CommentForm />
-        </div>
-      </>
+      <div className="comment-title text-align-center">
+        <CommentForm />
+      </div>
     );
   }
 }
