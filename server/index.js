@@ -4,6 +4,7 @@ const jsonMiddleware = express.json();
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
+const authorizationMiddleware = require('./authorization-middleware');
 const db = require('./db');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
@@ -111,6 +112,12 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+app.use(authorizationMiddleware);
+
+// app.post('/api/comment/:recipeId/:userName/:comment', (req, res, next) => {
+//   const
+// })
 
 app.use(errorMiddleware);
 
