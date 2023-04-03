@@ -257,6 +257,10 @@ div.ac-title p,
   margin-top: 1rem;
 }
 
+.clear-comment {
+  width: 8rem;
+}
+
 @media screen and (min-width: 700px) {
   .menu-modal {
     position: static;

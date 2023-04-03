@@ -1,8 +1,9 @@
-export default function dbPostComment(spoonId, title, content) {
+export default function dbPostComment(userId, token, spoonApiId, comment) {
   const reqBody = {
-    username: title,
-    spoonApiId: spoonId,
-    comment: content
+    userId,
+    token,
+    spoonApiId,
+    comment
   };
   const data = JSON.stringify(reqBody);
   fetch('/api/recipes', {

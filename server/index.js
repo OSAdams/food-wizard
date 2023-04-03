@@ -115,9 +115,18 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-// app.post('/api/comment/:recipeId/:userName/:comment', (req, res, next) => {
-//   const
-// })
+app.post('/api/comments', (req, res, next) => {
+  const { userId, token, spoonApiId, comment } = req.body;
+  if (!userId || !token) {
+    throw new ClientError(400, 'username and token required');
+  }
+  if (comment.length < 5) {
+    throw new ClientError(400, 'comment needs to exceed 5 characters');
+  }
+  if (!spoonApiId) {
+    throw new ClientError(400, 'Spoonacular API id required');
+  }
+});
 
 app.use(errorMiddleware);
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -31,7 +32,6 @@ export default class CommentForm extends React.Component {
       handleSubmit,
       clearForm
     } = this;
-    console.log('comment: ', comment); // eslint-disable-line no-console
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
@@ -49,7 +49,7 @@ export default class CommentForm extends React.Component {
         </div>
         <div className="comment-buttons flex f-justify-content-space-around">
           <div>
-            <p onClick={ clearForm }>Delete Comment</p>
+            <button type="reset" className="clear-comment" onClick={ clearForm }>Delete Comment</button>
           </div>
           <div>
             <button type="submit" className="comment-button">
@@ -61,3 +61,5 @@ export default class CommentForm extends React.Component {
     );
   }
 }
+
+CommentForm.contextType = AppContext;
