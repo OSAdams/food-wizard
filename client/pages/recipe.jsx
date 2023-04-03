@@ -25,7 +25,7 @@ export default class Recipe extends React.Component {
         <div className="full-recipe-container">
           <FullRecipe recipe={ recipe } />
         </div>
-        <Comments />
+        <Comments recipeId={ recipe.id } />
       </>
     );
   }

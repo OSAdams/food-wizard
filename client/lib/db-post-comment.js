@@ -1,7 +1,7 @@
-export default function dbPostComment(userId, token, spoonApiId, comment) {
+export default function dbPostComment(userId, token, recipeId, comment) {
   const reqBody = {
     userId,
-    spoonApiId,
+    recipeId,
     comment
   };
   const data = JSON.stringify(reqBody);

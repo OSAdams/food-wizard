@@ -113,6 +113,29 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/comments/:id', (req, res, next) => {
+  const { id } = req.params;
+  const recipeId = Number(id);
+  if (!recipeId) {
+    throw new ClientError(401, 'recipeId is required');
+  }
+  const sql = `
+    SELECT "recipeId"
+      FROM recipes
+     WHERE "spoonApiId" = $1
+  `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipeId] = result.rows;
+      if (!recipeId) {
+        throw new ClientError(404, 'recipeId doesn\'t exist');
+      }
+      res.status(201).json(recipeId);
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.post('/api/comments', (req, res, next) => {
@@ -137,6 +160,8 @@ app.post('/api/comments', (req, res, next) => {
          VALUES ($1, $2, $3)
       RETURNING "recipeId", comment, "commentId"
   `;
+    // 1 to query the Database for recipeId using spoonApiId (or title)
+  // assign the recipeId
   const params = [userId, recipeId, comment];
   db.query(sql, params)
     .then(result => {
