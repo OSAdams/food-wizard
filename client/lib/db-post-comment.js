@@ -1,15 +1,15 @@
 export default function dbPostComment(userId, token, spoonApiId, comment) {
   const reqBody = {
     userId,
-    token,
     spoonApiId,
     comment
   };
   const data = JSON.stringify(reqBody);
-  fetch('/api/recipes', {
+  fetch('/api/comments', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Access-Token': token
     },
     body: data
   })

@@ -116,16 +116,34 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 app.use(authorizationMiddleware);
 
 app.post('/api/comments', (req, res, next) => {
-  const { userId, token, spoonApiId, comment } = req.body;
-  if (!userId || !token) {
-    throw new ClientError(400, 'username and token required');
+  const {
+    user: { userId },
+    body: {
+      recipeId,
+      comment
+    }
+  } = req;
+  if (!userId) {
+    throw new ClientError(400, 'must be logged in to comment on a recipe');
   }
   if (comment.length < 5) {
     throw new ClientError(400, 'comment needs to exceed 5 characters');
   }
-  if (!spoonApiId) {
+  if (!recipeId) {
     throw new ClientError(400, 'Spoonacular API id required');
   }
+  const sql = `
+    INSERT INTO comments ("userId", "recipeId", comment)
+         VALUES ($1, $2, $3)
+      RETURNING "recipeId", comment, "commentId"
+  `;
+  const params = [userId, recipeId, comment];
+  db.query(sql, params)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json(comment);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);

@@ -175,8 +175,8 @@ button:active {
     -2px -2px 2px #e5e3e8;
 }
 
-.comment-buttons p {
-  cursor: pointer;
+.clear-comment {
+  background-color: var(--alt-color);
 }
 
 @media screen and (min-width: 700px) {
