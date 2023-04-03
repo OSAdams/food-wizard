@@ -49,7 +49,9 @@ export default class CommentForm extends React.Component {
         </div>
         <div className="comment-buttons flex f-justify-content-space-around">
           <div>
-            <button type="reset" className="clear-comment" onClick={ clearForm }>Delete Comment</button>
+            <button type="reset" className="clear-comment" onClick={ clearForm }>
+              Delete Comment
+            </button>
           </div>
           <div>
             <button type="submit" className="comment-button">
