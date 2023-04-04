@@ -19,7 +19,9 @@ export default class Recipe extends React.Component {
   }
 
   render() {
-    const { recipe } = this.state;
+    // eslint-disable-next-line
+    const { state: { recipe }, props: { recipeId } } = this;
+    console.log(recipe); // eslint-disable-line
     return (
       <>
         <div className="full-recipe-container">
