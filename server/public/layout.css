@@ -28,28 +28,12 @@
   justify-content: center;
 }
 
-.f-justify-content-f-end {
-  justify-content: flex-end;
-}
-
 .f-justify-content-space-around {
-  justify-content: space-around;
-}
-
-.f-align-items-space-around {
   align-items: space-around;
-}
-
-.f-align-items-space-between {
-  align-items: space-between;
 }
 
 .text-align-center {
   text-align: center;
-}
-
-.margin-auto {
-  margin: auto;
 }
 
 /* PADDING */
@@ -237,30 +221,6 @@ div.ac-title p,
   margin-left: 1rem;
 }
 
-.auth-sign-out > a {
-  margin-right: 1rem;
-}
-
-.comment-value > label {
-  text-align: left;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-}
-
-.comment-value > textarea {
-  width: 90%;
-  height: 7rem;
-  margin: auto;
-}
-
-.comment-buttons button {
-  margin-top: 1rem;
-}
-
-.clear-comment {
-  width: 8rem;
-}
-
 @media screen and (min-width: 700px) {
   .menu-modal {
     position: static;
@@ -325,7 +285,6 @@ div.ac-title p,
   .full-recipe-container {
     min-width: 700px;
     max-width: 900px;
-    margin: auto;
   }
 
   .fr-ingredients {

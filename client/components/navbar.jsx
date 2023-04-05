@@ -25,7 +25,6 @@ export default class NavBar extends React.Component {
     event.preventDefault();
     const { keyword } = this.state;
     const updatedKeyword = searchString(keyword);
-    this.setState({ keyword: '' });
     window.location.hash = `keyword?${updatedKeyword}`;
   }
 
@@ -52,15 +51,8 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const {
-      state: {
-        keyword,
-        showMenu
-      },
-      handleChange,
-      handleSubmit,
-      handleClick
-    } = this;
+    const { handleChange, handleSubmit, handleClick } = this;
+    const { showMenu } = this.state;
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">
@@ -81,7 +73,6 @@ export default class NavBar extends React.Component {
                 name="keyword"
                 onChange={handleChange}
                 placeholder="Type a keyword here"
-                value={ keyword }
                 className="nav-input" />
             </div>
             <div>

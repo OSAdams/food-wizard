@@ -6,9 +6,10 @@ export default function recipeCard(props) {
   const updatedDiet = arrayToString(diet);
   return (
     <div
+      onClick={ methods ? methods[0] : null }
       className="recipe-card flex f-dir-col marg-bot-2rem">
       <div className="rc-text">
-        <div onClick={methods ? methods[0] : null}>
+        <div>
           <h3 className="rc-title" id={id}>{title}</h3>
         </div>
         <div>

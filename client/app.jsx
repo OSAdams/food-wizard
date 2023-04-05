@@ -9,7 +9,6 @@ import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
-import SignOut from './components/sign-out';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -41,9 +40,8 @@ export default class App extends React.Component {
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('food-wizard-jwt');
+    window.localStorage.removeItem('react-context-jwt');
     this.setState({ user: null });
-    window.location.hash = '#home';
   }
 
   renderPage() {
@@ -60,28 +58,26 @@ export default class App extends React.Component {
     if (path === 'sign-up' || path === 'sign-in') {
       return <Auth action={ queryString } />;
     }
-    if (path === 'sign-out') {
-      return <SignOut />;
-    }
     return (
-      <div className="flex f-justify-content-center">
+      <Container className="flex f-justify-content-center">
         <UnderConstruction />
-      </div>
+      </Container>
     );
   }
 
   render() {
     if (this.state.isAuthorizing) return null;
-    const { state: { user, route }, handleSignIn, handleSignOut } = this;
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
     const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
-        <div className="main-container flex f-justify-content-center f-dir-col">
+        <Container className="main-container flex f-dir-col">
           <NavBar />
           <Container className="page-container">
             { this.renderPage() }
           </Container>
-        </div>
+        </Container>
       </AppContext.Provider>
     );
   }
