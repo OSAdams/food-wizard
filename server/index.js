@@ -4,6 +4,7 @@ const jsonMiddleware = express.json();
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
+const authorizationMiddleware = require('./authorization-middleware');
 const db = require('./db');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
@@ -108,6 +109,64 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
           res.json({ token, user: payload });
         });
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/comments/:id', (req, res, next) => {
+  const { id } = req.params;
+  const recipeId = Number(id);
+  if (!recipeId) {
+    throw new ClientError(401, 'recipeId is required');
+  }
+  const sql = `
+    SELECT "recipeId"
+      FROM recipes
+     WHERE "spoonApiId" = $1
+  `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipeId] = result.rows;
+      if (!recipeId) {
+        throw new ClientError(404, 'recipeId doesn\'t exist');
+      }
+      res.status(201).json(recipeId);
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
+app.post('/api/comments', (req, res, next) => {
+  const {
+    user: { userId },
+    body: {
+      recipeId,
+      comment
+    }
+  } = req;
+  if (!userId) {
+    throw new ClientError(400, 'must be logged in to comment on a recipe');
+  }
+  if (comment.length < 5) {
+    throw new ClientError(400, 'comment needs to exceed 5 characters');
+  }
+  if (!recipeId) {
+    throw new ClientError(400, 'Spoonacular API id required');
+  }
+  const sql = `
+    INSERT INTO comments ("userId", "recipeId", comment)
+         VALUES ($1, $2, $3)
+      RETURNING "recipeId", comment, "commentId"
+  `;
+    // 1 to query the Database for recipeId using spoonApiId (or title)
+  // assign the recipeId
+  const params = [userId, recipeId, comment];
+  db.query(sql, params)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json(comment);
     })
     .catch(err => next(err));
 });
