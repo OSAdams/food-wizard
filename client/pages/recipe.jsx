@@ -21,13 +21,14 @@ export default class Recipe extends React.Component {
   render() {
     // eslint-disable-next-line
     const { state: { recipe }, props: { recipeId } } = this;
-    console.log(recipe); // eslint-disable-line
+    console.log('state recipe', recipe); // eslint-disable-line
+    console.log('props recipeId', recipeId); // eslint-disable-line
     return (
       <>
         <div className="full-recipe-container">
           <FullRecipe recipe={ recipe } />
         </div>
-        <Comments recipeId={ recipe.id } />
+        <Comments recipeId={ recipeId } />
       </>
     );
   }

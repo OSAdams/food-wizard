@@ -25,10 +25,10 @@ export default class Comments extends React.Component {
   }
 
   render() {
-    console.log(this.state.recipeId); // eslint-disable-line
+    const { recipeId } = this.state;
     return (
       <div className="comment-title text-align-center">
-        <CommentForm />
+        <CommentForm recipeId={ recipeId }/>
       </div>
     );
   }

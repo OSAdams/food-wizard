@@ -1,6 +1,5 @@
 export default function dbPostComment(userId, token, recipeId, comment) {
   const reqBody = {
-    userId,
     recipeId,
     comment
   };
@@ -11,6 +10,7 @@ export default function dbPostComment(userId, token, recipeId, comment) {
       'Content-Type': 'application/json',
       'X-Access-Token': token
     },
+    user: userId,
     body: data
   })
     .catch(err => console.error({ error: err }));

@@ -1,11 +1,13 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import dbPostComment from '../lib/db-post-comment';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: ''
+      comment: '',
+      token: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,10 +21,34 @@ export default class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const {
+      state: {
+        comment,
+        token
+      },
+      props: {
+        recipeId: {
+          recipeId
+        }
+      },
+      context: {
+        user: {
+          userId
+        }
+      },
+      clearForm
+    } = this;
+    dbPostComment(userId, token, recipeId, comment);
+    clearForm();
   }
 
   clearForm() {
     this.setState({ comment: '' });
+  }
+
+  componentDidMount() {
+    const token = window.localStorage.getItem('food-wizard-jwt');
+    this.setState({ token });
   }
 
   render() {
@@ -32,6 +58,7 @@ export default class CommentForm extends React.Component {
       handleSubmit,
       clearForm
     } = this;
+    console.log('context ', this.context); // eslint-disable-line
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
