@@ -58,7 +58,6 @@ export default class CommentForm extends React.Component {
       handleSubmit,
       clearForm
     } = this;
-    console.log('context ', this.context); // eslint-disable-line
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">

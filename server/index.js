@@ -58,7 +58,7 @@ app.post('/api/recipes', (req, res, next) => {
 });
 
 app.post('/api/auth/sign-up', (req, res, next) => {
-  const { username, password } = req.body;
+  const { body: { username, password } } = req;
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required fields');
   }
@@ -81,15 +81,15 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 });
 
 app.post('/api/auth/sign-in', (req, res, next) => {
-  const { username, password } = req.body;
+  const { body: { username, password } } = req;
   if (!username || !password) {
     throw new ClientError(401, 'username and password are required fields');
   }
   const sql = `
     SELECT "userId",
            "hashedPassword"
-      FROM "users"
-     WHERE "username" = $1
+      FROM users
+     WHERE username = $1
   `;
   const params = [username];
   db.query(sql, params)
