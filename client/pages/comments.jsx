@@ -11,7 +11,7 @@ export default class Comments extends React.Component {
 
   componentDidMount() {
     const { recipeId } = this.props;
-    fetch(`/api/comments/${recipeId}`, {
+    fetch(`/api/comments/spoonApiId/${recipeId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

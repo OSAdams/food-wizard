@@ -113,7 +113,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/comments/:id', (req, res, next) => {
+app.get('/api/comments/spoonApiId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) {
@@ -146,22 +146,14 @@ app.post('/api/comments', (req, res, next) => {
       comment
     }
   } = req;
-  if (!userId) {
-    throw new ClientError(400, 'must be logged in to comment on a recipe');
-  }
-  if (comment.length < 5) {
-    throw new ClientError(400, 'comment needs to exceed 5 characters');
-  }
-  if (!recipeId) {
-    throw new ClientError(400, 'Spoonacular API id required');
-  }
+  if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
+  if (comment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
+  if (!recipeId) throw new ClientError(400, 'Spoonacular API id required');
   const sql = `
     INSERT INTO comments ("userId", "recipeId", comment)
          VALUES ($1, $2, $3)
       RETURNING "recipeId", comment, "commentId"
   `;
-    // 1 to query the Database for recipeId using spoonApiId (or title)
-  // assign the recipeId
   const params = [userId, recipeId, comment];
   db.query(sql, params)
     .then(result => {
