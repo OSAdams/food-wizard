@@ -113,14 +113,14 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/comments/spoonApiId/:id', (req, res, next) => {
+app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) {
-    throw new ClientError(401, 'recipeId is required');
+    throw new ClientError(401, 'spoonacular api id is required');
   }
   const sql = `
-    SELECT "recipeId"
+    SELECT *
       FROM recipes
      WHERE "spoonApiId" = $1
   `;

@@ -1,22 +1,37 @@
 import React from 'react';
 
-export default function CommentCard(props) {
-  const { header: { username, date }, content } = props;
-  return (
-    <div className="comment-card">
-      <div className="comment-header">
-        <div className="comment-user">
-          <h4>{ username }</h4>
+export default class CommentCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userComments: null
+    };
+  }
+
+  render() {
+    const {
+      props: {
+        username,
+        date,
+        content
+      }
+    } = this;
+    return (
+      <div className="comment-card">
+        <div className="comment-header flex f-justify-content-space-around" style={{ width: '50%' }}>
+          <div className="comment-user">
+            <p>{ username }</p>
+          </div>
+          <div className="comment-date">
+            <p>{ date }</p>
+          </div>
         </div>
-        <div className="comment-date">
-          <h5>{ date }</h5>
+        <div className="comment-body">
+          <div className="comment-content">
+            { content }
+          </div>
         </div>
       </div>
-      <div className="comment-body">
-        <div className="comment-content">
-          { content }
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 }

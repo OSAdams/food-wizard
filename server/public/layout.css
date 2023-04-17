@@ -261,6 +261,13 @@ div.ac-title p,
   width: 8rem;
 }
 
+.comment-form,
+.comments-container {
+  width: 50%;
+  margin: auto;
+  margin-top: 2rem;
+}
+
 @media screen and (min-width: 700px) {
   .menu-modal {
     position: static;
