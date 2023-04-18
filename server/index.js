@@ -57,6 +57,29 @@ app.post('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
+  const { id } = req.params;
+  const recipeId = Number(id);
+  if (!recipeId) {
+    throw new ClientError(401, 'spoonacular api id is required');
+  }
+  const sql = `
+    SELECT *
+      FROM recipes
+     WHERE "spoonApiId" = $1
+  `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipeId] = result.rows;
+      if (!recipeId) {
+        throw new ClientError(404, 'recipeId doesn\'t exist');
+      }
+      res.status(201).json(recipeId);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { body: { username, password } } = req;
   if (!username || !password) {
@@ -109,29 +132,6 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
           res.json({ token, user: payload });
         });
-    })
-    .catch(err => next(err));
-});
-
-app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
-  const { id } = req.params;
-  const recipeId = Number(id);
-  if (!recipeId) {
-    throw new ClientError(401, 'spoonacular api id is required');
-  }
-  const sql = `
-    SELECT *
-      FROM recipes
-     WHERE "spoonApiId" = $1
-  `;
-  const params = [recipeId];
-  db.query(sql, params)
-    .then(result => {
-      const [recipeId] = result.rows;
-      if (!recipeId) {
-        throw new ClientError(404, 'recipeId doesn\'t exist');
-      }
-      res.status(201).json(recipeId);
     })
     .catch(err => next(err));
 });
