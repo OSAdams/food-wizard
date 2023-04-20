@@ -261,11 +261,14 @@ div.ac-title p,
   width: 8rem;
 }
 
-.comment-form,
 .comments-container {
-  width: 50%;
-  margin: auto;
-  margin-top: 2rem;
+  padding: 1rem;
+  max-height: 15rem;
+}
+
+.comment-content {
+  overflow-y: auto;
+  max-height: 7rem;
 }
 
 @media screen and (min-width: 700px) {

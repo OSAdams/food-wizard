@@ -179,6 +179,10 @@ button:active {
   background-color: var(--alt-color);
 }
 
+.comment-card {
+  background-color: var(--alt-dark-color);
+}
+
 @media screen and (min-width: 700px) {
   .ac-title {
     opacity: 100%;
