@@ -136,6 +136,26 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/comments/:id', (req, res, next) => {
+  const { id } = req.params;
+  const recipeId = Number(id);
+  if (!recipeId) throw new ClientError(401, 'recipeId must be an integer');
+  const sql = `
+      SELECT *
+        FROM comments
+       WHERE "recipeId" = $1
+    `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      console.log(result); // eslint-disable-line
+      const comments = result.rows[0];
+      if (!comments) throw new ClientError(401, 'there are no current comments for this recipe');
+      res.status(201).json(comments);
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.post('/api/comments', (req, res, next) => {
@@ -157,8 +177,8 @@ app.post('/api/comments', (req, res, next) => {
   const params = [userId, recipeId, comment];
   db.query(sql, params)
     .then(result => {
-      const [comment] = result.rows;
-      res.status(201).json(comment);
+      const [comments] = result.rows[0];
+      res.status(201).json(comments);
     })
     .catch(err => next(err));
 });

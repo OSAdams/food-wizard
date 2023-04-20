@@ -10,7 +10,7 @@ export default class CommentCards extends React.Component {
   }
 
   componentDidMount() {
-    const { props: recipeId } = this;
+    const { recipeId } = this.props;
     if (!recipeId) return 'Invalid parameter set, please use local recipe ID';
     fetch(`/api/comments/${recipeId}`, {
       method: 'GET',

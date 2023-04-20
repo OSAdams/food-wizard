@@ -183,6 +183,10 @@ button:active {
   background-color: var(--alt-dark-color);
 }
 
+.comment-header {
+  border-bottom: solid var(--alt-light-color);
+}
+
 @media screen and (min-width: 700px) {
   .ac-title {
     opacity: 100%;
