@@ -32,22 +32,26 @@ export default class CommentCards extends React.Component {
     } = this;
     console.log('recipeId: ', recipeId); // eslint-disable-line
     console.log('userComments: ', userComments); // eslint-disable-line
-    return (
-      <div className="comment-card">
-        <div className="comment-header flex f-justify-content-space-around" style={{ width: '50%' }}>
-          <div className="comment-user">
-            <p>John Smith</p>
+    const commentsMap = userComments.map(commentIndex => {
+      const { commentId, userId, createdAt, comment } = commentIndex;
+      return (
+        <div className="comment-card" key={ commentId }>
+          <div className="comment-header flex f-justify-content-space-around" style={{ width: '50%' }}>
+            <div className="comment-user">
+              <p>{ userId }</p>
+            </div>
+            <div className="comment-date">
+              <p>{ createdAt }</p>
+            </div>
           </div>
-          <div className="comment-date">
-            <p>4-20-23</p>
+          <div className="comment-body">
+            <div className="comment-content">
+              <p>{ comment }</p>
+            </div>
           </div>
         </div>
-        <div className="comment-body">
-          <div className="comment-content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam eum corrupti veritatis laboriosam placeat? Pariatur sunt consequatur ducimus explicabo in odio iusto quod beatae nostrum esse. Ratione, numquam. Modi, laborum?
-          </div>
-        </div>
-      </div>
-    );
+      );
+    });
+    return commentsMap;
   }
 }

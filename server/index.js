@@ -130,7 +130,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          res.json({ token, user: payload });
+          res.status(201).json({ token, user: payload });
         });
     })
     .catch(err => next(err));
@@ -141,14 +141,16 @@ app.get('/api/comments/:id', (req, res, next) => {
   const recipeId = Number(id);
   if (!recipeId) throw new ClientError(401, 'recipeId must be an integer');
   const sql = `
-      SELECT *
+      SELECT comment,
+             "userId",
+             "createdAt"
         FROM comments
        WHERE "recipeId" = $1
     `;
   const params = [recipeId];
   db.query(sql, params)
     .then(result => {
-      const comments = result.rows[0];
+      const comments = result.rows;
       if (!comments) throw new ClientError(401, 'there are no current comments for this recipe');
       res.status(201).json(comments);
     })

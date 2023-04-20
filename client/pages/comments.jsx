@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentForm from '../components/comment-form';
-// import CommentCards from '../components/comment-cards';
+import CommentCards from '../components/comment-cards';
 import LoadingModal from '../components/loading-modal';
 
 export default class Comments extends React.Component {
@@ -46,7 +46,7 @@ export default class Comments extends React.Component {
     return (
       <>
         <div className="comments-container">
-          {/* <CommentCards recipeId= { recipeId.recipeId } /> */}
+          <CommentCards recipeId= { recipeId } />
         </div>
         <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
           <CommentForm recipeId={ recipeId }/>
