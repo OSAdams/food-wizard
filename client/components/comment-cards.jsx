@@ -12,12 +12,7 @@ export default class CommentCards extends React.Component {
   componentDidMount() {
     const { recipeId } = this.props;
     if (!recipeId) return 'Invalid parameter set, please use local recipe ID';
-    fetch(`/api/comments/${recipeId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`/api/comments/${recipeId}`)
       .then(res => res.json())
       .then(comments => this.setState({ userComments: comments }))
       .catch(err => console.error({ error: err }));

@@ -1,6 +1,5 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-import dbPostComment from '../lib/db-post-comment';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -27,9 +26,7 @@ export default class CommentForm extends React.Component {
         token
       },
       props: {
-        recipeId: {
-          recipeId
-        }
+        recipeId
       },
       context: {
         user: {
@@ -38,7 +35,21 @@ export default class CommentForm extends React.Component {
       },
       clearForm
     } = this;
-    dbPostComment(userId, token, recipeId, comment);
+    const reqBody = {
+      recipeId,
+      comment
+    };
+    const data = JSON.stringify(reqBody);
+    fetch('/api/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
+      },
+      user: userId,
+      body: data
+    })
+      .catch(err => console.error({ error: err }));
     clearForm();
   }
 

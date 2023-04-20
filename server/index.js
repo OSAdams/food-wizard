@@ -148,7 +148,6 @@ app.get('/api/comments/:id', (req, res, next) => {
   const params = [recipeId];
   db.query(sql, params)
     .then(result => {
-      console.log(result); // eslint-disable-line
       const comments = result.rows[0];
       if (!comments) throw new ClientError(401, 'there are no current comments for this recipe');
       res.status(201).json(comments);
@@ -168,16 +167,16 @@ app.post('/api/comments', (req, res, next) => {
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
   if (comment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
-  if (!recipeId) throw new ClientError(400, 'Spoonacular API id required');
+  if (!recipeId) throw new ClientError(400, 'local recipeId required');
   const sql = `
     INSERT INTO comments ("userId", "recipeId", comment)
          VALUES ($1, $2, $3)
-      RETURNING "recipeId", comment, "commentId"
+      RETURNING comment, "commentId"
   `;
   const params = [userId, recipeId, comment];
   db.query(sql, params)
     .then(result => {
-      const [comments] = result.rows[0];
+      const [comments] = result.rows;
       res.status(201).json(comments);
     })
     .catch(err => next(err));

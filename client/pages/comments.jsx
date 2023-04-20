@@ -42,15 +42,14 @@ export default class Comments extends React.Component {
     if (!this.state.recipe) {
       return <LoadingModal />;
     }
-    const { recipe: recipeId } = this.state;
-    console.log('recipe: ', this.state.recipe); // eslint-disable-line
+    const { recipe: { recipeId } } = this.state;
     return (
       <>
         <div className="comments-container">
           {/* <CommentCards recipeId= { recipeId.recipeId } /> */}
         </div>
         <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
-          <CommentForm recipeId={ recipeId.recipeId }/>
+          <CommentForm recipeId={ recipeId }/>
         </div>
       </>
     );

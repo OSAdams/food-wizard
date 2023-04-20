@@ -32,7 +32,6 @@ export default class AuthForm extends React.Component {
         if (action === 'sign-up') {
           window.location.hash = 'sign-in';
         } else if (result.user && result.token) {
-          console.log(result) // eslint-disable-line
           this.props.onSignIn(result);
         }
       })
