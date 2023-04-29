@@ -14,6 +14,10 @@ const app = express();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
+app.get('/test', (req, res, next) => {
+  res.status(204).json('{ server: "on" }');
+});
+
 app.get('/api/recipes', (req, res, next) => {
   throw new ClientError(400, 'Use an id number to select a recipe');
 });
@@ -30,7 +34,7 @@ app.get('/api/recipes/:id', (req, res, next) => {
   `;
   const params = [id];
   db.query(sql, params)
-    .then(result => res.json(result.rows[0]))
+    .then(result => res.status(202).json(result.rows[0]))
     .catch(err => next(err));
 });
 
@@ -61,7 +65,7 @@ app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) {
-    throw new ClientError(401, 'spoonacular api id is required');
+    throw new ClientError(400, 'spoonacular api id is required');
   }
   const sql = `
     SELECT *
@@ -130,7 +134,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          res.status(201).json({ token, user: payload });
+          res.status(202).json({ token, user: payload });
         });
     })
     .catch(err => next(err));
