@@ -140,16 +140,39 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// app.get('/api/comments/:id', (req, res, next) => {
+//   const { id } = req.params;
+//   const recipeId = Number(id);
+//   if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
+//   const sql = `
+//       SELECT comment,
+//              "userId",
+//              "createdAt"
+//         FROM comments
+//        WHERE "recipeId" = $1
+//     `;
+//   const params = [recipeId];
+//   db.query(sql, params)
+//     .then(result => {
+//       const comments = result.rows;
+//       if (!comments) throw new ClientError(404, 'there are no current comments for this recipe');
+//       res.status(201).json(comments);
+//     })
+//     .catch(err => next(err));
+// });
+
 app.get('/api/comments/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
   const sql = `
       SELECT comment,
-             "userId",
-             "createdAt"
+             u.username AS username,
+             comments."createdAt" as date
         FROM comments
+        JOIN users AS u USING ("userId")
        WHERE "recipeId" = $1
+    ORDER BY date DESC
     `;
   const params = [recipeId];
   db.query(sql, params)

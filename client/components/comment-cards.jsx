@@ -7,6 +7,7 @@ export default class CommentCards extends React.Component {
     this.state = {
       userComments: null
     };
+    this.updateTimestamp = this.updateTimestamp.bind(this);
   }
 
   componentDidMount() {
@@ -16,6 +17,13 @@ export default class CommentCards extends React.Component {
       .then(res => res.json())
       .then(comments => this.setState({ userComments: comments }))
       .catch(err => console.error({ error: err }));
+  }
+
+  updateTimestamp(createdAt) {
+    const dateTime = createdAt.split('T');
+    const date = dateTime[0];
+    const time = dateTime[1].slice(0, 8);
+    return `${date} ${time}`;
   }
 
   render() {
@@ -28,20 +36,21 @@ export default class CommentCards extends React.Component {
       },
       state: {
         userComments
-      }
+      },
+      updateTimestamp
     } = this;
     console.log('recipeId: ', recipeId); // eslint-disable-line
     console.log('userComments: ', userComments); // eslint-disable-line
     const commentsMap = userComments.map(commentIndex => {
-      const { commentId, userId, createdAt, comment } = commentIndex;
+      const { commentId, username, date, comment } = commentIndex;
       return (
         <div className="comment-card" key={ commentId }>
           <div className="comment-header flex f-justify-content-space-around" style={{ width: '50%' }}>
             <div className="comment-user">
-              <p>{ userId }</p>
+              <p>{ username }</p>
             </div>
             <div className="comment-date">
-              <p>{ createdAt }</p>
+              <p>{ updateTimestamp(date) }</p>
             </div>
           </div>
           <div className="comment-body">

@@ -195,6 +195,8 @@ button:active {
   scrollbar-width: thin;
   scrollbar-color: var(--alt-light-color) var(--main-dark-color);
   background-color: var(--alt-dark-color);
+  border-radius: 5px;
+  border: solid 1rem var(--alt-dark-color);
 }
 
 @media screen and (min-width: 700px) {
