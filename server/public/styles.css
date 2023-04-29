@@ -187,6 +187,16 @@ button:active {
   border-bottom: solid var(--alt-light-color);
 }
 
+.comments-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.comments-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--alt-light-color) var(--main-dark-color);
+  background-color: var(--alt-dark-color);
+}
+
 @media screen and (min-width: 700px) {
   .ac-title {
     opacity: 100%;

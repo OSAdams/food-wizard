@@ -143,7 +143,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 app.get('/api/comments/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
-  if (!recipeId) throw new ClientError(401, 'recipeId must be an integer');
+  if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
   const sql = `
       SELECT comment,
              "userId",
@@ -155,7 +155,7 @@ app.get('/api/comments/:id', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const comments = result.rows;
-      if (!comments) throw new ClientError(401, 'there are no current comments for this recipe');
+      if (!comments) throw new ClientError(404, 'there are no current comments for this recipe');
       res.status(201).json(comments);
     })
     .catch(err => next(err));
