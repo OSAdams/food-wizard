@@ -50,6 +50,7 @@ export default class CommentForm extends React.Component {
       body: data
     })
       .catch(err => console.error({ error: err }));
+    window.location.hash += '&updateRecipe';
     clearForm();
   }
 

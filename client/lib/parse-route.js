@@ -2,7 +2,8 @@ export default function parseRoute(hashRoute) {
   if (hashRoute.startsWith('#')) {
     hashRoute = hashRoute.replace('#', '');
   }
-  const [path, queryString] = hashRoute.split('?');
-  const params = new URLSearchParams(queryString);
-  return { path, params, queryString };
+  const [path, query] = hashRoute.split('?');
+  const [queryString, params] = query.split('&');
+  const param = !params ? 'initial' : params;
+  return { path, param, queryString };
 }

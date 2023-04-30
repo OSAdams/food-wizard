@@ -17,7 +17,8 @@ export default class App extends React.Component {
     this.state = {
       user: null,
       isAuthorizing: true,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      params: null
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -47,12 +48,13 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path, queryString } = this.state.route;
+    const { path, queryString, param } = this.state.route;
+    if (param) window.location.hash = `#${path}?${queryString}`;
     if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
     if (path === 'recipeId') {
-      return <Recipe recipeId={ queryString } />;
+      return <Recipe recipeId={ queryString } key={ param } />;
     }
     if (path === 'keyword') {
       return <SearchResult key={ queryString } keyword={ queryString } />;
