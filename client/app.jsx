@@ -10,6 +10,7 @@ import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
 import SignOut from './components/sign-out';
+import Comments from './pages/comments';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -50,11 +51,16 @@ export default class App extends React.Component {
   renderPage() {
     const { path, queryString, param } = this.state.route;
     if (param) window.location.hash = `#${path}?${queryString}`;
-    if (path === '' || path === '#' || path === 'home') {
+    if (path === '' || path === '#' || path === '#home') {
       return <Home />;
     }
     if (path === 'recipeId') {
-      return <Recipe recipeId={ queryString } key={ param } />;
+      return (
+        <>
+          <Recipe recipeId={ queryString } />
+          <Comments recipeId={ queryString } key={ param } />
+        </>
+      );
     }
     if (path === 'keyword') {
       return <SearchResult key={ queryString } keyword={ queryString } />;

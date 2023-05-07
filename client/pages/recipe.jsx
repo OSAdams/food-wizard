@@ -1,6 +1,5 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
-import Comments from '../pages/comments';
 import AppContext from '../lib/app-context';
 
 export default class Recipe extends React.Component {
@@ -28,19 +27,13 @@ export default class Recipe extends React.Component {
     const {
       state: {
         recipe
-      },
-      props: {
-        recipeId
       }
     } = this;
     console.log('this.AppContext in recipe: ', this.context); // eslint-disable-line
     return (
-      <>
-        <div className="full-recipe-container">
-          <FullRecipe recipe={ recipe } />
-        </div>
-        <Comments recipeId={ recipeId } />
-      </>
+      <div className="full-recipe-container">
+        <FullRecipe recipe={ recipe } />
+      </div>
     );
   }
 }
