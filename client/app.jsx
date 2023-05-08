@@ -49,16 +49,15 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path, queryString, param } = this.state.route;
-    if (param) window.location.hash = `#${path}?${queryString}`;
-    if (path === '' || path === '#' || path === '#home') {
+    const { path, queryString, params } = this.state.route;
+    if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
     if (path === 'recipeId') {
       return (
         <>
           <Recipe recipeId={ queryString } />
-          <Comments recipeId={ queryString } key={ param } />
+          <Comments recipeId={ queryString } key={ params } />
         </>
       );
     }

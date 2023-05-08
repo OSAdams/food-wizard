@@ -13,13 +13,15 @@ export default class Comments extends React.Component {
 
   componentDidMount() {
     const { props: { recipeId } } = this;
+    const id = recipeId.split('&');
+    const spoonApiId = id[0];
     // const spoonHeader = {
     //   method: 'GET',
     //   headers: {
     //     'Content-Type': 'application/json'
     //   }
     // };
-    fetch(`/api/recipes/spoonApiId/${recipeId}`, {
+    fetch(`/api/recipes/spoonApiId/${spoonApiId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
