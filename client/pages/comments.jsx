@@ -15,12 +15,6 @@ export default class Comments extends React.Component {
     const { props: { recipeId } } = this;
     const id = recipeId.split('&');
     const spoonApiId = id[0];
-    // const spoonHeader = {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
     fetch(`/api/recipes/spoonApiId/${spoonApiId}`, {
       method: 'GET',
       headers: {
@@ -32,12 +26,6 @@ export default class Comments extends React.Component {
         this.setState({ recipe });
       })
       .catch(err => console.error({ error: err }));
-    // const promises = Promise.all([
-    //   fetch(`/api/recipes/spoonApiId/${recipeId}`, spoonHeader)
-    // ]);
-    // promises.then(results => {
-    //   Promise.all(this.setState({ recipeId: results }));
-    // });
   }
 
   render() {
@@ -57,7 +45,3 @@ export default class Comments extends React.Component {
     );
   }
 }
-
-// Container
-// -- Accordion
-// -- -- CommentCards

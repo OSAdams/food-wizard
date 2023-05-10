@@ -29,7 +29,6 @@ export default class Recipe extends React.Component {
         recipe
       }
     } = this;
-    console.log('this.AppContext in recipe: ', this.context); // eslint-disable-line
     return (
       <div className="full-recipe-container">
         <FullRecipe recipe={ recipe } />

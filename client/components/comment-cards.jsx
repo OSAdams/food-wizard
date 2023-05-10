@@ -30,17 +30,7 @@ export default class CommentCards extends React.Component {
     if (!this.state.userComments) {
       return <LoadingModal />;
     }
-    const {
-      props: {
-        recipeId
-      },
-      state: {
-        userComments
-      },
-      updateTimestamp
-    } = this;
-    console.log('recipeId: ', recipeId); // eslint-disable-line
-    console.log('userComments: ', userComments); // eslint-disable-line
+    const { state: { userComments }, updateTimestamp } = this;
     const commentsMap = userComments.map(commentIndex => {
       const { commentId, username, date, comment } = commentIndex;
       return (
