@@ -35,7 +35,7 @@ export default class CommentCards extends React.Component {
       const { commentId, username, date, comment } = commentIndex;
       return (
         <div className="comment-card" key={ commentId }>
-          <div className="comment-header flex f-justify-content-space-around" style={{ width: '50%' }}>
+          <div className="comment-header flex f-justify-content-space-around">
             <div className="comment-user">
               <p>{ username }</p>
             </div>

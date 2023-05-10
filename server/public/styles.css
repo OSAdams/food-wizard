@@ -127,7 +127,8 @@ button:active {
   opacity: 100%;
 }
 
-.ac-title:hover {
+.ac-title:hover,
+.comments-section-header {
   opacity: 100%;
   text-shadow:
     2px 2px 2px var(--main-dark-color),

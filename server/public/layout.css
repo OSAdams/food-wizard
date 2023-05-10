@@ -263,22 +263,21 @@ div.ac-title p,
 
 .comments-container {
   margin: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  max-height: 15rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  max-height: 20rem;
   overflow-y: auto;
 }
 
 .comment-card {
   margin-left: 1rem;
   margin-right: 1rem;
-  width: 50rem;
 }
 
 .comment-content {
   min-height: 7rem;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 @media screen and (min-width: 700px) {
@@ -367,5 +366,10 @@ div.ac-title p,
 
   .main-container {
     align-items: center;
+  }
+
+  .comments-section {
+    max-width: 90%;
+    margin: auto;
   }
 }

@@ -41,7 +41,7 @@ export default function FullRecipe(props) {
           </ul>
         </div>
       </div>
-      <div className="fr-ingredients flex f-justify-content-center">
+      <div className="fr-ingredients">
         <Accordion data={ recipeContent } />
       </div>
     </>
