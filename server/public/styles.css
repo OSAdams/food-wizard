@@ -127,7 +127,8 @@ button:active {
   opacity: 100%;
 }
 
-.ac-title:hover {
+.ac-title:hover,
+.comments-section-header {
   opacity: 100%;
   text-shadow:
     2px 2px 2px var(--main-dark-color),
@@ -177,6 +178,26 @@ button:active {
 
 .clear-comment {
   background-color: var(--alt-color);
+}
+
+.comment-card {
+  background-color: var(--alt-dark-color);
+}
+
+.comment-header {
+  border-bottom: solid var(--alt-light-color);
+}
+
+.comments-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.comments-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--alt-light-color) var(--main-dark-color);
+  background-color: var(--alt-dark-color);
+  border-radius: 5px;
+  border: solid 1rem var(--alt-dark-color);
 }
 
 @media screen and (min-width: 700px) {

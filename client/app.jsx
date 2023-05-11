@@ -10,6 +10,7 @@ import UnderConstruction from './pages/under-construction';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
 import SignOut from './components/sign-out';
+import Comments from './pages/comments';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export default class App extends React.Component {
     this.state = {
       user: null,
       isAuthorizing: true,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      params: null
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -47,12 +49,17 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path, queryString } = this.state.route;
+    const { path, queryString, params } = this.state.route;
     if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
     if (path === 'recipeId') {
-      return <Recipe recipeId={ queryString } />;
+      return (
+        <>
+          <Recipe recipeId={ queryString } />
+          <Comments recipeId={ queryString } key={ params } />
+        </>
+      );
     }
     if (path === 'keyword') {
       return <SearchResult key={ queryString } keyword={ queryString } />;

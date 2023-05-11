@@ -6,7 +6,7 @@ import Container from '../components/container';
 
 export default class Auth extends React.Component {
   render() {
-    const { user, route, handleSignIn } = this.context;
+    const { context: { user, route, handleSignIn } } = this;
     if (user) return <Redirect to="" />;
     const welcomeMessage = route.path === 'sign-in'
       ? 'Please sign in to continue'

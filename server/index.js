@@ -14,6 +14,10 @@ const app = express();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
+app.get('/test', (req, res, next) => {
+  res.status(204).json('{ server: "on" }');
+});
+
 app.get('/api/recipes', (req, res, next) => {
   throw new ClientError(400, 'Use an id number to select a recipe');
 });
@@ -30,7 +34,7 @@ app.get('/api/recipes/:id', (req, res, next) => {
   `;
   const params = [id];
   db.query(sql, params)
-    .then(result => res.json(result.rows[0]))
+    .then(result => res.status(202).json(result.rows[0]))
     .catch(err => next(err));
 });
 
@@ -53,6 +57,29 @@ app.post('/api/recipes', (req, res, next) => {
     .then(result => {
       const [recipes] = result.rows;
       res.status(201).json(recipes);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
+  const { id } = req.params;
+  const recipeId = Number(id);
+  if (!recipeId) {
+    throw new ClientError(400, 'spoonacular api id is required');
+  }
+  const sql = `
+    SELECT *
+      FROM recipes
+     WHERE "spoonApiId" = $1
+  `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipeId] = result.rows;
+      if (!recipeId) {
+        throw new ClientError(404, 'recipeId doesn\'t exist');
+      }
+      res.status(201).json(recipeId);
     })
     .catch(err => next(err));
 });
@@ -107,31 +134,31 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          res.json({ token, user: payload });
+          res.status(202).json({ token, user: payload });
         });
     })
     .catch(err => next(err));
 });
 
-app.get('/api/comments/spoonApiId/:id', (req, res, next) => {
+app.get('/api/comments/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
-  if (!recipeId) {
-    throw new ClientError(401, 'recipeId is required');
-  }
+  if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
   const sql = `
-    SELECT "recipeId"
-      FROM recipes
-     WHERE "spoonApiId" = $1
-  `;
+      SELECT comment,
+             u.username AS username,
+             comments."createdAt" as date
+        FROM comments
+        JOIN users AS u USING ("userId")
+       WHERE "recipeId" = $1
+    ORDER BY date DESC
+    `;
   const params = [recipeId];
   db.query(sql, params)
     .then(result => {
-      const [recipeId] = result.rows;
-      if (!recipeId) {
-        throw new ClientError(404, 'recipeId doesn\'t exist');
-      }
-      res.status(201).json(recipeId);
+      const comments = result.rows;
+      if (!comments) throw new ClientError(404, 'there are no current comments for this recipe');
+      res.status(201).json(comments);
     })
     .catch(err => next(err));
 });
@@ -148,17 +175,17 @@ app.post('/api/comments', (req, res, next) => {
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
   if (comment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
-  if (!recipeId) throw new ClientError(400, 'Spoonacular API id required');
+  if (!recipeId) throw new ClientError(400, 'local recipeId required');
   const sql = `
     INSERT INTO comments ("userId", "recipeId", comment)
          VALUES ($1, $2, $3)
-      RETURNING "recipeId", comment, "commentId"
+      RETURNING comment, "commentId"
   `;
   const params = [userId, recipeId, comment];
   db.query(sql, params)
     .then(result => {
-      const [comment] = result.rows;
-      res.status(201).json(comment);
+      const [comments] = result.rows;
+      res.status(201).json(comments);
     })
     .catch(err => next(err));
 });
