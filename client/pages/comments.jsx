@@ -13,8 +13,11 @@ export default class Comments extends React.Component {
 
   componentDidMount() {
     const { props: { recipeId } } = this;
-    const id = recipeId.split('&');
-    const spoonApiId = id[0];
+    let spoonApiId = recipeId;
+    if (recipeId.includes('&')) {
+      const id = recipeId.split('&');
+      spoonApiId = id[0];
+    }
     fetch(`/api/recipes/spoonApiId/${spoonApiId}`, {
       method: 'GET',
       headers: {
@@ -39,10 +42,10 @@ export default class Comments extends React.Component {
           <h2>Comments</h2>
         </div>
         <div className="comments-container">
-          <CommentCards recipeId= { recipeId } />
+          <CommentCards recipeId={recipeId} />
         </div>
         <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
-          <CommentForm recipeId={ recipeId }/>
+          <CommentForm recipeId={recipeId} />
         </div>
       </section>
     );
