@@ -191,24 +191,29 @@ app.post('/api/comments', (req, res, next) => {
 });
 
 app.patch('/api/comments/:commentId', (req, res) => {
-  const { params: { commentId }, body: { updatedComment } } = req;
-  if (updatedComment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
-  if (!commentId) throw new ClientError(400, 'commentId is required');
-  const id = parseInt(commentId);
-  if (!Number.isInteger(id)) throw new ClientError(400, 'commentId must be a positive integer');
-  const sql = `
-    UPDATE comments
-         SET     comment = $1
-             "updatedAt" = now()
-       WHERE "commentId" = $2
+  const {
+    user: { userId },
+    body: { comment },
+    params: { commentId }
+  } = req;
+  if (!comment || comment.length < 5) throw new ClientError(400, 'comment is required and must be greater than 4 characters');
+  if (!parseInt(userId)) throw new ClientError(400, 'userId must exist and be a positive integer');
+  if (!parseInt(commentId)) throw new ClientError(400, 'commentId must exist and be a positive integer');
+  const sql =
+  `
+     UPDATE comments
+        SET comment     = $1,
+           "updatedAt"  = now()
+      WHERE "commentId" = $2
+  RETURNING comment, "commentId"
   `;
-  const params = [updatedComment, id];
+  const params = [comment, parseInt(commentId)];
   db.query(sql, params)
     .then(result => {
-      const [rows] = result;
-      res.status(201).json(rows);
+      const [comment] = result.rows;
+      res.status(201).json(comment);
     })
-    .catch(err => console.error({ error: err }));
+    .catch(err => next(err)); // eslint-disable-line
 });
 
 app.use(errorMiddleware);
