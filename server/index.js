@@ -202,7 +202,7 @@ app.patch('/api/comments/:commentId', (req, res) => {
      WHERE "commentId" = $2
   `;
   const params = [updatedComment, commentId];
-  if (!params || !sql) throw new ClientError(401, 'our query parameter is breaking');
+  if (!params || !sql) throw new ClientError(406, 'our query parameter is breaking');
 });
 
 app.use(errorMiddleware);
