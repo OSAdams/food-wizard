@@ -190,6 +190,14 @@ app.post('/api/comments', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/users/:userId/comments/:commentId', (req, res) => {
+  const { params: { commentId, userId }, body: { updatedComment } } = req;
+  if (updatedComment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
+  if (!commentId || !userId) throw new ClientError(400, 'userId and commentId are required');
+  if (!Number.isInteger(commentId) || !Number.isInteger(userId)) throw new ClientError(400, 'userId and commentId must be a positive integer');
+
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
