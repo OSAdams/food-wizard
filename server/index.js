@@ -194,15 +194,21 @@ app.patch('/api/comments/:commentId', (req, res) => {
   const { params: { commentId }, body: { updatedComment } } = req;
   if (updatedComment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
   if (!commentId) throw new ClientError(400, 'commentId is required');
-  if (!Number.isInteger(commentId)) throw new ClientError(400, 'commentId must be a positive integer');
+  const id = parseInt(commentId);
+  if (!Number.isInteger(id)) throw new ClientError(400, 'commentId must be a positive integer');
   const sql = `
     UPDATE comments
-       SET     comment = $1
-           "updatedAt" = now()
-     WHERE "commentId" = $2
+         SET     comment = $1
+             "updatedAt" = now()
+       WHERE "commentId" = $2
   `;
-  const params = [updatedComment, commentId];
-  if (!params || !sql) throw new ClientError(406, 'our query parameter is breaking');
+  const params = [updatedComment, id];
+  db.query(sql, params)
+    .then(result => {
+      const [rows] = result;
+      res.status(201).json(rows);
+    })
+    .catch(err => console.error({ error: err }));
 });
 
 app.use(errorMiddleware);
