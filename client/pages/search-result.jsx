@@ -21,7 +21,7 @@ export default class SearchResult extends React.Component {
 
   handleClick(event) {
     const { id } = event.target;
-    window.location.hash = `recipeId?${id}`;
+    window.location.hash = `recipes?recipeId=${id}&newComment=false&isEditing=null`;
   }
 
   render() {

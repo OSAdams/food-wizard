@@ -53,11 +53,14 @@ export default class App extends React.Component {
     if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
-    if (path === 'recipeId') {
+    if (path === 'recipes') { // first update - /recipes?recipeId
+      const recipeId = params.get('recipeId');
+      const newComment = params.get('newComment');
+      const isEditing = params.get('isEditing');
       return (
         <>
-          <Recipe recipeId={ queryString } />
-          <Comments recipeId={ queryString } key={ params } />
+          <Recipe recipeId={ recipeId } />
+          <Comments recipeId={ recipeId } key={ newComment } isEditing={ isEditing } />
         </>
       );
     }
