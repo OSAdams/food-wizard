@@ -37,10 +37,22 @@ export default class CommentCards extends React.Component {
     if (!this.state.userComments) {
       return <LoadingModal />;
     }
-    const { state: { userComments }, context, updateTimestamp, userCommentControls } = this; // eslint-disable-line
-    // const commentControls = () => {
-
-    // }
+    const { state: { userComments }, context: { user: { userId, username } }, updateTimestamp, userCommentControls } = this; // eslint-disable-line
+    const commentControls = string => {
+      if (username === string) {
+        return (
+          <div>
+            <p>
+              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
+              onClick={userCommentControls}
+            />
+              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
+            </p>
+          </div>
+        );
+      }
+      return <div />;
+    };
     const commentsMap = userComments.map(commentIndex => {
       const { commentId, username, date, comment } = commentIndex;
       return (
@@ -53,15 +65,7 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimestamp(date) }</p>
             </div>
             <div />
-            <div>
-              { }
-              <p>
-                <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
-                  onClick={ userCommentControls }
-                />
-                <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
-              </p>
-            </div>
+            { commentControls(username) }
           </div>
           <div className="comment-body">
             <div className="comment-content">
