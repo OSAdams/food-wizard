@@ -184,12 +184,20 @@ button:active {
   background-color: var(--alt-color);
 }
 
+.clear-comment:hover {
+  background-color: var(--main-color);
+}
+
 .comment-card {
   background-color: var(--alt-dark-color);
 }
 
 .comment-header {
   border-bottom: solid var(--alt-light-color);
+}
+
+.comment-content {
+  border-bottom: dotted var(--alt-color);
 }
 
 .comments-container::-webkit-scrollbar {

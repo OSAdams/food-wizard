@@ -37,8 +37,19 @@ export default class CommentCards extends React.Component {
     if (!this.state.userComments) {
       return <LoadingModal />;
     }
-    const { state: { userComments }, context: { user: { userId, username } }, updateTimestamp, userCommentControls } = this; // eslint-disable-line
-    const commentControls = string => {
+    const {
+      state: {
+        userComments
+      },
+      context: {
+        user: {
+          username
+        }
+      },
+      updateTimestamp,
+      userCommentControls
+    } = this;
+    const controlsRender = string => {
       if (username === string) {
         return (
           <div>
@@ -65,7 +76,7 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimestamp(date) }</p>
             </div>
             <div />
-            { commentControls(username) }
+            { controlsRender(username) }
           </div>
           <div className="comment-body">
             <div className="comment-content">
