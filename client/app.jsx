@@ -60,12 +60,16 @@ export default class App extends React.Component {
       return (
         <>
           <Recipe recipeId={ recipeId } />
-          <Comments recipeId={ recipeId } key={ newComment } isEditing={ isEditing } />
+          <Comments
+            recipeId={ recipeId }
+            key={ newComment }
+            isEditing={ isEditing } />
         </>
       );
     }
-    if (path === 'keyword') {
-      return <SearchResult key={ queryString } keyword={ queryString } />;
+    if (path === 'quickSearch') {
+      const keyword = params.get('keyword');
+      return <SearchResult key={ keyword } keyword={ keyword } />;
     }
     if (path === 'sign-up' || path === 'sign-in') {
       return <Auth action={ queryString } />;
