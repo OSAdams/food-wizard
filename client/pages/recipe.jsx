@@ -1,6 +1,5 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
-import AppContext from '../lib/app-context';
 
 export default class Recipe extends React.Component {
   constructor(props) {
@@ -34,5 +33,3 @@ export default class Recipe extends React.Component {
     );
   }
 }
-
-Recipe.contextType = AppContext;

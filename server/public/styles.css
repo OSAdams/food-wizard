@@ -39,6 +39,10 @@ i {
   transition: all 300ms ease-in-out;
 }
 
+i:hover {
+  color: #6551a4;
+}
+
 button {
   background: var(--main-color);
   color: var(--main-light-color);

@@ -1,5 +1,6 @@
 import React from 'react';
 import LoadingModal from './loading-modal';
+import AppContext from '../lib/app-context';
 
 export default class CommentCards extends React.Component {
   constructor(props) {
@@ -42,6 +43,13 @@ export default class CommentCards extends React.Component {
             <div className="comment-date">
               <p>{ updateTimestamp(date) }</p>
             </div>
+            <div />
+            <div>
+              <p>
+                <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem" />
+                <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
+              </p>
+            </div>
           </div>
           <div className="comment-body">
             <div className="comment-content">
@@ -54,3 +62,5 @@ export default class CommentCards extends React.Component {
     return commentsMap;
   }
 }
+
+CommentCards.contextType = AppContext;

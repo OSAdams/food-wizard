@@ -203,11 +203,11 @@ app.patch('/api/comments/:commentId', (req, res) => {
   `
      UPDATE comments
         SET comment     = $1,
-           "updatedAt"  = now()
+            "updatedAt" = now()
       WHERE "commentId" = $2
   RETURNING comment, "commentId"
   `;
-  const params = [comment, parseInt(commentId)];
+  const params = [comment, commentId];
   db.query(sql, params)
     .then(result => {
       const [comment] = result.rows;
