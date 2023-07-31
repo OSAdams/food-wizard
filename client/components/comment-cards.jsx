@@ -6,10 +6,10 @@ export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null,
-      isEditing: false
+      userComments: null
     };
     this.updateTimestamp = this.updateTimestamp.bind(this);
+    this.modifyComment = this.modifyComment.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +29,9 @@ export default class CommentCards extends React.Component {
   }
 
   modifyComment(commentId) {
-    window.location.hash += `&editComment?${commentId}`;
+    console.log('params, ', this.context.route.params); // eslint-disable-line
+    console.log('params typeof, ', typeof this.context.route.params); // eslint-disable-line
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   render() {

@@ -45,7 +45,7 @@ export default class App extends React.Component {
   handleSignOut() {
     window.localStorage.removeItem('food-wizard-jwt');
     this.setState({ user: null });
-    window.location.hash = '#home';
+    window.location.hash = 'home';
   }
 
   renderPage() {
