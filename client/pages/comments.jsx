@@ -2,6 +2,7 @@ import React from 'react';
 import CommentForm from '../components/comment-form';
 import CommentCards from '../components/comment-cards';
 import LoadingModal from '../components/loading-modal';
+import AppContext from '../lib/app-context';
 
 export default class Comments extends React.Component {
   constructor(props) {
@@ -44,10 +45,12 @@ export default class Comments extends React.Component {
         <div className="comments-container">
           <CommentCards recipeId={recipeId} />
         </div>
-        <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
+        <div ref={ editScroll => { this.editScroll = editScroll; } } className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
           <CommentForm recipeId={recipeId} />
         </div>
       </section>
     );
   }
 }
+
+Comments.contextType = AppContext;

@@ -6,10 +6,10 @@ export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null
+      userComments: null,
+      isEditing: false
     };
     this.updateTimestamp = this.updateTimestamp.bind(this);
-    this.userCommentControls = this.userCommentControls.bind(this);
   }
 
   componentDidMount() {
@@ -23,14 +23,13 @@ export default class CommentCards extends React.Component {
 
   updateTimestamp(createdAt) {
     const dateTime = createdAt.split('T');
-    const date = dateTime[0];
+    const date = dateTime[0].slice(5);
     const time = dateTime[1].slice(0, 5);
     return `${date} ${time}`;
   }
 
-  userCommentControls() {
-    // eslint-disable-next-line
-    console.log(this.context);
+  modifyComment(commentId) {
+    window.location.hash += `&editComment?${commentId}`;
   }
 
   render() {
@@ -47,16 +46,14 @@ export default class CommentCards extends React.Component {
         }
       },
       updateTimestamp,
-      userCommentControls
+      modifyComment
     } = this;
-    const controlsRender = string => {
-      if (username === string) {
+    const controlsRender = (arg1, arg2) => {
+      if (username === arg1) {
         return (
           <div>
-            <p>
-              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
-              onClick={userCommentControls}
-            />
+            <p onClick={ () => modifyComment(arg2) }>
+              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem" />
               <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
             </p>
           </div>
@@ -76,7 +73,7 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimestamp(date) }</p>
             </div>
             <div />
-            { controlsRender(username) }
+            { controlsRender(username, commentId) }
           </div>
           <div className="comment-body">
             <div className="comment-content">

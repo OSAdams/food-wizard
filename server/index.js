@@ -147,7 +147,8 @@ app.get('/api/comments/:id', (req, res, next) => {
   const sql = `
       SELECT comment,
              u.username AS username,
-             comments."createdAt" as date
+             comments."createdAt" as date,
+             "commentId"
         FROM comments
         JOIN users AS u USING ("userId")
        WHERE "recipeId" = $1
