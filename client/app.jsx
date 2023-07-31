@@ -49,11 +49,11 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path, queryString, params } = this.state.route;
+    const { path, params } = this.state.route;
     if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
-    if (path === 'recipes') { // first update - /recipes?recipeId
+    if (path === 'recipes') {
       const recipeId = params.get('recipeId');
       const newComment = params.get('newComment');
       const isEditing = params.get('isEditing');
@@ -72,7 +72,7 @@ export default class App extends React.Component {
       return <SearchResult key={ keyword } keyword={ keyword } />;
     }
     if (path === 'sign-up' || path === 'sign-in') {
-      return <Auth action={ queryString } />;
+      return <Auth action={ path } />;
     }
     if (path === 'sign-out') {
       return <SignOut />;

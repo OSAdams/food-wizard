@@ -6,7 +6,8 @@ export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null
+      userComments: null,
+      isEditing: null
     };
     this.updateTimestamp = this.updateTimestamp.bind(this);
     this.modifyComment = this.modifyComment.bind(this);
@@ -15,7 +16,7 @@ export default class CommentCards extends React.Component {
   componentDidMount() {
     const { recipeId } = this.props;
     if (!recipeId) return 'Invalid parameter set, please use local recipe ID';
-    fetch(`/api/comments/${recipeId}`)
+    fetch(`/api/comments/recipeId/${recipeId}`)
       .then(res => res.json())
       .then(comments => this.setState({ userComments: comments }))
       .catch(err => console.error({ error: err }));
@@ -28,10 +29,10 @@ export default class CommentCards extends React.Component {
     return `${date} ${time}`;
   }
 
-  modifyComment(commentId) {
-    console.log('params, ', this.context.route.params); // eslint-disable-line
-    console.log('params typeof, ', typeof this.context.route.params); // eslint-disable-line
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  modifyComment() {
+    const { context: { route: { params } } } = this;
+    const isEditing = params.get('isEditing');
+    !isEditing ? this.setState({ isEditing: !isEditing }) : window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   render() {
@@ -54,7 +55,7 @@ export default class CommentCards extends React.Component {
       if (username === arg1) {
         return (
           <div>
-            <p onClick={ () => modifyComment(arg2) }>
+            <p onClick={ () => modifyComment }>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem" />
               <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
             </p>

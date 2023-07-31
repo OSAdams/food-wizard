@@ -18,13 +18,13 @@ export default class AuthForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { action } = this.props;
+    const { props: { action, onSignIn }, state } = this;
     const req = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(state)
     };
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
@@ -32,15 +32,14 @@ export default class AuthForm extends React.Component {
         if (action === 'sign-up') {
           window.location.hash = 'sign-in';
         } else if (result.user && result.token) {
-          this.props.onSignIn(result);
+          onSignIn(result);
         }
       })
       .catch(err => console.error({ error: err }));
   }
 
   render() {
-    const { action } = this.props;
-    const { handleChange, handleSubmit } = this;
+    const { props: { action }, handleChange, handleSubmit } = this;
     const alternateActionHref = action === 'sign-up'
       ? '#sign-in'
       : '#sign-up';

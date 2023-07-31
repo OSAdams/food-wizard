@@ -140,7 +140,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/comments/:id', (req, res, next) => {
+app.get('/api/comments/recipeId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
