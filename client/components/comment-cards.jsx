@@ -10,7 +10,6 @@ export default class CommentCards extends React.Component {
       isEditing: null
     };
     this.updateTimestamp = this.updateTimestamp.bind(this);
-    this.modifyComment = this.modifyComment.bind(this);
   }
 
   componentDidMount() {
@@ -29,12 +28,6 @@ export default class CommentCards extends React.Component {
     return `${date} ${time}`;
   }
 
-  modifyComment() {
-    const { context: { route: { params } } } = this;
-    const isEditing = params.get('isEditing');
-    !isEditing ? this.setState({ isEditing: !isEditing }) : window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }
-
   render() {
     if (!this.state.userComments) {
       return <LoadingModal />;
@@ -48,15 +41,16 @@ export default class CommentCards extends React.Component {
           username
         }
       },
-      updateTimestamp,
-      modifyComment
+      updateTimestamp
     } = this;
-    const controlsRender = (arg1, arg2) => {
-      if (username === arg1) {
+    const controlsRender = string => {
+      if (username === string) {
         return (
           <div>
-            <p onClick={ () => modifyComment }>
-              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem" />
+            <p>
+              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
+                // onClick={() => this.props.commentFormRef.current.scrollIntoView({ behavior: 'smooth' })}
+              />
               <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
             </p>
           </div>
