@@ -39,17 +39,26 @@ export default class CommentCards extends React.Component {
       context: {
         user: {
           username
+        },
+        route: {
+          path,
+          params
         }
       },
       updateTimestamp
     } = this;
-    const controlsRender = string => {
-      if (username === string) {
+    const controlsRender = (name, id, comment) => {
+      const recipeId = params.get('recipeId');
+      const newComment = comment.toString();
+      if (username === name) {
         return (
           <div>
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
-                // onClick={() => this.props.commentFormRef.current.scrollIntoView({ behavior: 'smooth' })}
+                 onClick={ () => {
+                   window.location.hash = `${path}?recipeId=${recipeId}&newComment=${newComment}&isEditing=${id}`;
+                 }
+                 }
               />
               <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
             </p>
@@ -70,7 +79,7 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimestamp(date) }</p>
             </div>
             <div />
-            { controlsRender(username, commentId) }
+            { controlsRender(username, commentId, comment) }
           </div>
           <div className="comment-body">
             <div className="comment-content">

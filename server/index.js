@@ -166,12 +166,14 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-app.post('/api/comments', (req, res, next) => {
+app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
     user: { userId },
     body: {
-      recipeId,
       comment
+    },
+    params: {
+      recipeId
     }
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
@@ -191,7 +193,7 @@ app.post('/api/comments', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('/api/comments/:commentId', (req, res) => {
+app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
   const {
     user: { userId },
     body: { comment },
