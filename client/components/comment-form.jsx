@@ -6,7 +6,8 @@ export default class CommentForm extends React.Component {
     super(props);
     this.state = {
       comment: '',
-      token: ''
+      token: '',
+      newComment: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,45 +32,82 @@ export default class CommentForm extends React.Component {
       context: {
         user: {
           userId
+        },
+        route: {
+          path,
+          params
         }
       },
       clearForm
     } = this;
-    const reqBody = {
-      recipeId,
-      comment
-    };
-    const data = JSON.stringify(reqBody);
-    fetch('/api/comments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Access-Token': token
-      },
-      user: userId,
-      body: data
-    })
-      .catch(err => console.error({ error: err }));
-    window.location.hash += '&updateRecipe';
-    clearForm();
+    const isEditing = params.get('isEditing');
+    const spoonId = params.get('recipeId');
+    if (isEditing !== 'null') {
+      const commentId = params.get('isEditing');
+      const reqBody = {
+        comment
+      };
+      const data = JSON.stringify(reqBody);
+      fetch(`/api/comments/edit/commentId/${commentId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Access-Token': token
+          },
+          user: userId,
+          body: data
+        })
+        .catch(err => console.error({ error: err }));
+      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
+      clearForm();
+    } else {
+      const reqBody = {
+        comment
+      };
+      const data = JSON.stringify(reqBody);
+      fetch(`/api/comments/post/recipeId/${recipeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Token': token
+        },
+        user: userId,
+        body: data
+      })
+        .catch(err => console.error({ error: err }));
+      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
+      clearForm();
+    }
   }
 
   clearForm() {
     this.setState({ comment: '' });
+    const { context: { route: { path, params } } } = this;
+    const recipeId = params.get('recipeId');
+    window.location.hash = `${path}?recipeId=${recipeId}&newComment=null&isEditing=null`;
   }
 
   componentDidMount() {
     const token = window.localStorage.getItem('food-wizard-jwt');
-    this.setState({ token });
+    const { route: { params } } = this.context;
+    const newComment = params.get('newComment');
+    this.setState({ token, newComment });
   }
 
   render() {
     const {
-      state: { comment },
+      context: {
+        route: {
+          params
+        }
+      },
       handleChange,
       handleSubmit,
       clearForm
     } = this;
+    const isEditing = params.get('isEditing');
+    const newComment = params.get('newComment');
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
@@ -82,8 +120,9 @@ export default class CommentForm extends React.Component {
               id="comment"
               type="text"
               name="comment"
-              value={ comment }
-              onChange={ handleChange } />
+              onChange={ handleChange }>
+            { isEditing !== 'null' ? `${newComment}` : '' }
+          </textarea>
         </div>
         <div className="comment-buttons flex f-justify-content-space-around">
           <div>

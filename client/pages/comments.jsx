@@ -2,6 +2,7 @@ import React from 'react';
 import CommentForm from '../components/comment-form';
 import CommentCards from '../components/comment-cards';
 import LoadingModal from '../components/loading-modal';
+import AppContext from '../lib/app-context';
 
 export default class Comments extends React.Component {
   constructor(props) {
@@ -13,8 +14,11 @@ export default class Comments extends React.Component {
 
   componentDidMount() {
     const { props: { recipeId } } = this;
-    const id = recipeId.split('&');
-    const spoonApiId = id[0];
+    let spoonApiId = recipeId;
+    if (recipeId.includes('&')) {
+      const id = recipeId.split('&');
+      spoonApiId = id[0];
+    }
     fetch(`/api/recipes/spoonApiId/${spoonApiId}`, {
       method: 'GET',
       headers: {
@@ -38,13 +42,15 @@ export default class Comments extends React.Component {
         <div className="comments-section-header" style={{ textAlign: 'center' }}>
           <h2>Comments</h2>
         </div>
-        <div className="comments-container">
-          <CommentCards recipeId= { recipeId } />
-        </div>
         <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
-          <CommentForm recipeId={ recipeId }/>
+          <CommentForm recipeId={recipeId} />
+        </div>
+        <div className="comments-container">
+          <CommentCards recipeId={recipeId} />
         </div>
       </section>
     );
   }
 }
+
+Comments.contextType = AppContext;

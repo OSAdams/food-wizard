@@ -58,6 +58,19 @@
   padding: 1rem;
 }
 
+.pad-left-1rem {
+  padding-left: 1rem;
+}
+
+.pad-right-1rem {
+  padding-left: 1rem;
+}
+
+.pad-l-r-1rem {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .marg-bot-2rem {
   margin-bottom: 2rem;
 }

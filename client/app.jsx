@@ -45,27 +45,34 @@ export default class App extends React.Component {
   handleSignOut() {
     window.localStorage.removeItem('food-wizard-jwt');
     this.setState({ user: null });
-    window.location.hash = '#home';
+    window.location.hash = 'home';
   }
 
   renderPage() {
-    const { path, queryString, params } = this.state.route;
+    const { path, params } = this.state.route;
     if (path === '' || path === '#' || path === 'home') {
       return <Home />;
     }
-    if (path === 'recipeId') {
+    if (path === 'recipes') {
+      const recipeId = params.get('recipeId');
+      const newComment = params.get('newComment');
+      const isEditing = params.get('isEditing');
       return (
         <>
-          <Recipe recipeId={ queryString } />
-          <Comments recipeId={ queryString } key={ params } />
+          <Recipe recipeId={ recipeId } />
+          <Comments
+            recipeId={ recipeId }
+            key={ newComment }
+            isEditing={ isEditing } />
         </>
       );
     }
-    if (path === 'keyword') {
-      return <SearchResult key={ queryString } keyword={ queryString } />;
+    if (path === 'quickSearch') {
+      const keyword = params.get('keyword');
+      return <SearchResult key={ keyword } keyword={ keyword } />;
     }
     if (path === 'sign-up' || path === 'sign-in') {
-      return <Auth action={ queryString } />;
+      return <Auth action={ path } />;
     }
     if (path === 'sign-out') {
       return <SignOut />;

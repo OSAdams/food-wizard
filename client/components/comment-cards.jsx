@@ -1,11 +1,13 @@
 import React from 'react';
 import LoadingModal from './loading-modal';
+import AppContext from '../lib/app-context';
 
 export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null
+      userComments: null,
+      isEditing: null
     };
     this.updateTimestamp = this.updateTimestamp.bind(this);
   }
@@ -13,7 +15,7 @@ export default class CommentCards extends React.Component {
   componentDidMount() {
     const { recipeId } = this.props;
     if (!recipeId) return 'Invalid parameter set, please use local recipe ID';
-    fetch(`/api/comments/${recipeId}`)
+    fetch(`/api/comments/recipeId/${recipeId}`)
       .then(res => res.json())
       .then(comments => this.setState({ userComments: comments }))
       .catch(err => console.error({ error: err }));
@@ -21,8 +23,8 @@ export default class CommentCards extends React.Component {
 
   updateTimestamp(createdAt) {
     const dateTime = createdAt.split('T');
-    const date = dateTime[0];
-    const time = dateTime[1].slice(0, 8);
+    const date = dateTime[0].slice(5);
+    const time = dateTime[1].slice(0, 5);
     return `${date} ${time}`;
   }
 
@@ -30,7 +32,41 @@ export default class CommentCards extends React.Component {
     if (!this.state.userComments) {
       return <LoadingModal />;
     }
-    const { state: { userComments }, updateTimestamp } = this;
+    const {
+      state: {
+        userComments
+      },
+      context: {
+        user: {
+          username
+        },
+        route: {
+          path,
+          params
+        }
+      },
+      updateTimestamp
+    } = this;
+    const controlsRender = (name, id, comment) => {
+      const recipeId = params.get('recipeId');
+      const newComment = comment.toString();
+      if (username === name) {
+        return (
+          <div>
+            <p>
+              <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
+                 onClick={ () => {
+                   window.location.hash = `${path}?recipeId=${recipeId}&newComment=${newComment}&isEditing=${id}`;
+                 }
+                 }
+              />
+              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
+            </p>
+          </div>
+        );
+      }
+      return <div />;
+    };
     const commentsMap = userComments.map(commentIndex => {
       const { commentId, username, date, comment } = commentIndex;
       return (
@@ -42,6 +78,8 @@ export default class CommentCards extends React.Component {
             <div className="comment-date">
               <p>{ updateTimestamp(date) }</p>
             </div>
+            <div />
+            { controlsRender(username, commentId, comment) }
           </div>
           <div className="comment-body">
             <div className="comment-content">
@@ -54,3 +92,5 @@ export default class CommentCards extends React.Component {
     return commentsMap;
   }
 }
+
+CommentCards.contextType = AppContext;

@@ -140,14 +140,15 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/comments/:id', (req, res, next) => {
+app.get('/api/comments/recipeId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
   if (!recipeId) throw new ClientError(400, 'recipeId must be an integer');
   const sql = `
       SELECT comment,
              u.username AS username,
-             comments."createdAt" as date
+             comments."createdAt" as date,
+             "commentId"
         FROM comments
         JOIN users AS u USING ("userId")
        WHERE "recipeId" = $1
@@ -165,12 +166,14 @@ app.get('/api/comments/:id', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-app.post('/api/comments', (req, res, next) => {
+app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
     user: { userId },
     body: {
-      recipeId,
       comment
+    },
+    params: {
+      recipeId
     }
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
@@ -188,6 +191,32 @@ app.post('/api/comments', (req, res, next) => {
       res.status(201).json(comments);
     })
     .catch(err => next(err));
+});
+
+app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
+  const {
+    user: { userId },
+    body: { comment },
+    params: { commentId }
+  } = req;
+  if (!comment || comment.length < 5) throw new ClientError(400, 'comment is required and must be greater than 4 characters');
+  if (!parseInt(userId)) throw new ClientError(400, 'userId must exist and be a positive integer');
+  if (!parseInt(commentId)) throw new ClientError(400, 'commentId must exist and be a positive integer');
+  const sql =
+  `
+     UPDATE comments
+        SET comment     = $1,
+            "updatedAt" = now()
+      WHERE "commentId" = $2
+  RETURNING comment, "commentId"
+  `;
+  const params = [comment, commentId];
+  db.query(sql, params)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json(comment);
+    })
+    .catch(err => next(err)); // eslint-disable-line
 });
 
 app.use(errorMiddleware);
