@@ -12,7 +12,8 @@ body {
   font-family:
     Inter,
     sans-serif;
-  color: #e5e3e8;
+  color: var(--alt-light-color);
+  font-size: small;
 }
 
 .txt-shadow {
