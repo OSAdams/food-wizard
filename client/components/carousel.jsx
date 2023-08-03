@@ -33,7 +33,7 @@ export default class Carousel extends React.Component {
     const { iterator } = this.state;
     const { recipes } = this.props;
     this.resetInterval();
-    window.location.hash = `recipes?recipeId=${recipes[iterator].id}&newComment=false&isEditing=null`;
+    window.location.hash = `recipes?recipeId=${recipes[iterator].id}&newComment=null&isEditing=null`;
     dbPostRecipe(recipes[iterator].id, recipes[iterator].title);
   }
 

@@ -34,14 +34,12 @@ export default class CommentForm extends React.Component {
           userId
         },
         route: {
-          path,
           params
         }
       },
       clearForm
     } = this;
     const isEditing = params.get('isEditing');
-    const spoonId = params.get('recipeId');
     if (isEditing !== 'null') {
       const commentId = params.get('isEditing');
       const reqBody = {
@@ -58,9 +56,10 @@ export default class CommentForm extends React.Component {
           user: userId,
           body: data
         })
+        .then(() => {
+          clearForm();
+        })
         .catch(err => console.error({ error: err }));
-      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
-      clearForm();
     } else {
       const reqBody = {
         comment
@@ -75,24 +74,25 @@ export default class CommentForm extends React.Component {
         user: userId,
         body: data
       })
+        .then(() => {
+          clearForm();
+        })
         .catch(err => console.error({ error: err }));
-      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
-      clearForm();
     }
   }
 
   clearForm() {
-    this.setState({ comment: '' });
+    this.setState({ comment: '', newComment: 'null' });
     const { context: { route: { path, params } } } = this;
     const recipeId = params.get('recipeId');
-    window.location.hash = `${path}?recipeId=${recipeId}&newComment=null&isEditing=null`;
+    window.location.hash = `${path}?recipeId=${recipeId}&newComment=true&isEditing=null`;
   }
 
   componentDidMount() {
     const token = window.localStorage.getItem('food-wizard-jwt');
     const { route: { params } } = this.context;
     const comment = params.get('newComment');
-    const newComment = comment === 'null' ? '' : comment;
+    const newComment = comment === 'null' || comment === 'true' ? '' : comment;
     this.setState({ token, newComment });
   }
 
