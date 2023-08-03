@@ -219,6 +219,28 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
     .catch(err => next(err)); // eslint-disable-line
 });
 
+app.delete('/api/comments/delete/commentId/:commentId', (req, res) => {
+  const {
+    user: { userId },
+    params: { commentId }
+  } = req;
+  if (!userId || !parseInt(userId)) throw new ClientError(400, 'userId is required and must be a positive integer');
+  if (!commentId || !parseInt(commentId)) throw new ClientError(400, 'commentId us required and must be a positive integer');
+  const sql =
+   `
+    DELETE FROM comments USING "commentId"
+          WHERE "commentId" = $1
+      RETURNING comment, "commentId"
+  `;
+  const params = [commentId];
+  db.query(params, sql)
+    .then(result => {
+      const [comment] = result.rows;
+      res.status(201).json(comment);
+    })
+    .catch(err => next(err)); // eslint-disable-line
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
