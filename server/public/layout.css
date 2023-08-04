@@ -52,6 +52,14 @@
   margin: auto;
 }
 
+.pos-absolute {
+  position: absolute;
+}
+
+.pos-relative {
+  position: relative;
+}
+
 /* PADDING */
 
 .pad-1rem {
@@ -98,15 +106,29 @@
 
 /* CAROUSEL */
 
-.carousel-controls {
-  margin-top: 0.3rem;
-  display: flex;
-  justify-content: space-around;
+.carounsel-container {
+  max-width: 375px;
 }
 
-.carousel-controls button {
-  width: 48%;
-  height: 2.5rem;
+.carousel-controls {
+  top: 0;
+}
+
+.carousel-previous {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+.carousel-controls > button {
+  width: 30px;
+}
+
+.carousel-controls > i {
+  margin: 0;
+  padding: 0;
 }
 
 /* div holding components */
@@ -125,13 +147,11 @@
   align-items: center;
 }
 
-.rc-text {
-  height: 200px;
-  padding: 1.5rem;
+.rc-image {
+  height: 250px;
+  width: 375px;
 }
 
-.rc-text div > h3,
-.rc-likes > h1,
 .li-style-none {
   margin: 0;
   padding: 0;
@@ -147,26 +167,6 @@
 
 .auth-form input {
   height: 30px;
-}
-
-.rc-text > div:last-child {
-  margin-top: 1rem;
-}
-
-.li-style-none {
-  list-style-type: none;
-}
-
-.rc-image {
-  height: 200px;
-  width: 200px;
-  background-position: center;
-  position: relative;
-  margin: 1rem;
-}
-
-.rc-likes h2 {
-  margin-bottom: 1rem;
 }
 
 /* full recipe */
@@ -317,26 +317,11 @@ div.ac-title p,
   }
 
   /* recipe card  */
-  .rc-text {
-    padding: 1.5rem;
-    padding-left: 2rem;
-    margin: 0;
-  }
-
-  .rc-title {
-    margin-top: 0;
-  }
 
   .recipe-card {
     max-width: 580px;
     margin: 2rem;
     flex-direction: row-reverse;
-  }
-
-  .recipe-card > .rc-text,
-  .recipe-card > .rc-image {
-    width: 290px;
-    height: 250px;
   }
 
   .fr-header {

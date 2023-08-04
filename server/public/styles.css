@@ -13,7 +13,7 @@ body {
     Inter,
     sans-serif;
   color: var(--alt-light-color);
-  font-size: small;
+  font-size: smaller;
 }
 
 .txt-shadow {
@@ -72,9 +72,6 @@ button:active {
 
 .recipe-card {
   background-color: #201c2b;
-}
-
-.rc-text:hover {
   cursor: pointer;
 }
 
@@ -92,13 +89,9 @@ button:active {
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
-.rc-image,
-.rc-shade {
-  border-radius: 50%;
-}
-
 .list-style-none {
   color: #e2dbf0;
+  list-style: none;
 }
 
 .nav-menu-icon > i {
@@ -143,9 +136,16 @@ button:active {
 }
 
 .carousel-previous,
-.carousel-next {
-  height: 30px;
-  width: 50px;
+.carousel-next,
+.carousel-controls button {
+  height: 250px;
+  width: 70px;
+}
+
+.carousel-controls button {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  font-size: large;
 }
 
 .nav-bar {
