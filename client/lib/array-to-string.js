@@ -3,8 +3,8 @@ export default function arrayToString(array) {
     return { error: 'invalid array' };
   }
   if (array.length === 0) {
-    return 'no diet information found';
+    return 'Sorry! No diet information found. Please be careful!';
   }
   const arrayToString = array.join(', ');
-  return `diet: ${arrayToString}`;
+  return `${arrayToString} friendly!`;
 }

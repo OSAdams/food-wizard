@@ -1,5 +1,6 @@
 import React from 'react';
 import { arrayToString } from '../lib';
+import LineBreak from './line-break';
 
 export default function recipeCard(props) {
   const { title, time, servings, diet, image, likes, id, methods } = props;
@@ -8,14 +9,36 @@ export default function recipeCard(props) {
     <div
       className="recipe-card flex f-dir-col marg-bot-2rem">
       <div className="rc-text">
-        <div onClick={methods ? methods[0] : null}>
-          <h3 className="rc-title" id={id}>{title}</h3>
+        <div className="rc-title" onClick={methods ? methods[0] : null}>
+          <p className="rc-title-text" id={id}>{title}</p>
         </div>
-        <div>
-          <ul className="li-style-none">
-            <li><p>time: { time } minutes</p></li>
-            <li><p>servings: { servings }</p></li>
-            <li><p>{ updatedDiet }</p></li>
+        <LineBreak />
+        <div className="rc-diet-information">
+          <ul className="list-style-none">
+            <li>
+              <div>
+                <p>
+                  <span className="rc-descriptions">Time Investment:</span><br/>
+                  <span className="rc-information">Roughly {time} minutes</span>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <p>
+                  <span className="rc-descriptions">Servings:</span><br/>
+                  <span className="rc-information">Feeds up to {servings}!</span>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <p>
+                  <span className="rc-descriptions">Diet Restrictions:</span><br/>
+                  <span className="rc-information">{updatedDiet}</span>
+                </p>
+              </div>
+            </li>
           </ul>
         </div>
       </div>

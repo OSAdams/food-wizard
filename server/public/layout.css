@@ -144,7 +144,6 @@
 .recipe-card {
   max-width: 375px;
   flex-direction: column-reverse;
-  align-items: center;
 }
 
 .rc-image {
@@ -152,9 +151,13 @@
   width: 375px;
 }
 
-.li-style-none {
-  margin: 0;
-  padding: 0;
+.rc-title {
+  height: 95px;
+}
+
+.line-break {
+  width: 80%;
+  margin: auto;
 }
 
 .auth-form {
