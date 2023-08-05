@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuModal from './menu-modal';
+import AppContext from '../lib/app-context';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ export default class NavBar extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   handleChange(event) {
@@ -29,6 +29,7 @@ export default class NavBar extends React.Component {
   }
 
   handleResize() {
+    const { context: { route: path, params } } = this; // eslint-disable-line
     if (window.innerWidth > 700) {
       this.setState({ showMenu: true, windowWidth: window.innerWidth });
     } else {
@@ -36,11 +37,15 @@ export default class NavBar extends React.Component {
     }
   }
 
+  // 08-05-23
   // Use window hash to update menu modal display. Huge work in progress.
+  // Unfortunately this has to be a rehaul, there's no way to just modify
+  // what I have currently. This realization has influenced a break.
 
-  handleClick() {
+  handleClick(e) {
     const { windowWidth } = this.state;
     if (windowWidth <= 700) {
+      window.location.hash += '?showModal';
       this.setState(prevState => ({
         showMenu: !prevState.showMenu
       }));
@@ -100,3 +105,5 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+NavBar.contextType = AppContext;
