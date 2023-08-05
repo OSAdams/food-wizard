@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode';
 import AppContext from './lib/app-context';
 import { parseRoute } from './lib';
 import NavBar from './components/navbar';
-import Container from './components/container';
 import Auth from './pages/auth';
 import SearchResult from './pages/search-result';
 import UnderConstruction from './pages/under-construction';
@@ -92,9 +91,9 @@ export default class App extends React.Component {
       <AppContext.Provider value={contextValue}>
         <div className="main-container flex f-justify-content-center f-dir-col">
           <NavBar />
-          <Container newClassName="page-container">
+          <div className="page-container">
             { this.renderPage() }
-          </Container>
+          </div>
         </div>
       </AppContext.Provider>
     );

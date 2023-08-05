@@ -39,11 +39,11 @@ export default class Comments extends React.Component {
     const { recipe: { recipeId } } = this.state;
     return (
       <section className="comments-section">
-        <div className="comments-section-header" style={{ textAlign: 'center' }}>
-          <h2>Comments</h2>
-        </div>
-        <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
+        <div className="comment-form-container text-align-center" style={{ marginBottom: '1rem', paddingTop: '1rem' }}>
           <CommentForm recipeId={recipeId} />
+        </div>
+        <div className="comments-section-header" style={{ textAlign: 'center', fontSize: 'larger' }}>
+          <p>Comments</p>
         </div>
         <div className="comments-container">
           <CommentCards recipeId={recipeId} />

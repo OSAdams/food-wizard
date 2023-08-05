@@ -92,7 +92,7 @@ export default class CommentForm extends React.Component {
     const token = window.localStorage.getItem('food-wizard-jwt');
     const { route: { params } } = this.context;
     const comment = params.get('newComment');
-    const newComment = comment === 'null' || comment === 'true' ? '' : comment;
+    const newComment = comment === 'null' || comment === 'true' || comment === 'false' ? '' : comment;
     this.setState({ token, newComment });
   }
 
@@ -109,7 +109,7 @@ export default class CommentForm extends React.Component {
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
           <label htmlFor="comment">
-            Type your comment:
+            Share your thoughts!
           </label>
           <textarea
               required

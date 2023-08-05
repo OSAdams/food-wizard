@@ -6,10 +6,8 @@ export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null,
-      isEditing: null
+      userComments: null
     };
-    this.updateTimestamp = this.updateTimestamp.bind(this);
   }
 
   componentDidMount() {
@@ -89,7 +87,7 @@ export default class CommentCards extends React.Component {
         </div>
       );
     });
-    return commentsMap;
+    return !userComments.length ? <div><p>Be the first to comment!</p></div> : commentsMap;
   }
 }
 

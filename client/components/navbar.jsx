@@ -13,6 +13,7 @@ export default class NavBar extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleChange(event) {
@@ -35,6 +36,8 @@ export default class NavBar extends React.Component {
     }
   }
 
+  // Use window hash to update menu modal display. Huge work in progress.
+
   handleClick() {
     const { windowWidth } = this.state;
     if (windowWidth <= 700) {
@@ -42,6 +45,10 @@ export default class NavBar extends React.Component {
         showMenu: !prevState.showMenu
       }));
     }
+  }
+
+  closeModal() {
+    this.setState(prevState => ({ showMenu: !prevState.showMenu }));
   }
 
   componentDidMount() {

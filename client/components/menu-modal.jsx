@@ -42,7 +42,7 @@ export default class MenuModal extends React.Component {
     ];
     return (
       <div className="menu-modal">
-        <ul className="menu-options">
+        <ul className="menu-options list-style-none">
           { !user
             ? <ListGenerator helperMethod={this.updateWindowHash} content={menuOptions} />
             : <ListGenerator helperMethod={this.updateWindowHash} content={authMenuOptions} />
