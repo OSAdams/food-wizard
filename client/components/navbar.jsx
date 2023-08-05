@@ -29,7 +29,6 @@ export default class NavBar extends React.Component {
   }
 
   handleResize() {
-    const { context: { route: path, params } } = this; // eslint-disable-line
     if (window.innerWidth > 700) {
       this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
     } else {
@@ -43,19 +42,30 @@ export default class NavBar extends React.Component {
   // what I have currently. This realization has influenced a break.
 
   handleClick() {
-    const { windowWidth } = this.state;
+    const { state: { windowWidth }, context: { route: { path, params } } } = this;
+    const showMenu = params.get('showMenu');
     if (windowWidth <= 700) {
-      window.location.hash += '&showModal=false';
-      this.setState(prevState => ({
-        showMenu: !prevState.showMenu
-      }));
+      if (showMenu === 'false' || !showMenu) {
+        params.set('showMenu', 'true');
+        window.location.hash = `${path}?${params.toString()}`;
+        this.setState({ showMenu: 'true' });
+      } else {
+        params.set('showMenu', 'false');
+        window.location.hash = `${path}?${params.toString()}`;
+        this.setState({ showMenu: 'false' });
+      }
     }
   }
 
   componentDidMount() {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+    const { params } = this.context.route;
+    const showMenu = params.get('showMenu');
+    if (showMenu !== 'true') this.setState({ showMenu: 'false' });
   }
+
+  // fucking menu close pls jesus.
 
   render() {
     const {

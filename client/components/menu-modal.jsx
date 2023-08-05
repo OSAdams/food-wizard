@@ -20,7 +20,9 @@ export default class MenuModal extends React.Component {
     } else if (textHash === 'sign out') {
       window.location.hash = '#sign-out';
     } else {
-      window.location.hash = textHash;
+      const { params } = this.context.route;
+      params.set('showMenu', 'false');
+      window.location.hash = `${textHash}?${params.toString()}`;
     }
   }
 

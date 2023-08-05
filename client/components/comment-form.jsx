@@ -84,8 +84,11 @@ export default class CommentForm extends React.Component {
   clearForm() {
     this.setState({ comment: '', newComment: 'null' });
     const { context: { route: { path, params } } } = this;
-    const recipeId = params.get('recipeId');
-    window.location.hash = `${path}?recipeId=${recipeId}&newComment=true&isEditing=null`;
+    const newComment = params.get('newComment');
+    if (newComment !== 'true') {
+      params.set('newComment', 'true');
+    } else { params.set('newComment', 'false'); }
+    window.location.hash = `${path}?${params.toString()}`;
   }
 
   componentDidMount() {

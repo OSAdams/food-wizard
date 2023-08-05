@@ -39,14 +39,12 @@ export default class CommentCards extends React.Component {
           username
         },
         route: {
-          path,
-          params
+          path
         }
       },
       updateTimestamp
     } = this;
     const controlsRender = (name, id, comment) => {
-      const recipeId = params.get('recipeId');
       const newComment = comment.toString();
       if (username === name) {
         return (
@@ -54,7 +52,10 @@ export default class CommentCards extends React.Component {
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {
-                   window.location.hash = `${path}?recipeId=${recipeId}&newComment=${newComment}&isEditing=${id}`;
+                   const { params } = this.context.route;
+                   params.set('isEditing', id);
+                   params.set('newComment', newComment);
+                   window.location.hash = `${path}?${params.toString()}`;
                  }
                  }
               />

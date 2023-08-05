@@ -149,6 +149,8 @@
 .rc-image {
   height: 250px;
   width: 375px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .rc-title {
