@@ -8,7 +8,7 @@ export default class NavBar extends React.Component {
     this.state = {
       keyword: '',
       windowWidth: 0,
-      showMenu: false
+      showMenu: 'false'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,9 +31,9 @@ export default class NavBar extends React.Component {
   handleResize() {
     const { context: { route: path, params } } = this; // eslint-disable-line
     if (window.innerWidth > 700) {
-      this.setState({ showMenu: true, windowWidth: window.innerWidth });
+      this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
     } else {
-      this.setState({ showMenu: false, windowWidth: window.innerWidth });
+      this.setState({ showMenu: 'false', windowWidth: window.innerWidth });
     }
   }
 
@@ -42,18 +42,14 @@ export default class NavBar extends React.Component {
   // Unfortunately this has to be a rehaul, there's no way to just modify
   // what I have currently. This realization has influenced a break.
 
-  handleClick(e) {
+  handleClick() {
     const { windowWidth } = this.state;
     if (windowWidth <= 700) {
-      window.location.hash += '?showModal';
+      window.location.hash += '&showModal=false';
       this.setState(prevState => ({
         showMenu: !prevState.showMenu
       }));
     }
-  }
-
-  closeModal() {
-    this.setState(prevState => ({ showMenu: !prevState.showMenu }));
   }
 
   componentDidMount() {
@@ -77,7 +73,7 @@ export default class NavBar extends React.Component {
           <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
         {
-          showMenu === true &&
+          showMenu === 'true' &&
           <MenuModal />
         }
         <div className="nav-search">

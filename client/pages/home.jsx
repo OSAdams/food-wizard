@@ -16,6 +16,7 @@ export default class Home extends React.Component {
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
+    window.location.hash += '?';
   }
 
   render() {
