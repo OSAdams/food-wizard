@@ -17,8 +17,7 @@ export default class App extends React.Component {
     this.state = {
       user: null,
       isAuthorizing: true,
-      route: parseRoute(window.location.hash),
-      params: null
+      route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);

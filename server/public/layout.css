@@ -189,19 +189,19 @@
 }
 
 .fr-header {
-  padding: 1rem;
+  padding: 0 1rem 1rem;
   min-width: 350px;
   max-width: 450px;
-}
-
-.fr-header h2 {
-  text-align: center;
-  margin-top: 0;
 }
 
 .fr-basic ul > li {
   width: 50%;
   text-align: center;
+}
+
+.fr-image,
+.fr-image img {
+  width: 375px;
 }
 
 div.ac-title {

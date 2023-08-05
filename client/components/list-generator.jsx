@@ -19,7 +19,7 @@ export default function ListGenerator(props) {
     }
     /*
     ###################
-    This is ugly
+    This entire thing is a huge what? Fix this. This is beyond ugly.
     ###################
     */
     if (helperMethod) {
@@ -37,7 +37,7 @@ export default function ListGenerator(props) {
     }
     /*
     #####################
-    Look into refactor
+    DO NOT FORGET TO REFACTOR
     #####################
     */
     return (

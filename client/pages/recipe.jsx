@@ -1,13 +1,13 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
 import AppContext from '../lib/app-context';
+import { dbPostRecipe } from '../lib';
 
 export default class Recipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipe: [],
-      method: null
+      recipe: []
     };
   }
 
@@ -17,17 +17,17 @@ export default class Recipe extends React.Component {
     const spoonApiId = id[0];
     fetch(`https://api.spoonacular.com/recipes/${spoonApiId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
       .then(res => res.json())
-      .then(recipe => this.setState({ recipe }))
+      .then(recipe => {
+        const { id, title } = recipe;
+        dbPostRecipe(id, title);
+        this.setState({ recipe });
+      })
       .catch(err => console.error({ error: err }));
   }
 
   render() {
     const { state: { recipe } } = this;
-    return (
-      <div className="full-recipe-container">
-        <FullRecipe recipe={ recipe } />
-      </div>
-    );
+    return <FullRecipe recipe={ recipe } />;
   }
 }
 
