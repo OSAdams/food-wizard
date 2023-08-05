@@ -1,5 +1,6 @@
 import React from 'react';
 import ListGenerator from './list-generator';
+import LineBreak from './line-break';
 
 function ContentList(props) {
   return (
@@ -7,6 +8,7 @@ function ContentList(props) {
       <ol>
         <ListGenerator content={ props.content } />
       </ol>
+      <LineBreak />
     </div>
   );
 }
