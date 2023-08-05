@@ -22,11 +22,7 @@ export default class Recipe extends React.Component {
   }
 
   render() {
-    const {
-      state: {
-        recipe
-      }
-    } = this;
+    const { state: { recipe } } = this;
     return (
       <div className="full-recipe-container">
         <FullRecipe recipe={ recipe } />

@@ -114,6 +114,13 @@ button:active {
 .list-style-none {
   color: #e2dbf0;
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fr-header > p {
+  text-align: center;
+  font-size: large;
 }
 
 .nav-menu-icon > i {

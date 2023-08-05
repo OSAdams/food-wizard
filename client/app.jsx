@@ -92,7 +92,7 @@ export default class App extends React.Component {
       <AppContext.Provider value={contextValue}>
         <div className="main-container flex f-justify-content-center f-dir-col">
           <NavBar />
-          <Container className="page-container">
+          <Container newClassName="page-container">
             { this.renderPage() }
           </Container>
         </div>
