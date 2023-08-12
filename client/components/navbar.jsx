@@ -23,9 +23,10 @@ export default class NavBar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { keyword } = this.state;
+    const { keyword, context: { route: { params } } } = this.state;
     this.setState({ keyword: '' });
-    window.location.hash = `quickSearch?keyword=${keyword}`;
+    params.set('keyword', keyword);
+    window.location.hash = `quickSearch?${params.toString()}`;
   }
 
   handleResize() {
@@ -36,36 +37,21 @@ export default class NavBar extends React.Component {
     }
   }
 
-  // 08-05-23
-  // Use window hash to update menu modal display. Huge work in progress.
-  // Unfortunately this has to be a rehaul, there's no way to just modify
-  // what I have currently. This realization has influenced a break.
-
   handleClick() {
-    const { state: { windowWidth }, context: { route: { path, params } } } = this;
-    const showMenu = params.get('showMenu');
+    const { windowWidth } = this.state;
     if (windowWidth <= 700) {
-      if (showMenu === 'false' || !showMenu) {
-        params.set('showMenu', 'true');
-        window.location.hash = `${path}?${params.toString()}`;
-        this.setState({ showMenu: 'true' });
-      } else {
-        params.set('showMenu', 'false');
-        window.location.hash = `${path}?${params.toString()}`;
-        this.setState({ showMenu: 'false' });
-      }
+      this.setState(prevState => ({
+        showMenu: !prevState.showMenu
+      }));
     }
   }
+
+  // too many things updating state? how to i condense this
 
   componentDidMount() {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
-    const { params } = this.context.route;
-    const showMenu = params.get('showMenu');
-    if (showMenu !== 'true') this.setState({ showMenu: 'false' });
   }
-
-  // fucking menu close pls jesus.
 
   render() {
     const {

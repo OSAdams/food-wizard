@@ -12,11 +12,13 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+    const { params } = this.context.route;
     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
-    window.location.hash += '?';
+    params.set('showMenu', 'false');
+    window.location.hash = `home?${params.toString()}`;
   }
 
   render() {
