@@ -23,26 +23,35 @@ export default class NavBar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { keyword, context: { route: { params } } } = this.state;
+    const { state: { keyword }, context: { route: { params } } } = this;
     this.setState({ keyword: '' });
     params.set('keyword', keyword);
     window.location.hash = `quickSearch?${params.toString()}`;
   }
 
   handleResize() {
+    const { params, path } = this.context.route;
     if (window.innerWidth > 700) {
+      params.set('showMenu', 'true');
+      window.location.hash = `${path}?${params.toString()}`;
       this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
     } else {
+      params.set('showMenu', 'false');
+      window.location.hash = `${path}?${params.toString()}`;
       this.setState({ showMenu: 'false', windowWidth: window.innerWidth });
     }
   }
 
-  handleClick() {
-    const { windowWidth } = this.state;
-    if (windowWidth <= 700) {
-      this.setState(prevState => ({
-        showMenu: !prevState.showMenu
-      }));
+  handleClick(e) {
+    const { params, path } = this.context.route; // eslint-disable-line
+    const showMenu = params.get('showMenu');
+    if (showMenu === 'false') {
+      params.set('showMenu', 'true');
+      this.setState({ showMenu: 'true' });
+      window.location.hash = `${path}?${params}`;
+    } else {
+      params.set('showMenu', 'false');
+      this.setState({ showMenu: 'false' });
     }
   }
 
@@ -63,6 +72,7 @@ export default class NavBar extends React.Component {
       handleSubmit,
       handleClick
     } = this;
+    console.log('showMenu in render: ', showMenu); // eslint-disable-line
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">
