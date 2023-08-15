@@ -1,6 +1,7 @@
 import React from 'react';
 import RecipeCard from './recipe-card';
 import dbPostRecipe from '../lib/db-post-recipe';
+import AppContext from '../lib/app-context';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -30,10 +31,14 @@ export default class Carousel extends React.Component {
   }
 
   loadRecipe(event) {
-    const { iterator } = this.state;
+    const { state: { iterator }, context: { route: { params } } } = this;
     const { recipes } = this.props;
+    params.set('showModal', 'false');
+    params.set('recipeId', recipes[iterator].id);
+    params.set('newComment', 'false');
+    params.set('isEditing', 'null');
     this.resetInterval();
-    window.location.hash = `recipes?recipeId=${recipes[iterator].id}&newComment=null&isEditing=null`;
+    window.location.hash = `recipes?${params.toString()}`;
     dbPostRecipe(recipes[iterator].id, recipes[iterator].title);
   }
 
@@ -93,3 +98,5 @@ export default class Carousel extends React.Component {
     );
   }
 }
+
+Carousel.contextType = AppContext;
