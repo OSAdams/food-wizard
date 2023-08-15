@@ -42,16 +42,17 @@ export default class NavBar extends React.Component {
     }
   }
 
-  handleClick(e) {
-    const { params, path } = this.context.route; // eslint-disable-line
+  handleClick() {
+    const { params, path } = this.context.route;
     const showMenu = params.get('showMenu');
     if (showMenu === 'false') {
       params.set('showMenu', 'true');
       this.setState({ showMenu: 'true' });
-      window.location.hash = `${path}?${params}`;
+      window.location.hash = `${path}?${params.toString()}`;
     } else {
       params.set('showMenu', 'false');
       this.setState({ showMenu: 'false' });
+      window.location.hash = `${path}?${params.toString()}`;
     }
   }
 
@@ -66,21 +67,25 @@ export default class NavBar extends React.Component {
     const {
       state: {
         keyword,
-        showMenu
+        windowWidth
+      },
+      context: {
+        route: {
+          params
+        }
       },
       handleChange,
       handleSubmit,
       handleClick
     } = this;
-    console.log('showMenu in render: ', showMenu); // eslint-disable-line
+    const showMenu = params.get('showMenu') === 'false' && windowWidth < 700 ? '' : <MenuModal />;
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">
           <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
         {
-          showMenu === 'true' &&
-          <MenuModal />
+          showMenu
         }
         <div className="nav-search">
           <form className="nav-search-form flex" onSubmit={handleSubmit}>

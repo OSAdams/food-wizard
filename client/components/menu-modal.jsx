@@ -13,14 +13,17 @@ export default class MenuModal extends React.Component {
 
   updateWindowHash(event) {
     const textHash = event.target.textContent.toLowerCase();
+    const { params } = this.context.route;
     if (textHash === 'sign up') {
-      window.location.hash = '#sign-up';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-up?${params.toString()}`;
     } else if (textHash === 'sign in') {
-      window.location.hash = '#sign-in';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-in?${params.toString()}`;
     } else if (textHash === 'sign out') {
-      window.location.hash = '#sign-out';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-out?${params.toString()}`;
     } else {
-      const { params } = this.context.route;
       params.set('showMenu', 'false');
       window.location.hash = `${textHash}?${params.toString()}`;
     }
