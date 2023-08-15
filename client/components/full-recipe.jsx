@@ -37,17 +37,19 @@ export default function FullRecipe(props) {
       <div className="fr-header">
         <p> { title } </p>
       </div>
-      <div className="fr-image">
-        <img
+      <section className="basic-recipe-data">
+        <div className="fr-image">
+          <img
         src={image}
         alt={`Image of ${title}`}
       />
-      </div>
-      <div className="fr-basic flex f-justify-content-center">
-        <ul className="list-style-none flex f-wrap-wrap">
-          <ListGenerator content={ basicContent } />
-        </ul>
-      </div>
+        </div>
+        <div className="fr-basic flex f-justify-content-center">
+          <ul className="list-style-none flex f-wrap-wrap">
+            <ListGenerator content={ basicContent } />
+          </ul>
+        </div>
+      </section>
       <div className="fr-ingredients">
         <Accordion data={ recipeContent } />
       </div>

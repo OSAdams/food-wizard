@@ -31,7 +31,7 @@ export default class NavBar extends React.Component {
 
   handleResize() {
     const { params, path } = this.context.route;
-    if (window.innerWidth > 700) {
+    if (window.innerWidth >= 768) {
       params.set('showMenu', 'true');
       window.location.hash = `${path}?${params.toString()}`;
       this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
@@ -78,7 +78,7 @@ export default class NavBar extends React.Component {
       handleSubmit,
       handleClick
     } = this;
-    const showMenu = params.get('showMenu') === 'false' && windowWidth < 700 ? '' : <MenuModal />;
+    const showMenu = params.get('showMenu') === 'false' && windowWidth < 768 ? '' : <MenuModal />;
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">

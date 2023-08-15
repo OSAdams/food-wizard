@@ -30,7 +30,7 @@ export default class MenuModal extends React.Component {
   }
 
   render() {
-    const elementClass = 'menu-li-block flex f-justify-content-center f-align-items-center';
+    const elementClass = 'menu-li-block';
     const { user } = this.context;
     const menuOptions = [
       { number: '30003333', value: 'Home', className: elementClass },
