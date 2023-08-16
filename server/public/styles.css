@@ -262,4 +262,33 @@ button:active {
   .menu-modal {
     font-size: inherit;
   }
+
+  .recipe-card {
+    background-color: var(--alt-dark-color);
+    height: 310px;
+    border-radius: 4px;
+  }
+
+  .rc-text {
+    width: 65%;
+  }
+
+  .rc-image {
+    height: 100%;
+  }
+
+  .carousel-controls {
+    transition: all 300ms ease-in-out;
+  }
+
+  .carousel-controls:hover {
+    background-color: #e2dbf045;
+  }
+
+  .carousel-previous,
+  .carousel-next,
+  .carousel-controls button {
+    height: 310px;
+    width: 70px;
+  }
 }
