@@ -1,7 +1,7 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
 import AppContext from '../lib/app-context';
-import { dbPostRecipe } from '../lib';
+import { dbPostRecipe } from '../lib'; // bye bye
 
 export default class Recipe extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class Recipe extends React.Component {
       .then(res => res.json())
       .then(recipe => {
         const { id, title } = recipe;
-        dbPostRecipe(id, title);
+        dbPostRecipe(id, title); // get this out of here
         this.setState({ recipe });
       })
       .catch(err => console.error({ error: err }));
