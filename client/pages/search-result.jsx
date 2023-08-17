@@ -1,6 +1,8 @@
 import React from 'react';
 import RecipeCard from '../components/recipe-card';
 import LoadingModal from '../components/loading-modal';
+import AppContext from '../lib/app-context';
+import { dbPostRecipe } from '../lib'; // eslint-disable-line
 
 export default class SearchResult extends React.Component {
   constructor(props) {
@@ -8,7 +10,6 @@ export default class SearchResult extends React.Component {
     this.state = {
       recipes: []
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -19,17 +20,19 @@ export default class SearchResult extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
-  handleClick(event) {
-    const { id } = event.target;
-    window.location.hash = `recipes?recipeId=${id}&newComment=false&isEditing=null`;
-  }
-
   render() {
     if (this.state.recipes.length < 1) {
       return <LoadingModal />;
     }
-    const { results } = this.state.recipes;
+    const { state: { recipes: { results } }, context: { route: { params } } } = this; // eslint-disable-line
+    console.log('results: ', results); // eslint-disable-line
     const recipeTitles = results.map(index => {
+      // const handleClick // handle click
+      // = (recipeId, recipeTitle) => {
+      //  params.set('recipeId', recipeId)
+      //  window.location.hash = `recipe?${params.toString()}`
+      //  dbPostRecipe(recipeId, recipeTitle)
+      // }
       return (
         <RecipeCard
           key={ index.id }
@@ -43,9 +46,11 @@ export default class SearchResult extends React.Component {
       );
     });
     return (
-      <div className="search-recipe-render" onClick={this.handleClick}>
+      <div className="search-recipe-render">
         { recipeTitles }
       </div>
     );
   }
 }
+
+SearchResult.contextType = AppContext;

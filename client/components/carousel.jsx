@@ -31,8 +31,19 @@ export default class Carousel extends React.Component {
   }
 
   loadRecipe(event) {
-    const { state: { iterator }, context: { route: { params } } } = this;
-    const { recipes } = this.props;
+    const {
+      state: {
+        iterator
+      },
+      context: {
+        route: {
+          params
+        }
+      },
+      props: {
+        recipes
+      }
+    } = this;
     params.set('showModal', 'false');
     params.set('recipeId', recipes[iterator].id);
     params.set('newComment', 'false');

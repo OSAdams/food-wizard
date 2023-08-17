@@ -13,6 +13,7 @@ export default class Recipe extends React.Component {
 
   componentDidMount() {
     const { props: { recipeId } } = this;
+    console.log('componentDidMount props in Recipe: ', recipeId); // eslint-disable-line
     const id = recipeId.split('&');
     const spoonApiId = id[0];
     fetch(`https://api.spoonacular.com/recipes/${spoonApiId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)

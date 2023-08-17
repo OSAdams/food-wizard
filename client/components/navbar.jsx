@@ -33,12 +33,12 @@ export default class NavBar extends React.Component {
     const { params, path } = this.context.route;
     if (window.innerWidth >= 768) {
       params.set('showMenu', 'true');
-      window.location.hash = `${path}?${params.toString()}`;
       this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
+      window.location.hash = `${path}?${params.toString()}`;
     } else {
       params.set('showMenu', 'false');
-      window.location.hash = `${path}?${params.toString()}`;
       this.setState({ showMenu: 'false', windowWidth: window.innerWidth });
+      window.location.hash = `${path}?${params.toString()}`;
     }
   }
 

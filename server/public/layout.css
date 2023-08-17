@@ -364,6 +364,10 @@ div.ac-title p,
     display: flex;
   }
 
+  .fr-ingredients > div {
+    width: 50%;
+  }
+
   .page-container {
     display: flex;
     flex-direction: column;

@@ -27,7 +27,7 @@ export default class CommentCards extends React.Component {
   }
 
   render() {
-    if (!this.state.userComments) {
+    if (!this.state.userComments || !this.context.user) {
       return <LoadingModal />;
     }
     const {

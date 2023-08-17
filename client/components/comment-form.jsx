@@ -104,10 +104,16 @@ export default class CommentForm extends React.Component {
       state: {
         newComment
       },
+      context: {
+        user
+      },
       handleChange,
       handleSubmit,
       clearForm
     } = this;
+    if (!user || !user.username) {
+      return <p>You must be logged in to comment!</p>;
+    }
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
