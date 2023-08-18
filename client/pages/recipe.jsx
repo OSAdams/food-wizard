@@ -1,7 +1,6 @@
 import React from 'react';
 import FullRecipe from '../components/full-recipe';
 import AppContext from '../lib/app-context';
-import { dbPostRecipe } from '../lib'; // bye bye
 
 export default class Recipe extends React.Component {
   constructor(props) {
@@ -19,8 +18,6 @@ export default class Recipe extends React.Component {
     fetch(`https://api.spoonacular.com/recipes/${spoonApiId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
       .then(res => res.json())
       .then(recipe => {
-        const { id, title } = recipe;
-        dbPostRecipe(id, title); // get this out of here
         this.setState({ recipe });
       })
       .catch(err => console.error({ error: err }));
