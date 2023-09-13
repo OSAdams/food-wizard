@@ -382,16 +382,30 @@ div.ac-title p,
 
 @media screen and (min-width: 1200px) {
   .full-recipe-container {
-    display: flex;
-    max-width: 1200px;
+    max-width: 1400px;
+    margin: auto;
+  }
+
+  .page-container {
+    min-width: 1200px;
+    max-width: 1400px;
   }
 
   .main-container {
     align-items: center;
   }
 
+  .fr-basic {
+    margin: 0;
+  }
+
+  .basic-recipe-data {
+    display: flex;
+    justify-content: space-around;
+  }
+
   .comments-section {
-    max-width: 90%;
     margin: auto;
+    width: 786px;
   }
 }
