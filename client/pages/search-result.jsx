@@ -20,6 +20,10 @@ export default class SearchResult extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
+  /*
+  WORK IN HERE GOOBER. CANNOT CLICK RECIPES ON SEARCH RESULT TO OPEN THE RECIPE.
+  */
+
   render() {
     if (this.state.recipes.length < 1) {
       return <LoadingModal />;
