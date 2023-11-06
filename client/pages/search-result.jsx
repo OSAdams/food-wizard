@@ -10,6 +10,7 @@ export default class SearchResult extends React.Component {
     this.state = {
       recipes: []
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -20,23 +21,24 @@ export default class SearchResult extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
-  /*
-  WORK IN HERE GOOBER. CANNOT CLICK RECIPES ON SEARCH RESULT TO OPEN THE RECIPE.
-  */
+  handleClick(event) {
+    const { id } = event.target; // eslint-disable-line
+    const { context: { route: { params } } } = this;
+    params.set('recipeId', id);
+    window.location.hash = `recipes?${params.toString()}`;
+  }
 
   render() {
     if (this.state.recipes.length < 1) {
       return <LoadingModal />;
     }
-    const { state: { recipes: { results } }, context: { route: { params } } } = this; // eslint-disable-line
-    console.log('results: ', results); // eslint-disable-line
+    const {
+      state: {
+        recipes: { results }
+      },
+      handleClick
+    } = this;
     const recipeTitles = results.map(index => {
-      // const handleClick // handle click
-      // = (recipeId, recipeTitle) => {
-      //  params.set('recipeId', recipeId)
-      //  window.location.hash = `recipe?${params.toString()}`
-      //  dbPostRecipe(recipeId, recipeTitle)
-      // }
       return (
         <RecipeCard
           key={ index.id }
@@ -46,7 +48,8 @@ export default class SearchResult extends React.Component {
           likes={ index.aggregateLikes }
           image={ index.image }
           time={ index.readyInMinutes }
-          diet={ index.diets } />
+          diet={ index.diets }
+          methods={ [handleClick] } />
       );
     });
     return (
