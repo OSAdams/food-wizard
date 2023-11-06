@@ -59,7 +59,14 @@ export default class CommentCards extends React.Component {
                  }
                  }
               />
-              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
+              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem"
+                onClick={ () => {
+                  console.log('haha'); // eslint-disable-line
+                  /* Open modal, modal will send patch and update hash to update
+                  component render */
+                }
+                }
+              />
             </p>
           </div>
         );

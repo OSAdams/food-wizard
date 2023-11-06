@@ -219,26 +219,30 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
     .catch(err => console.error(err)); // eslint-disable-line
 });
 
-app.delete('/api/comments/delete/commentId/:commentId', (req, res) => {
+app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
   const {
     user: { userId },
+    body: { deleted },
     params: { commentId }
   } = req;
   if (!userId || !parseInt(userId)) throw new ClientError(400, 'userId is required and must be a positive integer');
   if (!commentId || !parseInt(commentId)) throw new ClientError(400, 'commentId us required and must be a positive integer');
+  // Use this to delete comments. Instead of deleting the comment, just patch it. Update the deleted to TRUE
+  // and deletedBy to userId. Should be much better.
   const sql =
    `
-    DELETE FROM comments USING "commentId"
-          WHERE "commentId" = $1
-      RETURNING comment, "commentId"
+    UPDATE comments
+       SET "updatedAt" = now(),
+           deleted = $1,
+           deletedBy = $2
+     WHERE "commentId" = $3
   `;
-  const params = [commentId];
+  const params = [deleted, userId, commentId];
   db.query(params, sql)
     .then(result => {
-      const [comment] = result.rows;
-      res.status(201).json(comment);
+      res.status(201).json({ success: 'Comment has been successfully deleted.' });
     })
-    .catch(err => next(err)); // eslint-disable-line
+    .catch(err => console.error(err)); // eslint-disable-line
 });
 
 app.use(errorMiddleware);
