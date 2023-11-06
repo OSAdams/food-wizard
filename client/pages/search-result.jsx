@@ -22,7 +22,7 @@ export default class SearchResult extends React.Component {
   }
 
   handleClick(event) {
-    const { id } = event.target; // eslint-disable-line
+    const { id } = event.target;
     const { context: { route: { params } } } = this;
     params.set('recipeId', id);
     window.location.hash = `recipes?${params.toString()}`;

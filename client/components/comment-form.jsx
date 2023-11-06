@@ -40,7 +40,7 @@ export default class CommentForm extends React.Component {
       clearForm
     } = this;
     const isEditing = params.get('isEditing');
-    if (isEditing !== 'null') {
+    if (isEditing) {
       const commentId = params.get('isEditing');
       const reqBody = {
         comment
@@ -84,10 +84,9 @@ export default class CommentForm extends React.Component {
   clearForm() {
     this.setState({ comment: '', newComment: 'null' });
     const { context: { route: { path, params } } } = this;
+    params.delete('isEditing');
     const newComment = params.get('newComment');
-    if (newComment !== 'true') {
-      params.set('newComment', 'true');
-    } else { params.set('newComment', 'false'); }
+    newComment !== 'true' ? params.set('newComment', 'true') : params.set('newComment', 'false');
     window.location.hash = `${path}?${params.toString()}`;
   }
 

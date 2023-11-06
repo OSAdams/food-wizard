@@ -216,7 +216,7 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
       const [comment] = result.rows;
       res.status(201).json(comment);
     })
-    .catch(err => next(err)); // eslint-disable-line
+    .catch(err => console.error(err)); // eslint-disable-line
 });
 
 app.delete('/api/comments/delete/commentId/:commentId', (req, res) => {
