@@ -1,6 +1,7 @@
 import React from 'react';
 import LoadingModal from './loading-modal';
 import AppContext from '../lib/app-context';
+import DeleteCommentModal from './delete-comment-modal'; // eslint-disable-line
 
 export default class CommentCards extends React.Component {
   constructor(props) {
