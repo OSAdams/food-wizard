@@ -7,8 +7,10 @@ export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userComments: null
+      userComments: null,
+      showModal: false
     };
+    this.showDeleteModal = this.showDeleteModal.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +29,23 @@ export default class CommentCards extends React.Component {
     return `${date} ${time}`;
   }
 
+  showDeleteModal() {
+    this.setState({ showModal: true });
+    console.log('comment-card line 34, showDeleteModal method definition'); // eslint-disable-line
+  }
+
+  /*
+    Re-imagine how to show and hide the delete modal. You're going to have to update the state in this component. Maybe.
+    What other component can you add it to? Clicking the delete icon is showing the modal so I need
+    to be able to control the visibility of the modal in this component.
+
+    Re-asses 11-12-23
+  */
   render() {
     if (!this.state.userComments || !this.context.user) {
       return <LoadingModal />;
     }
+    console.log('render state value: ', this.state.showModal); // eslint-disable-line
     const {
       state: {
         userComments
@@ -43,7 +58,8 @@ export default class CommentCards extends React.Component {
           path
         }
       },
-      updateTimestamp
+      updateTimestamp,
+      showDeleteModal
     } = this;
     const controlsRender = (name, id, comment) => {
       const newComment = comment.toString();
@@ -61,12 +77,7 @@ export default class CommentCards extends React.Component {
                  }
               />
               <i className="fa-solid fa-trash fa-lg pad-l-r-1rem"
-                onClick={ () => {
-                  console.log('haha'); // eslint-disable-line
-                  /* Open modal, modal will send patch and update hash to update
-                  component render */
-                }
-                }
+                onClick={ showDeleteModal }
               />
             </p>
           </div>
@@ -86,6 +97,10 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimestamp(date) }</p>
             </div>
             <div />
+            {/*
+              Reading through the code, this may be where you need to impliment this feature.
+              The entirety of this component smells like a bug. Tread litely.
+            */}
             { controlsRender(username, commentId, comment) }
           </div>
           <div className="comment-body">

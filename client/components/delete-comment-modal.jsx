@@ -3,7 +3,7 @@ import React from 'react';
 export default function DeleteCommentModal(props) {
   const { props: { commentId, recipeId } } = this; // eslint-disable-line
   return (
-    <div className="delete-modal-background">
+    <div className="delete-modal-background pos-absolute">
       <div className="delete-modal">
         <div className="delete-modal-warning">
           <p>
