@@ -48,7 +48,8 @@ export default class CommentCards extends React.Component {
     console.log('render state value: ', this.state.showModal); // eslint-disable-line
     const {
       state: {
-        userComments
+        userComments,
+        showModal
       },
       context: {
         user: {
@@ -66,6 +67,7 @@ export default class CommentCards extends React.Component {
       if (username === name) {
         return (
           <div>
+            { showModal && <DeleteCommentModal /> }
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {
