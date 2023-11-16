@@ -5,12 +5,12 @@ export default function DeleteCommentModal(props) {
   return (
     <div className="delete-modal-background pos-absolute">
       <div className="delete-modal">
-        <div className="delete-modal-warning">
+        <div className="delete-modal-warning text-align-center">
           <p>
             Warning: Are you sure you want to delete your comment? This action is irreversible.
           </p>
         </div>
-        <div className="delete-modal-actions">
+        <div className="flex f-justify-content-center f-align-items-center auth-signout">
           <button className="delete-modal-cancel">
             Oops, take me back!
           </button>
