@@ -59,6 +59,9 @@ export default class CommentCards extends React.Component {
           path
         }
       },
+      props: {
+        recipeId
+      },
       updateTimestamp,
       showDeleteModal
     } = this;
@@ -67,7 +70,7 @@ export default class CommentCards extends React.Component {
       if (username === name) {
         return (
           <div>
-            { showModal && <DeleteCommentModal /> }
+            { showModal && <DeleteCommentModal recipeId={ recipeId } commentId={ id } /> }
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {

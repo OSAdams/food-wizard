@@ -301,6 +301,11 @@ div.ac-title p,
   left: 0;
 }
 
+.delete-modal {
+  width: 350px;
+  height: 300px;
+}
+
 @media screen and (min-width: 768px) {
   .menu-modal {
     position: inherit;
