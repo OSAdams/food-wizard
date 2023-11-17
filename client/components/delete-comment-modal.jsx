@@ -4,13 +4,13 @@ export default function DeleteCommentModal(props) {
   const { commentId, recipeId } = props; // eslint-disable-line
   return (
     <div className="delete-modal-background pos-absolute flex f-align-items-center">
-      <div className="delete-modal margin-auto">
+      <div className="delete-modal margin-auto flex f-dir-col f-justify-content-center">
         <div className="delete-modal-warning text-align-center">
-          <p>
+          <h3>
             Warning: Are you sure you want to delete your comment? This action is irreversible.
-          </p>
+          </h3>
         </div>
-        <div className="flex f-justify-content-center auth-signout">
+        <div className="flex f-justify-content-center delete-modal-buttons">
           <button className="delete-modal-cancel">
             Oops, take me back!
           </button>
