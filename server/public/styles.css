@@ -250,7 +250,7 @@ button:active {
 }
 
 .delete-modal-background {
-  background-color: #6441a455;
+  background-color: #6441a4a4;
 }
 
 .delete-modal {
@@ -263,7 +263,11 @@ button:active {
 }
 
 .delete-modal button {
-  width: 9rem;
+  background-color: var(--alt-dark-color);
+}
+
+.delete-modal-cancel {
+  color: var(--alt-dark-color);
 }
 
 @media screen and (min-width: 768px) {

@@ -306,12 +306,16 @@ div.ac-title p,
   height: 300px;
 }
 
-.delete-modal-warning {
-  margin-bottom: 3rem;
+.delete-modal button {
+  width: 6rem;
 }
 
-.delete-modal-buttons > button {
-  margin: 1rem;
+.delete-modal-controls {
+  width: 90%;
+}
+
+.delete-modal-warning {
+  margin-bottom: 3rem;
 }
 
 @media screen and (min-width: 768px) {

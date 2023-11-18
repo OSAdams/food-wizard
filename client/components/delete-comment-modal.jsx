@@ -30,18 +30,22 @@ export default class DeleteCommentModal extends React.Component {
               Are you sure you want to delete your comment? This action is irreversible.
             </h3>
           </div>
-          <div className="flex f-justify-content-center delete-modal-buttons">
-            <button className="delete-modal-cancel" onClick={ () => {
-              params.set('recipeId', spoonApiId);
-              params.set('newComment', 'true');
-              window.location.hash = `${path}?${params.toString()}`;
-            }
+          <div className="flex f-justify-content-center delete-modal-controls">
+            <div className="margin-auto">
+              <a className="delete-modal-cancel" onClick={ () => {
+                params.set('recipeId', spoonApiId);
+                params.set('newComment', 'true');
+                window.location.hash = `${path}?${params.toString()}`;
+              }
            }>
-              Oops, take me back!
-            </button>
-            <button className="delete-modal-confirm">
-              Yes, delete!
-            </button>
+                Oops, take me back!
+              </a>
+            </div>
+            <div>
+              <button>
+                Yes, delete!
+              </button>
+            </div>
           </div>
         </div>
       </div>

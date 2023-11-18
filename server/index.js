@@ -169,12 +169,8 @@ app.use(authorizationMiddleware);
 app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
     user: { userId },
-    body: {
-      comment
-    },
-    params: {
-      recipeId
-    }
+    body: { comment },
+    params: { recipeId }
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
   if (comment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
