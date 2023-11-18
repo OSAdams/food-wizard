@@ -13,7 +13,7 @@ export default class Comments extends React.Component {
   }
 
   componentDidMount() {
-    const { props: { recipeId } } = this;
+    const { props: { recipeId }, context: { route: { path, params } } } = this;
     let spoonApiId = recipeId;
     if (recipeId.includes('&')) {
       const id = recipeId.split('&');
@@ -27,6 +27,8 @@ export default class Comments extends React.Component {
     })
       .then(res => res.json())
       .then(recipe => {
+        params.set('newComment', 'false');
+        window.location.hash = `${path}?${params.toString()}`;
         this.setState({ recipe });
       })
       .catch(err => console.error({ error: err }));
@@ -46,7 +48,7 @@ export default class Comments extends React.Component {
           <p>Comments</p>
         </div>
         <div className="comments-container">
-          <CommentCards recipeId={recipeId} />
+          <CommentCards recipeId={recipeId} spoonApiId={this.props.recipeId} />
         </div>
       </section>
     );

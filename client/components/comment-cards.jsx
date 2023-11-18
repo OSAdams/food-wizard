@@ -56,11 +56,13 @@ export default class CommentCards extends React.Component {
           username
         },
         route: {
-          path
+          path,
+          params
         }
       },
       props: {
-        recipeId
+        recipeId,
+        spoonApiId
       },
       updateTimestamp,
       showDeleteModal
@@ -70,7 +72,7 @@ export default class CommentCards extends React.Component {
       if (username === name) {
         return (
           <div>
-            { showModal && <DeleteCommentModal recipeId={ recipeId } commentId={ id } /> }
+            { showModal && <DeleteCommentModal recipeId={ recipeId } spoonApiId={ spoonApiId } commentId={ id } path={ path } params={ params.toString() } /> }
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {
