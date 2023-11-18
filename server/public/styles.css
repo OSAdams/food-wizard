@@ -262,6 +262,10 @@ button:active {
   color: var(--main-dark-color);
 }
 
+.delete-modal button {
+  width: 9rem;
+}
+
 @media screen and (min-width: 768px) {
   .ac-title {
     opacity: 100%;

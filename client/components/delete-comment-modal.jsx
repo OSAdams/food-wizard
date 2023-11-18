@@ -25,8 +25,9 @@ export default class DeleteCommentModal extends React.Component {
       <div className="delete-modal-background pos-absolute flex f-align-items-center">
         <div className="delete-modal margin-auto flex f-dir-col f-justify-content-center">
           <div className="delete-modal-warning text-align-center">
+            <h2>Warning:</h2>
             <h3>
-              Warning: Are you sure you want to delete your comment? This action is irreversible.
+              Are you sure you want to delete your comment? This action is irreversible.
             </h3>
           </div>
           <div className="flex f-justify-content-center delete-modal-buttons">
@@ -39,7 +40,7 @@ export default class DeleteCommentModal extends React.Component {
               Oops, take me back!
             </button>
             <button className="delete-modal-confirm">
-              Delete!
+              Yes, delete!
             </button>
           </div>
         </div>
