@@ -93,10 +93,6 @@ export default class CommentCards extends React.Component {
               <p>{ updateTimeStamp(date) }</p>
             </div>
             <div />
-            {/*
-              Reading through the code, this may be where you need to impliment this feature.
-              The entirety of this component smells like a bug. Tread litely.
-            */}
             { controlsRender(username, commentId, comment) }
           </div>
           <div className="comment-body">
