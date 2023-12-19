@@ -40,7 +40,25 @@ export default class CommentForm extends React.Component {
       clearForm
     } = this;
     const isEditing = params.get('isEditing');
-    if (isEditing) {
+    if (!isEditing) {
+      const reqBody = {
+        comment
+      };
+      const data = JSON.stringify(reqBody);
+      fetch(`/api/comments/post/recipeId/${recipeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Token': token
+        },
+        user: userId,
+        body: data
+      })
+        .then(() => {
+          clearForm();
+        })
+        .catch(err => console.error({ error: err }));
+    } else {
       const commentId = params.get('isEditing');
       const reqBody = {
         comment
@@ -56,24 +74,6 @@ export default class CommentForm extends React.Component {
           user: userId,
           body: data
         })
-        .then(() => {
-          clearForm();
-        })
-        .catch(err => console.error({ error: err }));
-    } else {
-      const reqBody = {
-        comment
-      };
-      const data = JSON.stringify(reqBody);
-      fetch(`/api/comments/post/recipeId/${recipeId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Access-Token': token
-        },
-        user: userId,
-        body: data
-      })
         .then(() => {
           clearForm();
         })

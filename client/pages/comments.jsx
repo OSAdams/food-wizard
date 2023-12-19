@@ -38,7 +38,11 @@ export default class Comments extends React.Component {
     if (!this.state.recipe) {
       return <LoadingModal />;
     }
-    const { recipe: { recipeId } } = this.state;
+    const {
+      recipe: {
+        recipeId
+      }
+    } = this.state;
     return (
       <section className="comments-section">
         <div className="comment-form-container text-align-center" style={{ marginBottom: '1rem', paddingTop: '1rem' }}>

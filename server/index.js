@@ -218,7 +218,7 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
 app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
   const {
     user: { userId },
-    body: { deleted },
+    body: { comment }, // eslint-disable-line
     params: { commentId }
   } = req;
   if (!userId || !parseInt(userId)) throw new ClientError(400, 'userId is required and must be a positive integer');
@@ -229,11 +229,11 @@ app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
    `
     UPDATE comments
        SET "updatedAt" = now(),
-           deleted = $1,
-           deletedBy = $2
-     WHERE "commentId" = $3
+           deleted = TRUE,
+           deletedBy = $1
+     WHERE "commentId" = $2 OR deleted = NOT deleted
   `;
-  const params = [deleted, userId, commentId];
+  const params = [userId, commentId];
   db.query(params, sql)
     .then(result => {
       res.status(201).json({ success: 'Comment has been successfully deleted.' });
