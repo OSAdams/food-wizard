@@ -40,7 +40,7 @@ export default class CommentForm extends React.Component {
       clearForm
     } = this;
     const isEditing = params.get('isEditing');
-    if (!isEditing) {
+    if (!isEditing || isEditing === 'null' || isEditing === 'false') {
       const reqBody = {
         comment
       };

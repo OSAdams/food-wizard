@@ -25,6 +25,7 @@ export default class SearchResult extends React.Component {
     const { id } = event.target;
     const { context: { route: { params } } } = this;
     params.set('recipeId', id);
+    params.set('isEditing', 'null');
     window.location.hash = `recipes?${params.toString()}`;
   }
 

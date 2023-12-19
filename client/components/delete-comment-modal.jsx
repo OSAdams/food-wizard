@@ -5,8 +5,35 @@ export default class DeleteCommentModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCompleted: false
+      token: ''
     };
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    const { state: { token }, context: { route: { path, params }, user: { userId, username } }, props: { spoonApiId, commentId } } = this;
+    const reqBody = { username };
+    const data = JSON.stringify(reqBody);
+    fetch(`/api/comments/delete/commentId/${commentId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
+      },
+      user: userId,
+      body: data
+    })
+      .then(() => {
+        params.set('recipeId', spoonApiId);
+        params.set('newComment', 'true');
+        window.location.hash = `${path}?${params.toString()}`;
+      })
+      .catch(err => console.error({ error: err }));
+  }
+
+  componentDidMount() {
+    const token = window.localStorage.getItem('food-wizard-jwt');
+    this.setState({ token });
   }
 
   render() {
@@ -19,7 +46,8 @@ export default class DeleteCommentModal extends React.Component {
           path,
           params
         }
-      }
+      },
+      handleDelete
     } = this;
     return (
       <div className="delete-modal-background pos-absolute flex f-align-items-center">
@@ -42,7 +70,7 @@ export default class DeleteCommentModal extends React.Component {
               </a>
             </div>
             <div>
-              <button>
+              <button onClick={handleDelete}>
                 Yes, delete!
               </button>
             </div>

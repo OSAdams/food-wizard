@@ -148,7 +148,8 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
       SELECT comment,
              u.username AS username,
              comments."createdAt" as date,
-             "commentId"
+             "commentId",
+             deleted
         FROM comments
         JOIN users AS u USING ("userId")
        WHERE "recipeId" = $1
@@ -218,23 +219,22 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
 app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
   const {
     user: { userId },
-    body: { comment }, // eslint-disable-line
+    body: { username },
     params: { commentId }
   } = req;
-  if (!userId || !parseInt(userId)) throw new ClientError(400, 'userId is required and must be a positive integer');
+  if (!userId || !parseInt(userId)) throw new ClientError(400, 'authorization required');
   if (!commentId || !parseInt(commentId)) throw new ClientError(400, 'commentId us required and must be a positive integer');
-  // Use this to delete comments. Instead of deleting the comment, just patch it. Update the deleted to TRUE
-  // and deletedBy to userId. Should be much better.
+  if (!username || typeof username !== 'string') throw new ClientError(400, 'username required. username must be a string');
   const sql =
    `
     UPDATE comments
        SET "updatedAt" = now(),
            deleted = TRUE,
-           deletedBy = $1
+           "deletedBy" = $1
      WHERE "commentId" = $2 OR deleted = NOT deleted
   `;
   const params = [userId, commentId];
-  db.query(params, sql)
+  db.query(sql, params)
     .then(result => {
       res.status(201).json({ success: 'Comment has been successfully deleted.' });
     })

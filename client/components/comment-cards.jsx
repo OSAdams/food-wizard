@@ -22,7 +22,7 @@ export default class CommentCards extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
-  updateTimestamp(createdAt) {
+  updateTimeStamp(createdAt) {
     const dateTime = createdAt.split('T');
     const date = dateTime[0].slice(5);
     const time = dateTime[1].slice(0, 5);
@@ -31,21 +31,12 @@ export default class CommentCards extends React.Component {
 
   showDeleteModal() {
     this.setState({ showModal: true });
-    console.log('comment-card line 34, showDeleteModal method definition'); // eslint-disable-line
   }
 
-  /*
-    Re-imagine how to show and hide the delete modal. You're going to have to update the state in this component. Maybe.
-    What other component can you add it to? Clicking the delete icon is showing the modal so I need
-    to be able to control the visibility of the modal in this component.
-
-    Re-asses 11-12-23
-  */
   render() {
     if (!this.state.userComments || !this.context.user) {
       return <LoadingModal />;
     }
-    console.log('render state value: ', this.state.showModal); // eslint-disable-line
     const {
       state: {
         userComments,
@@ -61,10 +52,9 @@ export default class CommentCards extends React.Component {
         }
       },
       props: {
-        recipeId,
         spoonApiId
       },
-      updateTimestamp,
+      updateTimeStamp,
       showDeleteModal
     } = this;
     const controlsRender = (name, id, comment) => {
@@ -72,11 +62,10 @@ export default class CommentCards extends React.Component {
       if (username === name) {
         return (
           <div>
-            { showModal && <DeleteCommentModal recipeId={ recipeId } spoonApiId={ spoonApiId } commentId={ id } path={ path } params={ params.toString() } /> }
+            {showModal && <DeleteCommentModal commentId={ id } spoonApiId={ spoonApiId } />}
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {
-                   const { params } = this.context.route;
                    params.set('isEditing', id);
                    params.set('newComment', newComment);
                    window.location.hash = `${path}?${params.toString()}`;
@@ -93,7 +82,7 @@ export default class CommentCards extends React.Component {
       return <div />;
     };
     const commentsMap = userComments.map(commentIndex => {
-      const { commentId, username, date, comment } = commentIndex;
+      const { commentId, username, date, comment, deleted } = commentIndex;
       return (
         <div className="comment-card" key={ commentId }>
           <div className="comment-header flex f-justify-content-space-around">
@@ -101,7 +90,7 @@ export default class CommentCards extends React.Component {
               <p>{ username }</p>
             </div>
             <div className="comment-date">
-              <p>{ updateTimestamp(date) }</p>
+              <p>{ updateTimeStamp(date) }</p>
             </div>
             <div />
             {/*
@@ -112,7 +101,7 @@ export default class CommentCards extends React.Component {
           </div>
           <div className="comment-body">
             <div className="comment-content">
-              <p>{ comment }</p>
+              <p>{ deleted === true ? 'Comment has been deleted by user.' : comment }</p>
             </div>
           </div>
         </div>
