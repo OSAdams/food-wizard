@@ -23,9 +23,10 @@ CREATE TABLE public.comments (
 	"comment"   TEXT NOT NULL,
 	"recipeId"  integer NOT NULL,
 	"userId"    integer NOT NULL,
-	"upVote"    integer,
-	"downVote"  integer,
+	"upVotes"   integer,
+  "downVotes" integer,
   "createdAt" timestamptz(6) NOT NULL DEFAULT now(),
+  "updatedAt" timestamptz(6) DEFAULT now(),
 	CONSTRAINT "comments_pk" PRIMARY KEY ("commentId")
 ) WITH (
   OIDS=FALSE
@@ -35,7 +36,7 @@ CREATE TABLE public.comments (
 
 CREATE TABLE public.recipes (
 	"recipeId"     serial NOT NULL,
-	"recipeName"   TEXT NOT NULL UNIQUE,
+	"recipeName"   TEXT NOT NULL,
 	"recipeRating" integer,
 	"spoonApiId"   integer NOT NULL UNIQUE,
 	CONSTRAINT "recipes_pk" PRIMARY KEY ("recipeId")

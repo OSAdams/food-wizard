@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuModal from './menu-modal';
+import AppContext from '../lib/app-context';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class NavBar extends React.Component {
     this.state = {
       keyword: '',
       windowWidth: 0,
-      showMenu: false
+      showMenu: 'false'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,27 +23,40 @@ export default class NavBar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { keyword } = this.state;
+    const { state: { keyword }, context: { route: { params } } } = this;
     this.setState({ keyword: '' });
-    window.location.hash = `quickSearch?keyword=${keyword}`;
+    params.set('keyword', keyword);
+    window.location.hash = `quickSearch?${params.toString()}`;
   }
 
   handleResize() {
-    if (window.innerWidth > 700) {
-      this.setState({ showMenu: true, windowWidth: window.innerWidth });
+    const { params, path } = this.context.route;
+    if (window.innerWidth >= 768) {
+      params.set('showMenu', 'true');
+      this.setState({ showMenu: 'true', windowWidth: window.innerWidth });
+      window.location.hash = `${path}?${params.toString()}`;
     } else {
-      this.setState({ showMenu: false, windowWidth: window.innerWidth });
+      params.set('showMenu', 'false');
+      this.setState({ showMenu: 'false', windowWidth: window.innerWidth });
+      window.location.hash = `${path}?${params.toString()}`;
     }
   }
 
   handleClick() {
-    const { windowWidth } = this.state;
-    if (windowWidth <= 700) {
-      this.setState(prevState => ({
-        showMenu: !prevState.showMenu
-      }));
+    const { params, path } = this.context.route;
+    const showMenu = params.get('showMenu');
+    if (showMenu === 'false') {
+      params.set('showMenu', 'true');
+      this.setState({ showMenu: 'true' });
+      window.location.hash = `${path}?${params.toString()}`;
+    } else {
+      params.set('showMenu', 'false');
+      this.setState({ showMenu: 'false' });
+      window.location.hash = `${path}?${params.toString()}`;
     }
   }
+
+  // too many things updating state? how to i condense this
 
   componentDidMount() {
     this.handleResize();
@@ -53,20 +67,25 @@ export default class NavBar extends React.Component {
     const {
       state: {
         keyword,
-        showMenu
+        windowWidth
+      },
+      context: {
+        route: {
+          params
+        }
       },
       handleChange,
       handleSubmit,
       handleClick
     } = this;
+    const showMenu = params.get('showMenu') === 'false' && windowWidth < 768 ? '' : <MenuModal />;
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">
           <i className="fa-solid fa-bars" onClick={ handleClick } />
         </div>
         {
-          showMenu === true &&
-          <MenuModal />
+          showMenu
         }
         <div className="nav-search">
           <form className="nav-search-form flex" onSubmit={handleSubmit}>
@@ -93,3 +112,5 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+NavBar.contextType = AppContext;

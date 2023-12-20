@@ -2,7 +2,6 @@ import React from 'react';
 import AuthForm from '../components/auth-form';
 import AppContext from '../lib/app-context';
 import Redirect from '../components/redirect';
-import Container from '../components/container';
 
 export default class Auth extends React.Component {
   render() {
@@ -13,16 +12,16 @@ export default class Auth extends React.Component {
       : 'Create an account to get started';
     return (
       <>
-        <Container>
+        <div>
           <h3 className="text-align-center">Food Wizard</h3>
           <p className="text-align-center">{ welcomeMessage }</p>
-        </Container>
-        <Container>
+        </div>
+        <div>
           <AuthForm
           key={route.path}
           action={route.path}
           onSignIn={handleSignIn} />
-        </Container>
+        </div>
       </>
     );
   }

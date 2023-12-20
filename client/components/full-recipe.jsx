@@ -12,7 +12,8 @@ export default function FullRecipe(props) {
     analyzedInstructions,
     extendedIngredients,
     nutrition,
-    id
+    id,
+    image
   } = props.recipe;
   if (!Array.isArray(analyzedInstructions) || !props.recipe) {
     return <LoadingModal />;
@@ -32,18 +33,26 @@ export default function FullRecipe(props) {
     { number: '020', name: 'Instructions', value: directInstructions }
   ];
   return (
-    <>
+    <div className="full-recipe-container">
       <div className="fr-header">
-        <h2> { title } </h2>
+        <p> { title } </p>
+      </div>
+      <section className="basic-recipe-data">
+        <div className="fr-image">
+          <img
+        src={image}
+        alt={`Image of ${title}`}
+      />
+        </div>
         <div className="fr-basic flex f-justify-content-center">
-          <ul className="li-style-none flex f-wrap-wrap">
+          <ul className="list-style-none flex f-wrap-wrap">
             <ListGenerator content={ basicContent } />
           </ul>
         </div>
-      </div>
+      </section>
       <div className="fr-ingredients">
         <Accordion data={ recipeContent } />
       </div>
-    </>
+    </div>
   );
 }

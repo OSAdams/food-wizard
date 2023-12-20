@@ -12,7 +12,8 @@ body {
   font-family:
     Inter,
     sans-serif;
-  color: #e5e3e8;
+  color: var(--alt-light-color);
+  font-size: smaller;
 }
 
 .txt-shadow {
@@ -71,10 +72,25 @@ button:active {
 
 .recipe-card {
   background-color: #201c2b;
+  cursor: pointer;
 }
 
-.rc-text:hover {
-  cursor: pointer;
+.rc-title {
+  padding: 5px;
+}
+
+.rc-title-text {
+  text-align: center;
+  font-size: larger;
+}
+
+.rc-descriptions {
+  font-size: smaller;
+  font-weight: 500;
+}
+
+.rc-information {
+  color: var(--alt-light-color);
 }
 
 .rc-likes h2 {
@@ -91,13 +107,20 @@ button:active {
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
-.rc-image,
-.rc-shade {
-  border-radius: 50%;
+.line-break {
+  border: 1px solid var(--main-light-color);
 }
 
 .list-style-none {
   color: #e2dbf0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fr-header > p {
+  text-align: center;
+  font-size: large;
 }
 
 .nav-menu-icon > i {
@@ -105,12 +128,15 @@ button:active {
   opacity: 70%;
 }
 
-.ac-title > i,
-.nav-menu-icon > i {
+.ac-title > i {
   color: #e5e3e8;
   width: 25px;
   height: 25px;
   transition: all 300ms;
+}
+
+.ac-content {
+  font-size: smaller;
 }
 
 .nav-menu-icon > i:hover {
@@ -142,9 +168,16 @@ button:active {
 }
 
 .carousel-previous,
-.carousel-next {
-  height: 30px;
-  width: 50px;
+.carousel-next,
+.carousel-controls button {
+  height: 250px;
+  width: 70px;
+}
+
+.carousel-controls button {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  font-size: large;
 }
 
 .nav-bar {
@@ -162,6 +195,8 @@ button:active {
 
 .menu-modal {
   background-color: #232127d3;
+  transition: all 300ms;
+  font-size: x-large;
 }
 
 .menu-li-block {
@@ -214,9 +249,67 @@ button:active {
   font-size: 12px;
 }
 
-@media screen and (min-width: 700px) {
+.delete-modal-background {
+  background-color: #6441a4a4;
+}
+
+.delete-modal {
+  background-color: var(--main-light-color);
+  border-radius: 3px;
+}
+
+.delete-modal-warning {
+  color: var(--main-dark-color);
+}
+
+.delete-modal button {
+  background-color: var(--alt-dark-color);
+}
+
+.delete-modal-cancel {
+  color: var(--alt-dark-color);
+}
+
+@media screen and (min-width: 768px) {
   .ac-title {
     opacity: 100%;
     background-color: rgba(0, 0, 0, 0);
+  }
+
+  .nav-bar {
+    font-size: small;
+  }
+
+  .menu-modal {
+    font-size: inherit;
+  }
+
+  .recipe-card {
+    background-color: var(--alt-dark-color);
+    height: 310px;
+    border-radius: 4px;
+  }
+
+  .rc-text {
+    width: 65%;
+  }
+
+  .rc-image {
+    height: 100%;
+  }
+
+  .carousel-controls {
+    transition: all 300ms ease-in-out;
+  }
+
+  .carousel-controls:hover {
+    background-color: #e2dbf045;
+  }
+
+  .carousel-previous,
+  .carousel-next,
+  .carousel-controls button {
+    height: 310px;
+    width: 70px;
   }
 }

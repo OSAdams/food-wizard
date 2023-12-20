@@ -13,19 +13,24 @@ export default class MenuModal extends React.Component {
 
   updateWindowHash(event) {
     const textHash = event.target.textContent.toLowerCase();
+    const { params } = this.context.route;
     if (textHash === 'sign up') {
-      window.location.hash = '#sign-up';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-up?${params.toString()}`;
     } else if (textHash === 'sign in') {
-      window.location.hash = '#sign-in';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-in?${params.toString()}`;
     } else if (textHash === 'sign out') {
-      window.location.hash = '#sign-out';
+      params.set('showMenu', 'false');
+      window.location.hash = `sign-out?${params.toString()}`;
     } else {
-      window.location.hash = textHash;
+      params.set('showMenu', 'false');
+      window.location.hash = `${textHash}?${params.toString()}`;
     }
   }
 
   render() {
-    const elementClass = 'menu-li-block flex f-justify-content-center f-align-items-center';
+    const elementClass = 'menu-li-block';
     const { user } = this.context;
     const menuOptions = [
       { number: '30003333', value: 'Home', className: elementClass },
@@ -42,7 +47,7 @@ export default class MenuModal extends React.Component {
     ];
     return (
       <div className="menu-modal">
-        <ul className="menu-options">
+        <ul className="menu-options list-style-none">
           { !user
             ? <ListGenerator helperMethod={this.updateWindowHash} content={menuOptions} />
             : <ListGenerator helperMethod={this.updateWindowHash} content={authMenuOptions} />

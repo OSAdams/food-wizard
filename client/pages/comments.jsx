@@ -13,7 +13,7 @@ export default class Comments extends React.Component {
   }
 
   componentDidMount() {
-    const { props: { recipeId } } = this;
+    const { props: { recipeId }, context: { route: { path, params } } } = this;
     let spoonApiId = recipeId;
     if (recipeId.includes('&')) {
       const id = recipeId.split('&');
@@ -27,6 +27,8 @@ export default class Comments extends React.Component {
     })
       .then(res => res.json())
       .then(recipe => {
+        params.set('newComment', 'false');
+        window.location.hash = `${path}?${params.toString()}`;
         this.setState({ recipe });
       })
       .catch(err => console.error({ error: err }));
@@ -36,17 +38,21 @@ export default class Comments extends React.Component {
     if (!this.state.recipe) {
       return <LoadingModal />;
     }
-    const { recipe: { recipeId } } = this.state;
+    const {
+      recipe: {
+        recipeId
+      }
+    } = this.state;
     return (
       <section className="comments-section">
-        <div className="comments-section-header" style={{ textAlign: 'center' }}>
-          <h2>Comments</h2>
-        </div>
-        <div className="comment-form-container text-align-center" style={{ marginBottom: '2rem' }}>
+        <div className="comment-form-container text-align-center" style={{ marginBottom: '1rem', paddingTop: '1rem' }}>
           <CommentForm recipeId={recipeId} />
         </div>
+        <div className="comments-section-header" style={{ textAlign: 'center', fontSize: 'larger' }}>
+          <p>Comments</p>
+        </div>
         <div className="comments-container">
-          <CommentCards recipeId={recipeId} />
+          <CommentCards recipeId={recipeId} spoonApiId={this.props.recipeId} />
         </div>
       </section>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import RecipeCard from '../components/recipe-card';
 import LoadingModal from '../components/loading-modal';
+import AppContext from '../lib/app-context';
+import { dbPostRecipe } from '../lib'; // eslint-disable-line
 
 export default class SearchResult extends React.Component {
   constructor(props) {
@@ -21,14 +23,22 @@ export default class SearchResult extends React.Component {
 
   handleClick(event) {
     const { id } = event.target;
-    window.location.hash = `recipes?recipeId=${id}&newComment=false&isEditing=null`;
+    const { context: { route: { params } } } = this;
+    params.set('recipeId', id);
+    params.set('isEditing', 'null');
+    window.location.hash = `recipes?${params.toString()}`;
   }
 
   render() {
     if (this.state.recipes.length < 1) {
       return <LoadingModal />;
     }
-    const { results } = this.state.recipes;
+    const {
+      state: {
+        recipes: { results }
+      },
+      handleClick
+    } = this;
     const recipeTitles = results.map(index => {
       return (
         <RecipeCard
@@ -39,13 +49,16 @@ export default class SearchResult extends React.Component {
           likes={ index.aggregateLikes }
           image={ index.image }
           time={ index.readyInMinutes }
-          diet={ index.diets } />
+          diet={ index.diets }
+          methods={ [handleClick] } />
       );
     });
     return (
-      <div className="search-recipe-render" onClick={this.handleClick}>
+      <div className="search-recipe-render">
         { recipeTitles }
       </div>
     );
   }
 }
+
+SearchResult.contextType = AppContext;

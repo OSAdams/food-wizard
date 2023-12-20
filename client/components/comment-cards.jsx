@@ -1,15 +1,16 @@
 import React from 'react';
 import LoadingModal from './loading-modal';
 import AppContext from '../lib/app-context';
+import DeleteCommentModal from './delete-comment-modal'; // eslint-disable-line
 
 export default class CommentCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userComments: null,
-      isEditing: null
+      showModal: false
     };
-    this.updateTimestamp = this.updateTimestamp.bind(this);
+    this.showDeleteModal = this.showDeleteModal.bind(this);
   }
 
   componentDidMount() {
@@ -21,20 +22,25 @@ export default class CommentCards extends React.Component {
       .catch(err => console.error({ error: err }));
   }
 
-  updateTimestamp(createdAt) {
+  updateTimeStamp(createdAt) {
     const dateTime = createdAt.split('T');
     const date = dateTime[0].slice(5);
     const time = dateTime[1].slice(0, 5);
     return `${date} ${time}`;
   }
 
+  showDeleteModal() {
+    this.setState({ showModal: true });
+  }
+
   render() {
-    if (!this.state.userComments) {
+    if (!this.state.userComments || !this.context.user) {
       return <LoadingModal />;
     }
     const {
       state: {
-        userComments
+        userComments,
+        showModal
       },
       context: {
         user: {
@@ -45,22 +51,30 @@ export default class CommentCards extends React.Component {
           params
         }
       },
-      updateTimestamp
+      props: {
+        spoonApiId
+      },
+      updateTimeStamp,
+      showDeleteModal
     } = this;
     const controlsRender = (name, id, comment) => {
-      const recipeId = params.get('recipeId');
       const newComment = comment.toString();
       if (username === name) {
         return (
           <div>
+            {showModal && <DeleteCommentModal commentId={ id } spoonApiId={ spoonApiId } />}
             <p>
               <i className="fa-solid fa-file-pen fa-lg pad-l-r-1rem"
                  onClick={ () => {
-                   window.location.hash = `${path}?recipeId=${recipeId}&newComment=${newComment}&isEditing=${id}`;
+                   params.set('isEditing', id);
+                   params.set('newComment', newComment);
+                   window.location.hash = `${path}?${params.toString()}`;
                  }
                  }
               />
-              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem" />
+              <i className="fa-solid fa-trash fa-lg pad-l-r-1rem"
+                onClick={ showDeleteModal }
+              />
             </p>
           </div>
         );
@@ -68,7 +82,7 @@ export default class CommentCards extends React.Component {
       return <div />;
     };
     const commentsMap = userComments.map(commentIndex => {
-      const { commentId, username, date, comment } = commentIndex;
+      const { commentId, username, date, comment, deleted } = commentIndex;
       return (
         <div className="comment-card" key={ commentId }>
           <div className="comment-header flex f-justify-content-space-around">
@@ -76,20 +90,20 @@ export default class CommentCards extends React.Component {
               <p>{ username }</p>
             </div>
             <div className="comment-date">
-              <p>{ updateTimestamp(date) }</p>
+              <p>{ updateTimeStamp(date) }</p>
             </div>
             <div />
             { controlsRender(username, commentId, comment) }
           </div>
           <div className="comment-body">
             <div className="comment-content">
-              <p>{ comment }</p>
+              <p>{ deleted === true ? 'Comment has been deleted by user.' : comment }</p>
             </div>
           </div>
         </div>
       );
     });
-    return commentsMap;
+    return !userComments.length ? <div><p>Be the first to comment!</p></div> : commentsMap;
   }
 }
 

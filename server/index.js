@@ -148,7 +148,8 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
       SELECT comment,
              u.username AS username,
              comments."createdAt" as date,
-             "commentId"
+             "commentId",
+             deleted
         FROM comments
         JOIN users AS u USING ("userId")
        WHERE "recipeId" = $1
@@ -169,12 +170,8 @@ app.use(authorizationMiddleware);
 app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
     user: { userId },
-    body: {
-      comment
-    },
-    params: {
-      recipeId
-    }
+    body: { comment },
+    params: { recipeId }
   } = req;
   if (!userId) throw new ClientError(400, 'must be logged in to comment on a recipe');
   if (comment.length < 5) throw new ClientError(400, 'comment needs to exceed 5 characters');
@@ -216,7 +213,32 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
       const [comment] = result.rows;
       res.status(201).json(comment);
     })
-    .catch(err => next(err)); // eslint-disable-line
+    .catch(err => console.error(err)); // eslint-disable-line
+});
+
+app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
+  const {
+    user: { userId },
+    body: { username },
+    params: { commentId }
+  } = req;
+  if (!userId || !parseInt(userId)) throw new ClientError(400, 'authorization required');
+  if (!commentId || !parseInt(commentId)) throw new ClientError(400, 'commentId us required and must be a positive integer');
+  if (!username || typeof username !== 'string') throw new ClientError(400, 'username required. username must be a string');
+  const sql =
+   `
+    UPDATE comments
+       SET "updatedAt" = now(),
+           deleted = TRUE,
+           "deletedBy" = $1
+     WHERE "commentId" = $2 OR deleted = NOT deleted
+  `;
+  const params = [userId, commentId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json({ success: 'Comment has been successfully deleted.' });
+    })
+    .catch(err => console.error(err)); // eslint-disable-line
 });
 
 app.use(errorMiddleware);

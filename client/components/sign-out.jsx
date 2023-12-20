@@ -1,12 +1,11 @@
 import React from 'react';
-import Container from './container';
 import AppContext from '../lib/app-context';
 
 export default class SignOut extends React.Component {
   render() {
     const { handleSignOut } = this.context;
     return (
-      <Container>
+      <div>
         <h3 className="text-align-center">
           Are you sure you<br /> would like to sign out?
         </h3>
@@ -18,7 +17,7 @@ export default class SignOut extends React.Component {
             Confirm
           </button>
         </div>
-      </Container>
+      </div>
     );
   }
 }

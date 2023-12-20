@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Container({ children }) {
+export default function Container(props, { children }) {
   return (
-    <div>
+    <div className={ props.newClassName }>
       { children }
     </div>
   );

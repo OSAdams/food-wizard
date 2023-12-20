@@ -34,15 +34,31 @@ export default class CommentForm extends React.Component {
           userId
         },
         route: {
-          path,
           params
         }
       },
       clearForm
     } = this;
     const isEditing = params.get('isEditing');
-    const spoonId = params.get('recipeId');
-    if (isEditing !== 'null') {
+    if (!isEditing || isEditing === 'null' || isEditing === 'false') {
+      const reqBody = {
+        comment
+      };
+      const data = JSON.stringify(reqBody);
+      fetch(`/api/comments/post/recipeId/${recipeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Token': token
+        },
+        user: userId,
+        body: data
+      })
+        .then(() => {
+          clearForm();
+        })
+        .catch(err => console.error({ error: err }));
+    } else {
       const commentId = params.get('isEditing');
       const reqBody = {
         comment
@@ -58,61 +74,50 @@ export default class CommentForm extends React.Component {
           user: userId,
           body: data
         })
+        .then(() => {
+          clearForm();
+        })
         .catch(err => console.error({ error: err }));
-      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
-      clearForm();
-    } else {
-      const reqBody = {
-        comment
-      };
-      const data = JSON.stringify(reqBody);
-      fetch(`/api/comments/post/recipeId/${recipeId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Access-Token': token
-        },
-        user: userId,
-        body: data
-      })
-        .catch(err => console.error({ error: err }));
-      window.location.hash = `${path}?recipeId=${spoonId}&newComment=true&isEditing=null`;
-      clearForm();
     }
   }
 
   clearForm() {
-    this.setState({ comment: '' });
+    this.setState({ comment: '', newComment: 'null' });
     const { context: { route: { path, params } } } = this;
-    const recipeId = params.get('recipeId');
-    window.location.hash = `${path}?recipeId=${recipeId}&newComment=null&isEditing=null`;
+    params.delete('isEditing');
+    const newComment = params.get('newComment');
+    newComment !== 'true' ? params.set('newComment', 'true') : params.set('newComment', 'false');
+    window.location.hash = `${path}?${params.toString()}`;
   }
 
   componentDidMount() {
     const token = window.localStorage.getItem('food-wizard-jwt');
     const { route: { params } } = this.context;
-    const newComment = params.get('newComment');
+    const comment = params.get('newComment');
+    const newComment = comment === 'null' || comment === 'true' || comment === 'false' ? '' : comment;
     this.setState({ token, newComment });
   }
 
   render() {
     const {
+      state: {
+        newComment
+      },
       context: {
-        route: {
-          params
-        }
+        user
       },
       handleChange,
       handleSubmit,
       clearForm
     } = this;
-    const isEditing = params.get('isEditing');
-    const newComment = params.get('newComment');
+    if (!user || !user.username) {
+      return <p>You must be logged in to comment!</p>;
+    }
     return (
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
           <label htmlFor="comment">
-            Type your comment:
+            Share your thoughts!
           </label>
           <textarea
               required
@@ -120,14 +125,13 @@ export default class CommentForm extends React.Component {
               id="comment"
               type="text"
               name="comment"
-              onChange={ handleChange }>
-            { isEditing !== 'null' ? `${newComment}` : '' }
-          </textarea>
+              defaultValue={ newComment }
+              onChange={ handleChange } />
         </div>
         <div className="comment-buttons flex f-justify-content-space-around">
           <div>
             <button type="reset" className="clear-comment" onClick={ clearForm }>
-              Delete Comment
+              Clear Comment
             </button>
           </div>
           <div>
