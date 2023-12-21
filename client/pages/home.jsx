@@ -13,6 +13,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     const { params } = this.context.route;
+    /* Comment for sensitive information security check */
     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))

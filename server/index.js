@@ -243,6 +243,7 @@ app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
 
 app.use(errorMiddleware);
 
+/* Comment for sensitive information security check */
 app.listen(process.env.PORT, () => {
   process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
 });
