@@ -14,7 +14,6 @@ export default class SearchResult extends React.Component {
 
   componentDidMount() {
     const keyword = this.props.keyword;
-    /* Comment for sensitive information security check */
     fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${keyword}&apiKey=${process.env.SPOONACULAR_API_KEY}&number=10&addRecipeNutrition=true&instructionsRequired=true`)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))

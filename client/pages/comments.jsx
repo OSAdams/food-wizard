@@ -19,7 +19,6 @@ export default class Comments extends React.Component {
       const id = recipeId.split('&');
       spoonApiId = id[0];
     }
-    /* Comment for sensitive information security check */
     fetch(`/api/recipes/spoonApiId/${spoonApiId}`, {
       method: 'GET',
       headers: {

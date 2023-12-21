@@ -56,8 +56,6 @@ export default class NavBar extends React.Component {
     }
   }
 
-  // too many things updating state? how to i condense this
-
   componentDidMount() {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);

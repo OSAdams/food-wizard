@@ -17,11 +17,6 @@ export default function ListGenerator(props) {
         </li>
       );
     }
-    /*
-    ###################
-    This entire thing is a huge what? Fix this. This is beyond ugly.
-    ###################
-    */
     if (helperMethod) {
       return (
         <li onClick={ helperMethod } key={index.number} className={index.className}>
@@ -35,16 +30,12 @@ export default function ListGenerator(props) {
         </li>
       );
     }
-    /*
-    #####################
-    DO NOT FORGET TO REFACTOR
-    #####################
-    */
     return (
       <li key={ index.number } >
-        { !index.name
-          ? <p>{index.value}</p>
-          : <p>{index.name}: {index.value}</p>
+        {
+          !index.name
+            ? <p>{index.value}</p>
+            : <p>{index.name}: {index.value}</p>
         }
       </li>
     );

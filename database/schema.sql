@@ -27,6 +27,8 @@ CREATE TABLE public.comments (
   "downVotes" integer,
   "createdAt" timestamptz(6) NOT NULL DEFAULT now(),
   "updatedAt" timestamptz(6) DEFAULT now(),
+  "deleted" boolean DEFAULT FALSE,
+  "deletedBy" integer,
 	CONSTRAINT "comments_pk" PRIMARY KEY ("commentId")
 ) WITH (
   OIDS=FALSE
