@@ -2,7 +2,6 @@ import React from 'react';
 import RecipeCard from '../components/recipe-card';
 import LoadingModal from '../components/loading-modal';
 import AppContext from '../lib/app-context';
-import { dbPostRecipe } from '../lib'; // eslint-disable-line
 
 export default class SearchResult extends React.Component {
   constructor(props) {
