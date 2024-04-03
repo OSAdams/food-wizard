@@ -76,12 +76,9 @@ button:active {
 }
 
 .rc-title {
-  padding: 5px;
-}
-
-.rc-title-text {
   text-align: center;
   font-size: larger;
+  font-weight: normal;
 }
 
 .rc-descriptions {
@@ -109,6 +106,7 @@ button:active {
 
 .line-break {
   border: 1px solid var(--main-light-color);
+  margin-top: 1rem;
 }
 
 .list-style-none {
@@ -118,9 +116,9 @@ button:active {
   padding: 0;
 }
 
-.fr-header > p {
+.fr-header > h2 {
   text-align: center;
-  font-size: large;
+  font-weight: normal;
 }
 
 .nav-menu-icon > i {
@@ -182,6 +180,7 @@ button:active {
 
 .nav-bar {
   background-color: #232127;
+  padding: 0.7rem;
 }
 
 .nav-input {

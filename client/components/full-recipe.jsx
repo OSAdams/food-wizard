@@ -35,7 +35,7 @@ export default function FullRecipe(props) {
   return (
     <div className="full-recipe-container">
       <div className="fr-header">
-        <p> { title } </p>
+        <h2> { title } </h2>
       </div>
       <section className="basic-recipe-data">
         <div className="fr-image">
