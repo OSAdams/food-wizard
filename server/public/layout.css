@@ -112,10 +112,6 @@
 
 /* CAROUSEL RECIPE CARD RULESETS */
 
-.carousel-container {
-  max-width: 100%;
-}
-
 .carousel-controls {
   top: 0;
 }
@@ -395,12 +391,6 @@ div.ac-title p,
 
   div.ac-title {
     font-size: small;
-  }
-
-  .carousel-container {
-    width: 95%;
-    margin: auto;
-    margin-top: 2rem;
   }
 
   .full-recipe-container {
