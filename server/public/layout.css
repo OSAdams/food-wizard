@@ -36,6 +36,10 @@
   justify-content: space-around;
 }
 
+.f-justify-content-space-between {
+  justify-content: space-between;
+}
+
 .f-align-items-space-around {
   align-items: space-around;
 }
@@ -177,11 +181,6 @@
 
 .full-recipe-container {
   max-width: 450px;
-}
-
-.ac-title {
-  display: flex;
-  justify-content: space-between;
 }
 
 .fr-header {
@@ -421,7 +420,6 @@ div.ac-title p,
   }
 
   .basic-recipe-data {
-    display: flex;
     justify-content: space-around;
   }
 
