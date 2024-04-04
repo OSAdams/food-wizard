@@ -59,7 +59,7 @@ export default class Accordion extends React.Component {
     const renderDataWide = recipeInstructions.map(index => {
       return (
         <div key={ index.number }>
-          <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
+          <div className="ac-title flex f-justify-content-space-between font-light-2" onClick={() => this.handleClick(index.number)}>
             <h4>{index.name}</h4>
             <p>
               <i className="fa-solid fa-arrow-down"/>
