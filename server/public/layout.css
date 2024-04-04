@@ -154,7 +154,6 @@
 
 .rc-image {
   width: 100%;
-  height: 12rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -369,9 +368,13 @@ div.ac-title p,
   }
 
   .recipe-card {
-    width: 700px;
-    max-width: 800px;
+    width: 100%;
+    padding: 0.25rem;
     flex-direction: row-reverse;
+  }
+
+  .rc-image {
+    width: 40%;
   }
 
   /* FULL RECIPE RULESETS */
@@ -395,8 +398,7 @@ div.ac-title p,
   }
 
   .carousel-container {
-    width: 700px;
-    max-width: 800px;
+    width: 95%;
     margin: auto;
     margin-top: 2rem;
   }

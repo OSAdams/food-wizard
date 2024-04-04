@@ -285,7 +285,6 @@ button:active {
 
   .recipe-card {
     background-color: var(--alt-dark-color);
-    height: 310px;
     border-radius: 4px;
   }
 
