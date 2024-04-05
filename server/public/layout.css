@@ -112,18 +112,6 @@
 
 /* CAROUSEL RECIPE CARD RULESETS */
 
-.carousel-controls {
-  top: 0;
-}
-
-.carousel-previous {
-  left: 0;
-}
-
-.carousel-next {
-  right: 0;
-}
-
 .carousel-controls > button {
   width: 1.875rem;
 }
@@ -152,6 +140,7 @@
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
+  height: 20rem;
 }
 
 .rc-diet-information > .list-style-none {

@@ -93,13 +93,11 @@ export default class Carousel extends React.Component {
               servings={recipes[iterator].servings}
               likes={recipes[iterator].aggregateLikes}
               image={recipes[iterator].image} />
-        <div className='carousel-controls carousel-previous'>
-          <button onClick={navigateCarousel} type='button'>
+        <div className='carousel-controls flex f-justify-content-space-around'>
+          <button onClick={navigateCarousel} type='button' className='carousel-previous'>
             <i className='fa-sharp fa-solid fa-arrow-left txt-shadow' />
           </button>
-        </div>
-        <div className='carousel-controls carousel-next'>
-          <button onClick={ navigateCarousel } type='button'>
+          <button onClick={ navigateCarousel } type='button' className='carousel-next'>
             <i className='fa-sharp fa-solid fa-arrow-right txt-shadow' />
           </button>
         </div>
