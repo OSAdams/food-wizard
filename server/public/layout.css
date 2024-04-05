@@ -112,13 +112,14 @@
 
 /* CAROUSEL RECIPE CARD RULESETS */
 
-.carousel-controls > button {
-  width: 1.875rem;
+.carousel-previous,
+.carousel-next {
+  width: 50%;
 }
 
 .carousel-controls > i {
-  margin: 0;
-  padding: 0;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 /* MAIN FEATURE SECTION RULESET */
@@ -223,7 +224,7 @@ div.ac-title p,
 }
 
 .loading-modal img {
-  width: 320px;
+  width: 20rem;
 }
 
 /* AUTH FORM RULESETS */
@@ -340,10 +341,6 @@ div.ac-title p,
     margin: auto;
   }
 
-  .nav-bar {
-    max-width: 1500px;
-  }
-
   /* RECIPE CARD RULSETS */
 
   .search-recipe-render {
@@ -383,8 +380,7 @@ div.ac-title p,
   }
 
   .full-recipe-container {
-    min-width: 700px;
-    max-width: 900px;
+    width: 95%;
     margin: auto;
   }
 
@@ -416,15 +412,14 @@ div.ac-title p,
   /* FULL RECIPE RULLE SET */
 
   .full-recipe-container {
-    max-width: 1400px;
+    max-width: 87.5rem;
     margin: auto;
   }
 
   /* MAIN FEATURE SECTION RULSETS */
 
   .page-container {
-    min-width: 1200px;
-    max-width: 1400px;
+    width: 80%;
   }
 
   .main-container {
@@ -445,6 +440,19 @@ div.ac-title p,
 
   .comments-section {
     margin: auto;
-    width: 786px;
+    width: 70%;
+  }
+
+  .recipe-card,
+  .carousel-controls {
+    width: 70%;
+  }
+
+  .carousel-controls {
+    width: 70%;
+  }
+
+  .carousel-controls > button {
+    width: 50%;
   }
 }
