@@ -314,6 +314,10 @@ div.ac-title p,
   margin-bottom: 3rem;
 }
 
+.page-container::-webkit-scrollbar {
+  display: none;
+}
+
 /* MEDIA SCREEN TABLET WIDTH RULESETS */
 
 @media screen and (min-width: 768px) {
@@ -398,7 +402,6 @@ div.ac-title p,
     display: flex;
     flex-direction: column;
     max-height: calc(100vh - 4rem);
-    overflow-y: auto;
   }
 
   div.main-container > div.page-container {
