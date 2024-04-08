@@ -191,13 +191,10 @@
 }
 
 div.ac-title {
-  padding: 0.5rem;
-}
-
-.ac-title h4,
-div.ac-title p,
-.ac-title i {
-  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* MENU MODAL RULESET */
@@ -377,10 +374,6 @@ div.ac-title p,
 
   .basic-recipe-data > div {
     width: 50%;
-  }
-
-  div.ac-title {
-    font-size: small;
   }
 
   .full-recipe-container {
