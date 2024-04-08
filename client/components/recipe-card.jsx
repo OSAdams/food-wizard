@@ -9,9 +9,9 @@ export default function recipeCard(props) {
     <div
       className="recipe-card flex f-dir-col marg-bot-2rem">
       <div className="rc-text">
-        <div className="rc-title" onClick={methods ? methods[0] : null}>
-          <h2 className="rc-title-text" id={id}>{title}</h2>
-          <p className="help-text">Click this area to view the recipe!</p>
+        <div className="rc-title">
+          <h2 className="rc-title-text" onClick={methods ? methods[0] : null} id={id}>{title}</h2>
+          <p className="help-text">Click the title to view the recipe!</p>
         </div>
         <div className="rc-diet-information">
           <ul className="list-style-none">

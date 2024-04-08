@@ -35,7 +35,7 @@ export default class Comments extends React.Component {
   }
 
   render() {
-    if (!this.state.recipe) {
+    if (this.state.recipe === null) {
       return <LoadingModal />;
     }
     const {

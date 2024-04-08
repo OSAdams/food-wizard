@@ -21,11 +21,25 @@ export default class SearchResult extends React.Component {
   }
 
   handleClick(event) {
-    const { id } = event.target;
+    const { id, textContent } = event.target;
     const { context: { route: { params } } } = this;
     params.set('recipeId', id);
     params.set('isEditing', 'null');
     window.location.hash = `recipes?${params.toString()}`;
+    const reqBody = {
+      spoonApiId: id,
+      recipeName: textContent
+    };
+    const data = JSON.stringify(reqBody);
+    fetch('/api/recipes',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      })
+      .catch(err => console.error({ error: err }));
   }
 
   render() {
