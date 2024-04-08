@@ -91,6 +91,10 @@
   margin-bottom: 2rem;
 }
 
+.marg-auto {
+  margin: auto;
+}
+
 /* NAVIGATION RULESETS */
 
 .nav-bar {
@@ -183,11 +187,11 @@
 
 .fr-basic ul > li {
   width: 50%;
-  text-align: center;
 }
 
 .fr-image > img {
   width: 100%;
+  max-height: 20rem;
 }
 
 div.ac-title {
@@ -424,8 +428,9 @@ div.ac-title {
 
   /* FULL RECIPE RULESET */
 
-  .fr-basic {
-    margin: 0;
+  .fr-image > img {
+    max-height: 20rem;
+    max-width: 25rem;
   }
 
   .basic-recipe-data {

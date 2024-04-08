@@ -44,8 +44,8 @@ export default function FullRecipe(props) {
         alt={`Image of ${title}`}
       />
         </div>
-        <div className="fr-basic flex f-justify-content-center">
-          <ul className="list-style-none flex f-wrap-wrap">
+        <div className="fr-basic">
+          <ul className="list-style-none text-align-center">
             <ListGenerator content={ basicContent } />
           </ul>
         </div>
