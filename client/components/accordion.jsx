@@ -1,6 +1,5 @@
 import React from 'react';
 import ListGenerator from './list-generator';
-import LineBreak from './line-break';
 
 function ContentList(props) {
   return (
@@ -8,7 +7,6 @@ function ContentList(props) {
       <ol>
         <ListGenerator content={ props.content } />
       </ol>
-      <LineBreak />
     </div>
   );
 }
@@ -62,7 +60,7 @@ export default class Accordion extends React.Component {
       return (
         <div key={ index.number }>
           <div className="ac-title font-light-2" onClick={() => this.handleClick(index.number)}>
-            <h4>{index.name}</h4>
+            <p>{index.name}</p>
             <p>
               <i className="fa-solid fa-arrow-down"/>
             </p>

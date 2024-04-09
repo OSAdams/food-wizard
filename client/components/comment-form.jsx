@@ -117,7 +117,7 @@ export default class CommentForm extends React.Component {
       <form className="comment-form" onSubmit={ handleSubmit }>
         <div className="comment-value flex f-dir-col">
           <label htmlFor="comment">
-            Share your thoughts!
+            <h3>Share your thoughts below!</h3>
           </label>
           <textarea
               required

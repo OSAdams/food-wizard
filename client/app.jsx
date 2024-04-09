@@ -10,6 +10,7 @@ import Home from './pages/home';
 import Recipe from './pages/recipe';
 import SignOut from './components/sign-out';
 import Comments from './pages/comments';
+import LineBreak from './components/line-break';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -58,6 +59,7 @@ export default class App extends React.Component {
       return (
         <>
           <Recipe recipeId={ recipeId } />
+          <LineBreak />
           <Comments
             recipeId={ recipeId }
             key={ newComment }

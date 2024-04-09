@@ -84,9 +84,8 @@ export default class Carousel extends React.Component {
     const { recipes } = this.props;
     const { navigateCarousel, loadRecipe } = this;
     return (
-      <div className='carousel-container pos-relative'>
-        <div className='carousel-recipe-card'>
-          <RecipeCard
+      <div className='search-recipe-render'>
+        <RecipeCard
               methods={[loadRecipe]}
               title={recipes[iterator].title}
               time={recipes[iterator].readyInMinutes}
@@ -94,14 +93,11 @@ export default class Carousel extends React.Component {
               servings={recipes[iterator].servings}
               likes={recipes[iterator].aggregateLikes}
               image={recipes[iterator].image} />
-        </div>
-        <div className='carousel-controls pos-absolute carousel-previous'>
-          <button onClick={navigateCarousel} type='button'>
+        <div className='carousel-controls flex f-justify-content-space-around'>
+          <button onClick={navigateCarousel} type='button' className='carousel-previous'>
             <i className='fa-sharp fa-solid fa-arrow-left txt-shadow' />
           </button>
-        </div>
-        <div className='carousel-controls pos-absolute carousel-next'>
-          <button onClick={ navigateCarousel } type='button'>
+          <button onClick={ navigateCarousel } type='button' className='carousel-next'>
             <i className='fa-sharp fa-solid fa-arrow-right txt-shadow' />
           </button>
         </div>

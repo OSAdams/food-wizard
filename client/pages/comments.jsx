@@ -25,17 +25,24 @@ export default class Comments extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          return false;
+        }
+        return res.json();
+      })
       .then(recipe => {
         params.set('newComment', 'false');
         window.location.hash = `${path}?${params.toString()}`;
-        this.setState({ recipe });
+        setTimeout(() => {
+          this.setState({ recipe });
+        }, 500);
       })
       .catch(err => console.error({ error: err }));
   }
 
   render() {
-    if (!this.state.recipe) {
+    if (this.state.recipe === null) {
       return <LoadingModal />;
     }
     const {

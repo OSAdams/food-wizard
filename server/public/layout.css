@@ -1,4 +1,4 @@
-/* FLEX OPTIONS */
+/* FLEX BOX RULESETS */
 
 .flex {
   display: flex;
@@ -36,6 +36,10 @@
   justify-content: space-around;
 }
 
+.f-justify-content-space-between {
+  justify-content: space-between;
+}
+
 .f-align-items-space-around {
   align-items: space-around;
 }
@@ -52,6 +56,8 @@
   margin: auto;
 }
 
+/* POSITIONING RULSETS */
+
 .pos-absolute {
   position: absolute;
 }
@@ -60,7 +66,7 @@
   position: relative;
 }
 
-/* PADDING */
+/* PADDING RULSETS */
 
 .pad-1rem {
   padding: 1rem;
@@ -79,11 +85,17 @@
   padding-right: 1rem;
 }
 
+/* MARGIN RULESETS */
+
 .marg-bot-2rem {
   margin-bottom: 2rem;
 }
 
-/* nav bar */
+.marg-auto {
+  margin: auto;
+}
+
+/* NAVIGATION RULESETS */
 
 .nav-bar {
   width: 100vw;
@@ -92,67 +104,48 @@
 
 .nav-input {
   width: 11rem;
-  height: 30px;
+  height: 1.875rem;
   border-radius: 4px;
   border: none;
-  padding-left: 4px;
+  padding-left: 0.25rem;
 }
 
 .nav-search-form > div {
   margin: 0.2rem;
 }
 
-/* CAROUSEL */
+/* CAROUSEL RECIPE CARD RULESETS */
 
-.carousel-container {
-  max-width: 375px;
-}
-
-.carousel-controls {
-  top: 0;
-}
-
-.carousel-previous {
-  left: 0;
-}
-
+.carousel-previous,
 .carousel-next {
-  right: 0;
-}
-
-.carousel-controls > button {
-  width: 30px;
+  width: 50%;
 }
 
 .carousel-controls > i {
-  margin: 0;
-  padding: 0;
+  margin: 1rem;
+  padding: 1rem;
 }
 
-/* div holding components */
+/* MAIN FEATURE SECTION RULESET */
 
 .page-container {
-  max-height: calc(100vh - 3.5rem);
+  max-height: calc(100vh - 3.7rem);
   overflow-y: auto;
   width: 100vw;
 }
 
-/* recipe card */
+/* RECIPE CARD SEARCH RENDER RULESETS */
 
 .recipe-card {
-  max-width: 375px;
+  max-width: 100%;
   flex-direction: column-reverse;
 }
 
 .rc-image {
-  height: 250px;
-  width: 375px;
+  width: 100%;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.rc-title {
-  height: 95px;
+  height: 20rem;
 }
 
 .rc-diet-information > .list-style-none {
@@ -160,10 +153,14 @@
   padding-right: 2rem;
 }
 
+/* LINEBREAK COMPONENT RULESET */
+
 .line-break {
   width: 80%;
   margin: auto;
 }
+
+/* AUTH FORM RULESETS */
 
 .auth-form {
   margin-top: 3rem;
@@ -174,45 +171,37 @@
 }
 
 .auth-form input {
-  height: 30px;
+  height: 1.875rem;
 }
 
-/* full recipe */
+/* FULL RECIPE RULESETS */
 
 .full-recipe-container {
-  max-width: 450px;
-}
-
-.ac-title {
-  display: flex;
-  justify-content: space-between;
+  max-width: 100%;
 }
 
 .fr-header {
   padding: 0 1rem 1rem;
-  min-width: 350px;
-  max-width: 450px;
+  width: 100%;
 }
 
 .fr-basic ul > li {
   width: 50%;
-  text-align: center;
 }
 
-.fr-image,
-.fr-image img {
-  width: 375px;
+.fr-image > img {
+  width: 100%;
+  max-height: 20rem;
 }
 
 div.ac-title {
-  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.ac-title h4,
-div.ac-title p,
-.ac-title i {
-  margin: 0;
-}
+/* MENU MODAL RULESET */
 
 .menu-modal {
   position: fixed;
@@ -229,13 +218,17 @@ div.ac-title p,
   align-items: center;
 }
 
+/* LOADING MODAL RULESETS */
+
 .loading-modal {
   padding-top: 1rem;
 }
 
 .loading-modal img {
-  width: 320px;
+  width: 20rem;
 }
+
+/* AUTH FORM RULESETS */
 
 .auth-form label {
   margin-right: 1rem;
@@ -255,6 +248,8 @@ div.ac-title p,
 .auth-sign-out > a {
   margin-right: 1rem;
 }
+
+/* COMMENT FEATURE RULESETS */
 
 .comment-value > label {
   text-align: left;
@@ -294,6 +289,8 @@ div.ac-title p,
   padding: 0.5rem;
 }
 
+/* DELETE MODAL RULESETS */
+
 .delete-modal-background {
   top: 0;
   right: 0;
@@ -302,8 +299,8 @@ div.ac-title p,
 }
 
 .delete-modal {
-  width: 350px;
-  height: 300px;
+  width: 80%;
+  height: 18rem;
 }
 
 .delete-modal button {
@@ -318,7 +315,15 @@ div.ac-title p,
   margin-bottom: 3rem;
 }
 
+.page-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* MEDIA SCREEN TABLET WIDTH RULESETS */
+
 @media screen and (min-width: 768px) {
+  /* MENU MODAL RULESETS */
+
   .menu-modal {
     position: inherit;
     justify-content: space-around;
@@ -332,6 +337,7 @@ div.ac-title p,
     width: 5rem;
   }
 
+  /* NAVIGATION RULESETS */
   .nav-menu-icon {
     margin: auto;
   }
@@ -340,10 +346,7 @@ div.ac-title p,
     margin: auto;
   }
 
-  /* nav bar */
-  .nav-bar {
-    max-width: 1500px;
-  }
+  /* RECIPE CARD RULSETS */
 
   .search-recipe-render {
     display: flex;
@@ -351,13 +354,17 @@ div.ac-title p,
     justify-content: center;
   }
 
-  /* recipe card  */
-
   .recipe-card {
-    width: 700px;
-    max-width: 800px;
+    width: 100%;
+    padding: 0.25rem;
     flex-direction: row-reverse;
   }
+
+  .rc-image {
+    width: 40%;
+  }
+
+  /* FULL RECIPE RULESETS */
 
   .fr-header {
     margin: auto;
@@ -365,27 +372,23 @@ div.ac-title p,
 
   .basic-recipe-data {
     display: flex;
-  }
-
-  div.ac-title {
-    font-size: small;
-  }
-
-  .carousel-container {
-    width: 700px;
-    max-width: 800px;
+    width: 95%;
     margin: auto;
-    margin-top: 2rem;
+  }
+
+  .basic-recipe-data > div {
+    width: 50%;
   }
 
   .full-recipe-container {
-    min-width: 700px;
-    max-width: 900px;
+    width: 95%;
     margin: auto;
   }
 
   .fr-ingredients {
     display: flex;
+    margin: auto;
+    width: 95%;
   }
 
   .fr-ingredients > div {
@@ -395,8 +398,7 @@ div.ac-title p,
   .page-container {
     display: flex;
     flex-direction: column;
-    min-width: 768px;
-    max-width: 1000px;
+    max-height: calc(100vh - 4rem);
   }
 
   div.main-container > div.page-container {
@@ -404,32 +406,54 @@ div.ac-title p,
   }
 }
 
+/* MEDIA SCREEN DESKTOP RULESETS */
+
 @media screen and (min-width: 1200px) {
+  /* FULL RECIPE RULLE SET */
+
   .full-recipe-container {
-    max-width: 1400px;
+    max-width: 87.5rem;
     margin: auto;
   }
 
+  /* MAIN FEATURE SECTION RULSETS */
+
   .page-container {
-    min-width: 1200px;
-    max-width: 1400px;
+    width: 80%;
   }
 
   .main-container {
     align-items: center;
   }
 
-  .fr-basic {
-    margin: 0;
+  /* FULL RECIPE RULESET */
+
+  .fr-image > img {
+    max-height: 20rem;
+    max-width: 25rem;
   }
 
   .basic-recipe-data {
-    display: flex;
     justify-content: space-around;
   }
 
+  /* COMMENT SECTION RULESET */
+
   .comments-section {
     margin: auto;
-    width: 786px;
+    width: 70%;
+  }
+
+  .recipe-card,
+  .carousel-controls {
+    width: 70%;
+  }
+
+  .carousel-controls {
+    width: 70%;
+  }
+
+  .carousel-controls > button {
+    width: 50%;
   }
 }
