@@ -43,9 +43,6 @@ export default class CommentCards extends React.Component {
         showModal
       },
       context: {
-        user: {
-          username
-        },
         route: {
           path,
           params
@@ -59,7 +56,8 @@ export default class CommentCards extends React.Component {
     } = this;
     const controlsRender = (name, id, comment) => {
       const newComment = comment.toString();
-      if (username === name) {
+      if (!this.context.user.username) return <div />;
+      if (this.context.user.username === name) {
         return (
           <div>
             {showModal && <DeleteCommentModal commentId={ id } spoonApiId={ spoonApiId } />}
@@ -79,7 +77,6 @@ export default class CommentCards extends React.Component {
           </div>
         );
       }
-      return <div />;
     };
     const commentsMap = userComments.map(commentIndex => {
       const { commentId, username, date, comment, deleted } = commentIndex;
