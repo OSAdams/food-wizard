@@ -77,10 +77,13 @@ export default class NavBar extends React.Component {
       handleClick
     } = this;
     const showMenu = params.get('showMenu') === 'false' && windowWidth < 768 ? '' : <MenuModal />;
+    const showIcon = windowWidth > 768 ? '' : <i className="fa-solid fa-bars" onClick={handleClick} />;
     return (
       <div className="nav-bar flex">
         <div className="nav-menu-icon flex">
-          <i className="fa-solid fa-bars" onClick={ handleClick } />
+          {
+            showIcon
+          }
         </div>
         {
           showMenu
