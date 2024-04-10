@@ -1,11 +1,13 @@
 import React from 'react';
+import InvalidAuthorization from './invalid-authorization-modal';
 
 export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      isValid: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,9 +29,13 @@ export default class AuthForm extends React.Component {
       body: JSON.stringify(state)
     };
     fetch(`/api/auth/${action}`, req)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) this.setState({ isValid: false });
+        return res.json();
+      })
       .then(result => {
         if (action === 'sign-up') {
+          this.setState({ isValid: null });
           window.location.hash = 'sign-in';
         } else if (result.user && result.token) {
           onSignIn(result);
@@ -39,7 +45,7 @@ export default class AuthForm extends React.Component {
   }
 
   render() {
-    const { props: { action }, handleChange, handleSubmit } = this;
+    const { props: { action }, handleChange, handleSubmit, state: { isValid } } = this;
     const alternateActionHref = action === 'sign-up'
       ? '#sign-in'
       : '#sign-up';
@@ -82,6 +88,7 @@ export default class AuthForm extends React.Component {
             { submitButtonText }
           </button>
         </div>
+        {isValid === false && <InvalidAuthorization /> }
       </form>
     );
   }
