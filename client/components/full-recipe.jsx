@@ -34,9 +34,6 @@ export default function FullRecipe(props) {
   ];
   return (
     <div className="full-recipe-container">
-      <div className="fr-header">
-        <h2> { title } </h2>
-      </div>
       <section className="basic-recipe-data">
         <div className="fr-image">
           <img
@@ -45,6 +42,9 @@ export default function FullRecipe(props) {
       />
         </div>
         <div className="fr-basic">
+          <div className="fr-header">
+            <h1> {title} </h1>
+          </div>
           <ul className="list-style-none text-align-center">
             <ListGenerator content={ basicContent } />
           </ul>

@@ -123,9 +123,8 @@ button:active {
   padding: 0;
 }
 
-.fr-header > h2 {
+.fr-header {
   text-align: center;
-  font-weight: normal;
 }
 
 .nav-menu-icon > i {
@@ -256,6 +255,18 @@ button:active {
 
 .delete-modal-cancel {
   color: var(--alt-dark-color);
+}
+
+/* INVALID LOGIN OR INVALID REGISTER MODAL */
+
+.no-auth-container {
+  color: var(--alt-dark-color);
+  background-color: var(--main-light-color);
+  padding: 2rem;
+}
+
+.no-auth-container p {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
