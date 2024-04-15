@@ -76,7 +76,7 @@ npm install
 
 #### Create the database
 
-1. Start PostgreSQL
+1. Start PostgreSQL server
 ```bash
 sudo service postgresql start
 ```
@@ -84,9 +84,13 @@ sudo service postgresql start
 ```bash
 createdb name-of-databse
 ```
-3. Copy the `.env.example` file and name it to `.env`
-4. Open the `.env` file and update the `TOKEN_SECRET` to any 20 character string value. This is used to hash the users password in our database. Upper case, lower case, and numbers only.
-5. When you obtain your Spoonacular API key, update the `SPOONACULAR_API_KEY` value in the `.env` file with your own Spoonacular API key.
+3. Start the database
+```bash
+pgweb --db=foodWizard
+```
+4. Copy the `.env.example` file and name it to `.env`
+5. Open the `.env` file and update the `TOKEN_SECRET` to any 20 character string value. This is used to hash the users password in our database. Upper case, lower case, and numbers only.
+6. When you obtain your Spoonacular API key, update the `SPOONACULAR_API_KEY` value in the `.env` file with your own Spoonacular API key.
 
 #### Start the development servers
 
@@ -95,16 +99,12 @@ createdb name-of-databse
 ```bash
 release: npm run prod:db:import
 ```
-2. In the same terminal, type in this command and hit enter
-```bash
-pgweb --db=foodWizard
-```
-3. In a seperate terminal, start all the development servers with the `"dev"` scripts
+2. In a seperate terminal, start all the development servers with the `"dev"` scripts
 ```bash
 npm run dev
 ```
-4. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where theservers are running.
-5. To turn off your postgresql server, copy and paste the command below in your terminal
+3. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where theservers are running.
+4. To turn off your postgresql server, copy and paste the command below in your terminal
 ```bash
 sudo service postgresql stop
 ```
