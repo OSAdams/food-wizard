@@ -30,9 +30,9 @@ Try the application live at [food-wizard.osastack.dev](https://food-wizard.osast
 
 - User can cycle through a carousel of random recipes
 - User can search for recipes
-- User can view a fulle recipe
+- User can view a full recipe
 - User can register an account
-- User can sign in and out
+- User can sign in and sign out
 - User can view comments on recipes
 - User can comment on a recipe
 - User can edit their comment
@@ -95,12 +95,16 @@ createdb name-of-databse
 ```bash
 release: npm run prod:db:import
 ```
-2. In a seperate terminal, start all the development servers with the `"dev"` scripts
+2. In the same terminal, type in this command and hit enter
+```bash
+pgweb --db=foodWizard
+```
+3. In a seperate terminal, start all the development servers with the `"dev"` scripts
 ```bash
 npm run dev
 ```
-3. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where theservers are running.
-4. To turn off your postgresql server, copy and paste the command below in your terminal
+4. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where theservers are running.
+5. To turn off your postgresql server, copy and paste the command below in your terminal
 ```bash
 sudo service postgresql stop
 ```
