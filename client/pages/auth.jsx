@@ -13,7 +13,7 @@ export default class Auth extends React.Component {
     return (
       <>
         <div>
-          <h3 className="text-align-center">Food Wizard</h3>
+          <h1 className="text-align-center">Sign In or Register</h1>
           <p className="text-align-center">{ welcomeMessage }</p>
         </div>
         <div>

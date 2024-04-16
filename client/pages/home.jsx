@@ -30,7 +30,7 @@ export default class Home extends React.Component {
     return (
       <>
         <div>
-          <h2 className="text-align-center">Food Wizard</h2>
+          <h1 className="text-align-center">Food Wizard</h1>
           <p className="text-align-center">{ user ? `Welcome ${user.username}!` : 'Welcome!' }</p>
           <p className="text-align-center">Cycle through the carousel or<br />search using keywords!</p>
         </div>

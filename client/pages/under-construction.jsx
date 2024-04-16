@@ -4,6 +4,7 @@ export default function UnderConstruction(props) {
   const image = 'https://i.imgur.com/HXEpouw.png';
   return (
     <div className='loading-modal'>
+      <h1>Page Under Construction</h1>
       <div>
         <img src={ image } alt='Under Construction Sign' />
       </div>
