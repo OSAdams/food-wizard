@@ -56,7 +56,7 @@ app.post('/api/recipes', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const [recipes] = result.rows;
-      res.status(201).json(recipes);
+      res.status(200).json(recipes);
     })
     .catch(err => next(err));
 });
@@ -79,7 +79,7 @@ app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
       if (!recipeId) {
         throw new ClientError(404, 'recipeId doesn\'t exist');
       }
-      res.status(201).json(recipeId);
+      res.status(200).json(recipeId);
     })
     .catch(err => next(err));
 });
@@ -160,7 +160,7 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
     .then(result => {
       const comments = result.rows;
       if (!comments) throw new ClientError(404, 'there are no current comments for this recipe');
-      res.status(201).json(comments);
+      res.status(200).json(comments);
     })
     .catch(err => next(err));
 });
@@ -185,7 +185,7 @@ app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const [comments] = result.rows;
-      res.status(201).json(comments);
+      res.status(200).json(comments);
     })
     .catch(err => next(err));
 });
@@ -211,7 +211,7 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
   db.query(sql, params)
     .then(result => {
       const [comment] = result.rows;
-      res.status(201).json(comment);
+      res.status(200).json(comment);
     })
     .catch(err => console.error(err)); // eslint-disable-line
 });
