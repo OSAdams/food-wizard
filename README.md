@@ -57,12 +57,12 @@ Try the application live at [food-wizard.osastack.dev](https://food-wizard.osast
 1. Open your GitBash terminal
 2. Copy the *HTTPS* code below
 ```bash
-https://github.com/OSAdams/final-project.git
+https://github.com/OSAdams/food-wizard.git
 ```
 3. In your terminal, clone the repository
 ```bash
-git clone https://github.com/OSAdams/final-project.git
-cd final-project
+git clone https://github.com/OSAdams/food-wizard.git
+cd food-wizard
 ```
 
 ### Run and test project setup
@@ -82,7 +82,7 @@ sudo service postgresql start
 ```
 2. Create database
 ```bash
-createdb name-of-databse
+createdb foodWizard
 ```
 3. Start the database
 ```bash
