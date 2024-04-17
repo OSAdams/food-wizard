@@ -68,6 +68,7 @@ export default class SearchResult extends React.Component {
     });
     return (
       <div className="search-recipe-render">
+        <h1 className="text-align-center">Search results for { this.props.keyword }</h1>
         { !results.length ? <h2 className="marg-auto text-align-center">Not found! Use a different search string</h2> : recipeTitles }
       </div>
     );
