@@ -279,6 +279,11 @@ button:active {
     font-size: small;
   }
 
+  .home-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
   .menu-modal {
     font-size: inherit;
   }
