@@ -2,6 +2,10 @@
 
 A full stack JavaScript web application for people who want to find and share recipes.
 
+## MAJOR UPDATES INCOMING 5/13/2024
+
+I am converting this application using React Hooks and TypeScript. There will be major UI changes, major code base changes, and and awesome learning experience. I will do my best to document changes, adding readme's accross the application. The current class component structure is not suitable for efficiency, and it has a nasty bug stink. I do not have a TBD date. Feel free to push commits and contribute!
+
 ## Why I built this
 
 As a former chef, I wanted to build an application that provided straight forward recipes. Commenting on recipes allows users to share recipe modifications successes and failures. This will provide immediate recipe feedback for the user to utilize in their decision to use the recipe!
