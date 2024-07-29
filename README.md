@@ -1,162 +1,139 @@
-# Food Wizard
+# full-stack-project
 
-A full stack JavaScript web application for people who want to find, create, critique, and share recipes!
+A full stack TypeScript solo project.
 
-## Current Work In Progress
+## Getting Started
 
-This application is in the beginning stages of refactor into TypeScript. I'm debating on using Python as server side code to impliment AI features. Please stay tuned to criticize my updates to help build a better product!
+---
 
-## Why I built this
+### Use this template to create a new repo on your GitHub account
 
-As a former chef, I wanted to build an application that provided straight forward recipes. Commenting on recipes allows users to share recipe modification successes and failures. This will provide immediate recipe feedback for the user to utilize in their decision to use the recipe!
+1. Click the green `Use this template` button, select `Create a new repository`
+   1. Under `Owner` select your username
+   1. Give your repository a name. Name it after your application. The name `full-stack-project` is _not_ a good name.
+   1. (Optional) Add a description
+   1. Leave repository as `Public`
+   1. **DO NOT** Include all branches
+   1. Click the green `Create repository from template` button
 
-## Technologies Used
+---
 
-- [React.js](https://react.dev/)
-- [Webpack](https://webpack.js.org/)
-- [Express](https://expressjs.com/)
-- [Node.js](https://nodejs.org/en)
-- [PostgreSQL](https://www.postgresql.org/)
-- [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [Dokku](https://dokku.com/)
-- [AWS](https://aws.amazon.com/)
-- [Spoonacular](https://spoonacular.com/)
+### Clone Newly created repo into `lfz-code`
 
-## Live Demo
+1. From your newly created repo on GitHub, click the green `<> Code` button, then copy **SSH** URL
+1. Open `lfz-code`, click on blue `><` button in bottom left of `lfz-code`
+   1. Select `Clone Repository in Container Volume...`
+   1. Paste **SSH** URL for your repo, click `Clone git repository from URL`
 
-Try the application live at [food-wizard.osastack.dev](https://food-wizard.osastack.dev)
-
-### Preview
-
-<img src="server/public/food-wizard-preview.gif" width=45%>
-
-### Current Features
-
-- User can cycle through a carousel of random recipes
-- User can search for recipes
-- User can view a full recipe
-- User can register an account
-- User can sign in and sign out
-- User can view comments on recipes
-- User can comment on a recipe
-- User can edit their comment
-- User can delete their comment
-
-## Development
-
-### Clone the Repository
-
-#### LearningFuze vscode
-
-1. Copy the link below
-  ```bash
-  git@github.com:OSAdams/food-wizard.git
-  ```
-2. Clone the repository by clicking the blue icon on the bottem left of your vscode
-3. Click "**Clone Repository in Container Volume**"
-4. Paste the link you have just copied and hit enter!
-
-#### GitBash
-
-1. Open your GitBash terminal
-2. Copy the *HTTPS* code below
-```bash
-https://github.com/OSAdams/food-wizard.git
-```
-3. In your terminal, clone the repository
-```bash
-git clone https://github.com/OSAdams/food-wizard.git
-cd food-wizard
-```
+---
 
 ### Run and test project setup
 
 #### Getting Started
 
-1. Install all dependencies with NPM
-```bash
-npm install
-```
+1. Install all dependencies with `npm install`.
 
 #### Create the database
 
-1. Start PostgreSQL server
-```bash
-sudo service postgresql start
-```
-2. Create database
-```bash
-createdb foodWizard
-```
-3. Start the database
-```bash
-pgweb --db=foodWizard
-```
-4. Copy the `.env.example` file and name it to `.env`
-5. Open the `.env` file and update the `TOKEN_SECRET` to any 20 character string value. This is used to hash the users password in our database. Upper case, lower case, and numbers only.
-6. When you obtain your Spoonacular API key, update the `SPOONACULAR_API_KEY` value in the `.env` file with your own Spoonacular API key.
+If your project will be using a database, create it now.
+
+1. Start PostgreSQL
+   ```sh
+   sudo service postgresql start
+   ```
+1. Create database (replace `name-of-database` with a name of your choosing, such as the name of your app)
+   ```sh
+   createdb name-of-database
+   ```
+1. In the `server/.env` file, in the `DATABASE_URL` value, replace `changeMe` with the name of your database, from the last step
+1. While you are editing `server/.env`, also change the value of `TOKEN_SECRET` to a custom value, without spaces.
+1. Make the same changes to `server/.env.example`.
+
+If your project will _not_ be using a database, edit `package.json` to remove the `dev:db` script.
 
 #### Start the development servers
 
-1. Open your `Procfile` and copy/paste the line below *above* `web: npm start`
-    - This command clears the database, you can remove it in the future
-```bash
-release: npm run prod:db:import
-```
-2. In a seperate terminal, start all the development servers with the `"dev"` scripts
-```bash
-npm run dev
-```
-3. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where theservers are running.
-4. To turn off your postgresql server, copy and paste the command below in your terminal
-```bash
-sudo service postgresql stop
-```
+1. Start all the development servers with the `"dev"` script:
+   ```sh
+   npm run dev
+   ```
+1. Later, when you wish to stop the development servers, type `Ctrl-C` in the terminal where the servers are running.
 
 #### Verify the client
 
-1. A React app has already been created for you
-2. Take a minute to look over the code in `client/components/app.jsx` to get an idea of what it is doing.
-3. Go to your app in your browers, you should see the home page!
+1. A React app has already been created for you.
+1. Take a minute to look over the code in `client/src/App.tsx` to get an idea of what it is doing.
+1. Go to the app in your browser. You should see the message from the server below the React logo, and in the browser console.
+   ![](md.assets/client-server.png)
+1. If you see the message from the server in your browser you are good to go, your client and server are communicating.
 
 #### Set up the database
 
-1. In a seperate terminal, run `npm run db:import` to create your tables
-2. At this point your database is setup and you are good to start using it. However there is no data in your database, which isn&apos;t necessarily a bad thing. All you need to do is register an account using the sign-up feature!
+1. In your browser navigate to the site you used for your database design.
+1. Export your database as PostgreSQL, this should generate the SQL code for creating your database tables.
+   - Reach out to an instructor if you have any issues with this step
+1. Copy the generated SQL code and paste it into `database/schema.sql` below the preexisting sql code in the file. The end result should look something like: _(You will likely have more tables)_
 
-## Work in Progress
+   ```SQL
+   set client_min_messages to warning;
 
-### Latest Updates
+   -- DANGER: this is NOT how to do it in the real world.
+   -- `drop schema` INSTANTLY ERASES EVERYTHING.
+   drop schema "public" cascade;
 
-#### Readme
+   create schema "public";
 
-- Initial Readme v1 release
+   create table "todos" (
+       "todoId"      serial PRIMARY KEY,
+       "task"        text not null,
+       "isCompleted" boolean not null,
+       "createdAt"   timestamptz not null DEFAULT now(),
+       "updatedAt"   timestamptz not null DEFAULT now()
+   );
+   ```
 
-#### Bugs
+1. In a separate terminal, run `npm run db:import` to create your tables
+1. Use `psql` to verify your tables were created successfully (see [LFZ Database Guide](https://lms.learningfuze.com/code-guides/Learning-Fuze/curriculum/database) for tips). Your database and tables should be listed; if not, stop here and reach out to an instructor for help
+1. At this point your database is setup and you are good to start using it. However there is no data in your database, which isn't necessarily a bad thing, but if you want some starting data in your database you need to add insert statements into the `database/data.sql` file. You can add whatever starting data you need/want. Here is an example:
+   ```SQL
+   insert into "todos" ("task", "isCompleted")
+   values
+       ('Learn to code', false),
+       ('Build projects', false),
+       ('Get a job', false);
+   ```
+1. After any changes to `database/schema.sql` or `database/data.sql` re-run the `npm run db:import` command to update your database. Use `psql` to verify your changes were successfully applied.
 
-- Comment card loading modal infinite render. Inconsistent on rendering "Be the first to comment" and loading modal
-- Window hashing causing forward and backward button page rendering errors
+## Deployment
 
-#### UI
+Once your template is set up and functional, deploy it. This will get all the deployment issues ironed out early. During development, you should re-deploy frequently to make sure that your code works properly in your production environment. Deployment instructions can be found [HERE](https://github.com/Learning-Fuze/lfz-portfolios/tree/master/deploy-to-ec2)
 
-- Element sizing updates for better UI Responsiveness
-- Update navbar sizing, padding, and flex properties
-- Update full recipe render
-- Update carousel button interaction and location
+---
 
-### Future Updates
+### Available `npm` commands explained
 
-#### Features
+Below is an explanation of all included `npm` commands in the root `package.json`. Several are only used for deployment purposes and should not be necessary for development.
 
-- User can save a recipe
-- User can create a recipe
-- User can modify a recipe
-- User can check boxes to keep track of ingredients
-- User can check boxes to keep track of instructions
-- User can share a recipe
-
-#### UI
-
-- Remove carousel feature, create an accordion list of recently viewed recipes
-- If user isn't signed in, the accordion list of recipes will be randomized
+1. `start`
+   - The `start` script starts the Node server in `production` mode, without any file watchers.
+1. `build`
+   - The `build` script executes `npm run build` in the context of the `client` folder. This builds your React app for production. This is used during deployment, and not commonly needed during development.
+1. `db:import`
+   - The `db:import` script executes `database/import.sh`, which executes the `database/schema.sql` and `database/data.sql` files to build and populate your database.
+1. `dev`
+   - Starts all the development servers.
+1. `lint`
+   - Runs ESLint against all the client and server code.
+1. Not directly used by developer
+   1. `install:*`
+   - These scripts install dependencies in the `client` and `server` folders, and copy `.env.example` to `.env` if it doesn't already exist.
+   1. `dev:*`
+   - These scripts start the individual development servers.
+   1. `lint:*`
+   - These scripts run lint in the client and server directories.
+   1. `postinstall`
+      - The `postinstall` script is automatically run when you run `npm install`. It is executed after the dependencies are installed. Specifically for this project the `postinstall` script is used to install the `client` and `server` dependencies.
+   1. `prepare`
+      - The `prepare` script is similar to `postinstall` — it is executed before `install`. Specifically for this project it is used to install `husky`.
+   1. `deploy`
+      - The `deploy` script is used to deploy the project by pushing the `main` branch to the `pub` branch, which triggers the GitHub Action that deploys the project.
