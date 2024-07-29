@@ -1,6 +1,6 @@
 # Food Wizard
 
-A full stack JavaScript web application for people who want to find and share recipes.
+A full stack JavaScript web application for people who want to find, create, critique, and share recipes!
 
 ## Current Work In Progress
 
@@ -8,14 +8,15 @@ This application is in the beginning stages of refactor into TypeScript. I'm deb
 
 ## Why I built this
 
-As a former chef, I wanted to build an application that provided straight forward recipes. Commenting on recipes allows users to share recipe modifications successes and failures. This will provide immediate recipe feedback for the user to utilize in their decision to use the recipe!
+As a former chef, I wanted to build an application that provided straight forward recipes. Commenting on recipes allows users to share recipe modification successes and failures. This will provide immediate recipe feedback for the user to utilize in their decision to use the recipe!
 
 ## Technologies Used
 
 - [React.js](https://react.dev/)
 - [Webpack](https://webpack.js.org/)
+- [Express](https://expressjs.com/)
 - [Node.js](https://nodejs.org/en)
-- [MongoDB](https://www.mongodb.com/)
+- [PostgreSQL]([https://www.mongodb.com/](https://www.postgresql.org/))
 - [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Dokku](https://dokku.com/)
