@@ -16,7 +16,7 @@ As a former chef, I wanted to build an application that provided straight forwar
 - [Webpack](https://webpack.js.org/)
 - [Express](https://expressjs.com/)
 - [Node.js](https://nodejs.org/en)
-- [PostgreSQL]([https://www.mongodb.com/](https://www.postgresql.org/))
+- [PostgreSQL](https://www.postgresql.org/)
 - [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Dokku](https://dokku.com/)
