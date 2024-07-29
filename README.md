@@ -51,7 +51,7 @@ Try the application live at [food-wizard.osastack.dev](https://food-wizard.osast
 
 1. Copy the link below
   ```bash
-  git@github.com:OSAdams/final-project.git
+  git@github.com:OSAdams/food-wizard.git
   ```
 2. Clone the repository by clicking the blue icon on the bottem left of your vscode
 3. Click "**Clone Repository in Container Volume**"
