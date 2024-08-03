@@ -2,9 +2,12 @@
 
 A full stack JavaScript web application for people who want to find, create, critique, and share recipes!
 
-## Current Work In Progress
+## Latest Update
 
-This application is in the beginning stages of refactor into TypeScript. I'm debating on using Python as server side code to impliment AI features. Please stay tuned to criticize my updates to help build a better product!
+03-08-2024
+This application will be archived after refactoring a few components and completing CRUD features for users to post recipes.
+
+I would like to keep this tech stack with its Class Component structure instead of refactoring this project into TypeScript. I will be starting a new project within a few weeks worh an entirely different tech stack!
 
 ## Why I built this
 
