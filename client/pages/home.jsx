@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from '../components/carousel';
-// import LoadingModal from '../components/loading-modal';
+import LoadingModal from '../components/loading-modal';
 import AppContext from '../lib/app-context';
 
 export default class Home extends React.Component {
@@ -37,7 +37,7 @@ export default class Home extends React.Component {
           <p className="text-align-center">{ user ? `Welcome ${user.username}!` : 'Welcome!' }</p>
           <p className="text-align-center">Cycle through the carousel or<br />search using keywords!</p>
         </div>
-        <Carousel recipes={ recipes } />
+        { !recipes.length ? <LoadingModal /> : <Carousel recipes={ recipes } /> }
       </>
     );
   }
