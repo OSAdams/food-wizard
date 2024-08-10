@@ -15,11 +15,14 @@ app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
 app.get('/test', (req, res, next) => {
-  res.status(204).json('{ server: "on" }');
+  res.status(200).json('{ server: "on" }');
 });
 
-app.get('/api/recipes', (req, res, next) => {
-  throw new ClientError(400, 'Use an id number to select a recipe');
+app.get('/api/carousel/recipes', (req, res, next) => {
+  fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
+    .then(result => result.json())
+    .then(recipeList => res.status(200).json(recipeList.recipes))
+    .catch(err => console.error({ error: err }));
 });
 
 app.get('/api/recipes/:id', (req, res, next) => {

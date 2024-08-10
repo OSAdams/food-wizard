@@ -13,7 +13,13 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     const { params } = this.context.route;
-    fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/carousel/recipes', req)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
