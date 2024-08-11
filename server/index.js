@@ -18,12 +18,16 @@ app.get('/test', (req, res, next) => {
   res.status(200).json('{ server: "on" }');
 });
 
+// homepage carousel recipes
+
 app.get('/api/carousel/recipes', (req, res, next) => {
   fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
     .then(result => result.json())
     .then(recipeList => res.status(200).json(recipeList.recipes))
     .catch(err => console.error({ error: err }));
 });
+
+// get recipe with our databse recipeId
 
 app.get('/api/recipes/:id', (req, res, next) => {
   const id = Number(req.params.id);
@@ -37,9 +41,14 @@ app.get('/api/recipes/:id', (req, res, next) => {
   `;
   const params = [id];
   db.query(sql, params)
-    .then(result => res.status(202).json(result.rows[0]))
+    .then(result => {
+      if (!result.rows[0]) throw new ClientError(404, 'recipe doesn\'t exist');
+      res.status(202).json(result.rows[0]);
+    })
     .catch(err => next(err));
 });
+
+// when a user clicks on a recipe, we will post recipe name and spoonApiId to our databse
 
 app.post('/api/recipes', (req, res, next) => {
   const { recipeName, spoonApiId } = req.body;
@@ -64,6 +73,8 @@ app.post('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// get recipe with the spoonApiId from our database, if it exists
+
 app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
@@ -87,6 +98,8 @@ app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// user registration
+
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { body: { username, password } } = req;
   if (!username || !password) {
@@ -109,6 +122,8 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+// user auth
 
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { body: { username, password } } = req;
@@ -143,6 +158,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// comments related to our in-home recipe id
+
 app.get('/api/comments/recipeId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
@@ -170,6 +187,8 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
+// user posting a comment on a recipe that is saved to our database
+
 app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
     user: { userId },
@@ -192,6 +211,8 @@ app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+// user editing their own comments
 
 app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
   const {
@@ -218,6 +239,8 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
     })
     .catch(err => console.error(err)); // eslint-disable-line
 });
+
+// user deleting their own comment, will be saved as
 
 app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
   const {
