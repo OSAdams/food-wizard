@@ -27,6 +27,22 @@ app.get('/api/carousel/recipes', (req, res, next) => {
     .catch(err => console.error({ error: err }));
 });
 
+// get recipes from spoonacular utilizing search input form
+
+app.get('/api/recipes/spoonacular/:keyword', (req, res, next) => {
+  const keyword = req.params.keyword;
+  fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${keyword}&apiKey=${process.env.SPOONACULAR_API_KEY}&number=10&addRecipeNutrition=true&instructionsRequired=true`)
+    .then(result => result.json())
+    .then(recipeList => {
+      if (recipeList.results.length === 0) {
+        res.status(502).json({ error: 'Bad Gateway, invalid response. Try a new keyword' });
+        throw new ClientError(404, 'Invalid keyword, unable to fetch response');
+      }
+      res.status(200).json(recipeList.results);
+    })
+    .catch(err => console.error({ error: err }));
+});
+
 // get recipe with our databse recipeId
 
 app.get('/api/recipes/:id', (req, res, next) => {
