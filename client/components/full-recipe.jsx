@@ -4,6 +4,8 @@ import Accordion from './accordion';
 import LoadingModal from './loading-modal';
 import { dbPostRecipe } from '../lib';
 
+// we will need to update the props.recipe destructure here
+
 export default function FullRecipe(props) {
   const {
     title,

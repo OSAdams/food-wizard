@@ -23,6 +23,7 @@ export default class SearchResult extends React.Component {
   }
 
   handleClick(event) {
+    // this should be used strictly in here and not on the recipe card render.
     const { id, textContent } = event.target;
     const { context: { route: { params } } } = this;
     params.set('recipeId', id);
@@ -33,6 +34,7 @@ export default class SearchResult extends React.Component {
       recipeName: textContent
     };
     const data = JSON.stringify(reqBody);
+    // what the fuck is this even doing here.. We don't need to post the recipe to our database from here.
     fetch('/api/recipes',
       {
         method: 'POST',
@@ -55,6 +57,8 @@ export default class SearchResult extends React.Component {
       handleClick
     } = this;
     const recipeTitles = recipes.map(index => {
+
+      // remove the onclick from the recipe card and have the onclick HERE
       return (
         <RecipeCard
           key={ index.id }

@@ -14,6 +14,7 @@ export default class Recipe extends React.Component {
     const { props: { recipeId } } = this;
     const id = recipeId.split('&');
     const spoonApiId = id[0];
+    // get our API key out of here
     fetch(`https://api.spoonacular.com/recipes/${spoonApiId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
       .then(res => res.json())
       .then(recipe => {
