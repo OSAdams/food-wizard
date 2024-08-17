@@ -14,20 +14,44 @@ const app = express();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
+/*
+  MUCH NEEDED UPDATES:
+  We're going to be updating how our server is going to handle requests
+  by updating the response objects
+
+  With a more uniform object model we will be able to use API responses much more effectively
+*/
+
+/*
+  GET request to see if the server is on
+*/
+
 app.get('/test', (req, res, next) => {
   res.status(200).json('{ server: "on" }');
 });
 
-// homepage carousel recipes
+/*
+  GET request from the applications homepage to generate data for the carousel component
+*/
 
-app.get('/api/carousel/recipes', (req, res, next) => {
+app.get('/api/homepage/carousel/recipes', (req, res, next) => {
+  /*
+    we need to create an object model to use when sending a response to our application
+    we need to add Edamam API as our main source of recipes and Spoonacular will be our backup
+    Do we need a third? Probably not
+  */
   fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
     .then(result => result.json())
     .then(recipeList => res.status(200).json(recipeList.recipes))
     .catch(err => console.error({ error: err }));
 });
 
-// get recipes from spoonacular utilizing search input form
+/*
+  GET request to our 3rd party API's, Edamam and Spoonacular
+  This is sent to our server from our recipe page
+  We will need to refactor thsi get request to create an object model that will
+  better represent our data and how we use it client side
+*/
 
 app.get('/api/recipes/spoonacular/:keyword', (req, res, next) => {
   const keyword = req.params.keyword;

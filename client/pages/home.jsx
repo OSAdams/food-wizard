@@ -19,7 +19,7 @@ export default class Home extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/carousel/recipes', req)
+    fetch('/api/homepage/carousel/recipes', req)
       .then(res => res.json())
       .then(recipes => this.setState({ recipes }))
       .catch(err => console.error({ error: err }));
