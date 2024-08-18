@@ -47,6 +47,18 @@ app.get('/api/homepage/carousel/recipes', (req, res, next) => {
 });
 
 /*
+  GET request from the applications recipe page to generate data for our FullRecipe component
+*/
+
+app.get('/api/recipepage/fullrecipe/recipe/:recipeId', (req, res, next) => {
+  const recipeId = req.params.recipeId;
+  fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
+    .then(result => result.json())
+    .then(recipe => res.status(200).json(recipe))
+    .catch(err => console.error({ error: err }));
+});
+
+/*
   GET request to our 3rd party API's, Edamam and Spoonacular
   This is sent to our server from our recipe page
   We will need to refactor thsi get request to create an object model that will
