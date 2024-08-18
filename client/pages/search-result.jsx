@@ -47,7 +47,7 @@ export default class SearchResult extends React.Component {
   }
 
   render() {
-    if (this.state.recipes.length < 1) {
+    if (this.state.recipes.length === 0) {
       return <LoadingModal />;
     }
     const {
