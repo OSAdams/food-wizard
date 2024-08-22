@@ -40,9 +40,35 @@ app.get('/api/homepage/carousel/recipes', (req, res, next) => {
     we need to add Edamam API as our main source of recipes and Spoonacular will be our backup
     Do we need a third? Probably not
   */
-  fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`)
+  const requestHeader = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`, requestHeader)
     .then(result => result.json())
-    .then(recipeList => res.status(200).json(recipeList.recipes))
+    .then(recipes => {
+      /*
+        Modified object model strictly for the carousel
+      */
+      if (!recipes.recipes.length) {
+        res.status(503).json({ Error: 'Bad Gateway. Please try again later.' });
+      }
+      const recipeList = [];
+      for (const recipe of recipes.recipes) {
+        const node = {
+          title: recipe.title,
+          time: recipe.time,
+          diets: recipe.diets,
+          servings: recipe.servings,
+          likes: recipe.aggregateLikes,
+          image: recipe.image
+        };
+        recipeList.push(node);
+      }
+      res.status(200).json(recipeList);
+    })
     .catch(err => console.error({ error: err }));
 });
 

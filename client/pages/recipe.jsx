@@ -15,7 +15,6 @@ export default class Recipe extends React.Component {
     const { props: { recipeId } } = this;
     const id = recipeId.split('&');
     const ourId = id[0];
-    // get our API key out of here
     fetch(`/api/recipepage/fullrecipe/recipe/${ourId}`)
       .then(res => res.json())
       .then(recipe => {

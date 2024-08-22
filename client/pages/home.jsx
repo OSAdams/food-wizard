@@ -20,9 +20,13 @@ export default class Home extends React.Component {
       }
     };
     fetch('/api/homepage/carousel/recipes', req)
-      .then(res => res.json())
-      .then(recipes => this.setState({ recipes }))
-      .catch(err => console.error({ error: err }));
+      .then(response => response.json())
+      .then(recipes => {
+        this.setState({ recipes });
+      })
+      .catch(err => {
+        console.error({ error: err });
+      });
     params.set('showMenu', 'false');
     window.location.hash = `home?${params.toString()}`;
   }
@@ -37,7 +41,11 @@ export default class Home extends React.Component {
           <p className="text-align-center">{ user ? `Welcome ${user.username}!` : 'Welcome!' }</p>
           <p className="text-align-center">Cycle through the carousel or<br />search using keywords!</p>
         </div>
-        { !recipes.length ? <LoadingModal /> : <Carousel recipes={ recipes } /> }
+        {
+          !recipes.length
+            ? <LoadingModal />
+            : <Carousel recipes={ recipes } />
+        }
       </>
     );
   }

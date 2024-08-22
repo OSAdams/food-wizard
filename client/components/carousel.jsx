@@ -45,6 +45,10 @@ export default class Carousel extends React.Component {
         recipes
       }
     } = this;
+    /*
+      recipes renders the recipe page, recipe will send it's own fetch request
+      to our server.
+    */
     params.set('showModal', 'false');
     params.set('recipeId', recipes[iterator].id);
     params.set('newComment', 'false');
