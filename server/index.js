@@ -63,7 +63,8 @@ app.get('/api/homepage/carousel/recipes', (req, res, next) => {
           diets: recipe.diets,
           servings: recipe.servings,
           likes: recipe.aggregateLikes,
-          image: recipe.image
+          image: recipe.image,
+          id: recipe.id
         };
         recipeList.push(node);
       }
