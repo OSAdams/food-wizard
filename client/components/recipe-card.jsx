@@ -10,6 +10,9 @@ export default function recipeCard(props) {
       className="recipe-card flex f-dir-col marg-bot-2rem">
       <div className="rc-text">
         <div className="rc-title">
+          {
+          // get the onClick the fuck out of here, it is not needed here. Use it search result for onclick user interaction
+          }
           <h2 className="rc-title-text" onClick={methods ? methods[0] : null} id={id}>{title}</h2>
           <p className="help-text">Click the title to view the recipe!</p>
         </div>

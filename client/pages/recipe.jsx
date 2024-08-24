@@ -11,10 +11,11 @@ export default class Recipe extends React.Component {
   }
 
   componentDidMount() {
+    // what the heck is even this
     const { props: { recipeId } } = this;
     const id = recipeId.split('&');
-    const spoonApiId = id[0];
-    fetch(`https://api.spoonacular.com/recipes/${spoonApiId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
+    const ourId = id[0];
+    fetch(`/api/recipepage/fullrecipe/recipe/${ourId}`)
       .then(res => res.json())
       .then(recipe => {
         this.setState({ recipe });

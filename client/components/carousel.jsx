@@ -2,6 +2,7 @@ import React from 'react';
 import RecipeCard from './recipe-card';
 import dbPostRecipe from '../lib/db-post-recipe';
 import AppContext from '../lib/app-context';
+import LoadingModal from '../components/loading-modal';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -44,6 +45,10 @@ export default class Carousel extends React.Component {
         recipes
       }
     } = this;
+    /*
+      recipes renders the recipe page, recipe will send it's own fetch request
+      to our server.
+    */
     params.set('showModal', 'false');
     params.set('recipeId', recipes[iterator].id);
     params.set('newComment', 'false');
@@ -82,6 +87,7 @@ export default class Carousel extends React.Component {
   render() {
     const { iterator } = this.state;
     const { recipes } = this.props;
+    if (recipes.length < 1) return <LoadingModal />;
     const { navigateCarousel, loadRecipe } = this;
     return (
       <div className='search-recipe-render'>

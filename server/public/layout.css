@@ -145,7 +145,7 @@
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  height: 20rem;
+  height: 18rem;
 }
 
 .rc-diet-information > .list-style-none {
@@ -402,6 +402,12 @@ div.ac-title {
 
   div.main-container > div.page-container {
     align-self: center;
+  }
+
+  .carousel-previous,
+  .carousel-next,
+  .carousel-controls > button {
+    width: 50%;
   }
 }
 

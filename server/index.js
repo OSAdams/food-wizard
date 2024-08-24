@@ -14,13 +14,97 @@ const app = express();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
+/*
+  MUCH NEEDED UPDATES:
+  We're going to be updating how our server is going to handle requests
+  by updating the response objects
+
+  With a more uniform object model we will be able to use API responses much more effectively
+*/
+
+/*
+  GET request to see if the server is on
+*/
+
 app.get('/test', (req, res, next) => {
-  res.status(204).json('{ server: "on" }');
+  res.status(200).json('{ server: "on" }');
 });
 
-app.get('/api/recipes', (req, res, next) => {
-  throw new ClientError(400, 'Use an id number to select a recipe');
+/*
+  GET request from the applications homepage to generate data for the carousel component
+*/
+
+app.get('/api/homepage/carousel/recipes', (req, res, next) => {
+  /*
+    we need to create an object model to use when sending a response to our application
+    we need to add Edamam API as our main source of recipes and Spoonacular will be our backup
+    Do we need a third? Probably not
+  */
+  const requestHeader = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.SPOONACULAR_API_KEY}&number=10`, requestHeader)
+    .then(result => result.json())
+    .then(recipes => {
+      /*
+        Modified object model strictly for the carousel
+      */
+      if (!recipes.recipes.length) {
+        res.status(503).json({ Error: 'Bad Gateway. Please try again later.' });
+      }
+      const recipeList = [];
+      for (const recipe of recipes.recipes) {
+        const node = {
+          title: recipe.title,
+          time: recipe.time,
+          diets: recipe.diets,
+          servings: recipe.servings,
+          likes: recipe.aggregateLikes,
+          image: recipe.image
+        };
+        recipeList.push(node);
+      }
+      res.status(200).json(recipeList);
+    })
+    .catch(err => console.error({ error: err }));
 });
+
+/*
+  GET request from the applications recipe page to generate data for our FullRecipe component
+*/
+
+app.get('/api/recipepage/fullrecipe/recipe/:recipeId', (req, res, next) => {
+  const recipeId = req.params.recipeId;
+  if (!recipeId) throw new ClientError(400, { error: 'recipeId required' });
+  fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}&includeNutrition=true`)
+    .then(result => result.json())
+    .then(recipe => {
+      res.status(200).json(recipe);
+    })
+    .catch(err => console.error({ error: err }));
+});
+
+/*
+  GET request to our 3rd party API's, Edamam and Spoonacular
+  This is sent to our server from our recipe page
+  We will need to refactor thsi get request to create an object model that will
+  better represent our data and how we use it client side
+*/
+
+app.get('/api/recipes/spoonacular/:keyword', (req, res, next) => {
+  const keyword = req.params.keyword;
+  fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${keyword}&apiKey=${process.env.SPOONACULAR_API_KEY}&number=10&addRecipeNutrition=true&instructionsRequired=true`)
+    .then(result => result.json())
+    .then(recipeList => {
+      res.status(200).json(recipeList.results);
+    })
+    .catch(err => console.error({ error: err }));
+});
+
+// get recipe with our databse recipeId
 
 app.get('/api/recipes/:id', (req, res, next) => {
   const id = Number(req.params.id);
@@ -34,9 +118,13 @@ app.get('/api/recipes/:id', (req, res, next) => {
   `;
   const params = [id];
   db.query(sql, params)
-    .then(result => res.status(202).json(result.rows[0]))
+    .then(result => {
+      res.status(202).json(result.rows[0]);
+    })
     .catch(err => next(err));
 });
+
+// when a user clicks on a recipe, we will post recipe name and spoonApiId to our databse
 
 app.post('/api/recipes', (req, res, next) => {
   const { recipeName, spoonApiId } = req.body;
@@ -61,6 +149,8 @@ app.post('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// get recipe with the spoonApiId from our database, if it exists
+
 app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
   const { id } = req.params;
   const recipeId = Number(id);
@@ -77,12 +167,14 @@ app.get('/api/recipes/spoonApiId/:id', (req, res, next) => {
     .then(result => {
       const [recipeId] = result.rows;
       if (!recipeId) {
-        throw new ClientError(404, 'recipeId doesn\'t exist');
+        res.status(404).json({ error: 'recipeId does not exist' });
       }
       res.status(200).json(recipeId);
     })
     .catch(err => next(err));
 });
+
+// user registration
 
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { body: { username, password } } = req;
@@ -102,15 +194,20 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     })
     .then(result => {
       const [user] = result.rows;
+      if (!user) {
+        res.status(502).json({ error: 'bad gateway, please try again later' });
+      }
       res.status(201).json(user);
     })
     .catch(err => next(err));
 });
 
+// user auth
+
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { body: { username, password } } = req;
   if (!username || !password) {
-    throw new ClientError(401, 'username and password are required fields');
+    throw new ClientError(400, 'username and password are required fields');
   }
   const sql = `
     SELECT "userId",
@@ -123,14 +220,14 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .then(result => {
       const [user] = result.rows;
       if (!user) {
-        throw new ClientError(401, 'username or password are invalid');
+        res.status(502).json({ error: 'invalid response' });
       }
       const { userId, hashedPassword } = user;
       return argon2
         .verify(hashedPassword, password)
         .then(isMatching => {
           if (!isMatching) {
-            throw new ClientError(401, 'username or password are invalid');
+            res.status(401).json({ error: 'username or passowrd are invalid' });
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
@@ -139,6 +236,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+// comments related to our in-home recipe id
 
 app.get('/api/comments/recipeId/:id', (req, res, next) => {
   const { id } = req.params;
@@ -159,13 +258,14 @@ app.get('/api/comments/recipeId/:id', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const comments = result.rows;
-      if (!comments) throw new ClientError(404, 'there are no current comments for this recipe');
       res.status(200).json(comments);
     })
     .catch(err => next(err));
 });
 
 app.use(authorizationMiddleware);
+
+// user posting a comment on a recipe that is saved to our database
 
 app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
   const {
@@ -189,6 +289,8 @@ app.post('/api/comments/post/recipeId/:recipeId', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+// user editing their own comments
 
 app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
   const {
@@ -215,6 +317,8 @@ app.patch('/api/comments/edit/commentId/:commentId', (req, res) => {
     })
     .catch(err => console.error(err)); // eslint-disable-line
 });
+
+// user deleting their own comment, will be saved as
 
 app.patch('/api/comments/delete/commentId/:commentId', (req, res) => {
   const {
