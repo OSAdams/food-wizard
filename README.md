@@ -4,10 +4,11 @@ A full stack JavaScript web application for people who want to find, create, cri
 
 ## Latest Update
 
-03-08-2024
-This application will be archived after refactoring a few components and completing CRUD features for users to post recipes.
+24-08-2024
 
-I would like to keep this tech stack with its Class Component structure instead of refactoring this project into TypeScript. I will be starting a new project within a few weeks worh an entirely different tech stack!
+I have completed updating the 3rd Party API fetch requests and have decided to archive this application. I'll be starting a new full-stack Food Wizard application from scratch using a new tech stack. I will be implimenting TypeScript, React Router, and Mantine UI!
+
+Thank you to everyone who has helped me build this. I've realized that a simple refactor is out of the question, I've committed a lot of this applications responsiveness to... window hashing. I may refactor this projects code in the future as practice, but I do not plan to add any features.
 
 ## Why I built this
 
