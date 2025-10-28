@@ -29,7 +29,7 @@ As a former chef, I wanted to build an application that provided straight forwar
 
 ## Live Demo
 
-Try the application live at [food-wizard.osastack.dev](https://food-wizard.osastack.dev)
+TBD
 
 ### Preview
 
